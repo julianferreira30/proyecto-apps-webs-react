@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import GameDisplay from "../src/components/gameDisplay";
 import { mockGames } from "../../backend/data/mockGames";
+import { Header } from "./components/Header";
 // import type { Game } from "../src/model/game";
 
 function App() {
@@ -16,9 +17,9 @@ function App() {
   return (
     <>
       <div>
-        <h1>GameBoxd</h1>
+        <Header title="GameBoxd" />
         {!selectedGame ? (
-          <div>
+          <div style={{ marginTop: "80px" }}>
             {mockGames.map((game, index) => (
               <GameDisplay
                 key={index}
