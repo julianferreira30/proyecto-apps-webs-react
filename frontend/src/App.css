@@ -34,9 +34,26 @@
 }
 
 .card {
-  padding: 2em;
+  width: 300px;
+  padding: 16px;
+  border: 1px solid #ccc;       /* Contorno gris claro */
+  background-color: #363636;    /* Fondo un poco más oscuro */
+  border-radius: 8px;           /* Bordes redondeados opcionales */
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05); /* Pequeña sombra opcional */
 }
 
 .read-the-docs {
   color: #888;
+}
+.header {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100vw;
+  background-color: #4a4a4a;
+  color:white;
+  padding:15px 20px;
+  text-align:left;
+  font-size:2rem;
+  z-index:100;
 }
