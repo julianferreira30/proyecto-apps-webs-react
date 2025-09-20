@@ -3,4 +3,5 @@ export interface Game{
     release_year: number,
     creator: string,
     genre: string[], 
+    image: string,
 }

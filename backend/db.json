@@ -4,91 +4,106 @@
     "name": "The Legend of Zelda: Ocarina of Time",
     "release_year": 1998,
     "creator": "Nintendo",
-    "genre": ["Action", "Adventure", "RPG"]
+    "genre": ["Action", "Adventure", "RPG"],
+    "image": "https://www.vgfacts.com/media/boxart/1/25.png?updated=1688880469"
   },
   {
     "name": "Super Mario 64",
     "release_year": 1996,
     "creator": "Nintendo",
-    "genre": ["Platform", "Adventure"]
+    "genre": ["Platform", "Adventure"],
+    "image": "https://m.media-amazon.com/images/M/MV5BNjhmNzg4ZTMtNWVhMy00NjgwLThhZjUtZjY4ZmU2YTVhYjUwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
   },
   {
     "name": "Minecraft",
     "release_year": 2011,
     "creator": "Mojang",
-    "genre": ["Sandbox", "Survival", "Adventure"]
+    "genre": ["Sandbox", "Survival", "Adventure"],
+    "image": "https://www.nint.hu/cdn/shop/files/minecraft-java-edition-457367.11.jpg?v=1720984497"
   },
   {
     "name": "Half-Life 2",
     "release_year": 2004,
     "creator": "Valve",
-    "genre": ["Shooter", "Action", "Sci-Fi"]
+    "genre": ["Shooter", "Action", "Sci-Fi"],
+    "image": "https://upload.wikimedia.org/wikipedia/en/thumb/2/25/Half-Life_2_cover.jpg/250px-Half-Life_2_cover.jpg"
   },
   {
     "name": "The Witcher 3: Wild Hunt",
     "release_year": 2015,
     "creator": "CD Projekt Red",
-    "genre": ["RPG", "Adventure", "Fantasy"]
+    "genre": ["RPG", "Adventure", "Fantasy"],
+    "image": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Witcher_3_cover_art.jpg/250px-Witcher_3_cover_art.jpg"
   },
   {
     "name": "Dark Souls",
     "release_year": 2011,
     "creator": "FromSoftware",
-    "genre": ["Action", "RPG", "Fantasy"]
+    "genre": ["Action", "RPG", "Fantasy"],
+    "image": "https://sm.ign.com/t/ign_latam/screenshot/d/dark-souls/dark-souls-1-concept-cover_2va4.200.jpg"
   },
   {
     "name": "Grand Theft Auto V",
     "release_year": 2013,
     "creator": "Rockstar Games",
-    "genre": ["Action", "Adventure", "Open World"]
+    "genre": ["Action", "Adventure", "Open World"],
+    "image": "https://i.redd.it/so-i-have-gtav-on-the-epic-game-store-but-is-it-easier-to-v0-6tjxe1a6v3zb1.jpg?width=1080&format=pjpg&auto=webp&s=b331f8d3956d01e8f0fde3aacf2626236f757cc0"
   },
   {
     "name": "Red Dead Redemption 2",
     "release_year": 2018,
     "creator": "Rockstar Games",
-    "genre": ["Action", "Adventure", "Open World"]
+    "genre": ["Action", "Adventure", "Open World"],
+    "image": "https://image.api.playstation.com/cdn/UP1004/CUSA03041_00/Hpl5MtwQgOVF9vJqlfui6SDB5Jl4oBSq.png"
   },
   {
     "name": "Overwatch",
     "release_year": 2016,
     "creator": "Blizzard Entertainment",
-    "genre": ["Shooter", "Multiplayer", "Team-Based"]
+    "genre": ["Shooter", "Multiplayer", "Team-Based"],
+    "image": "https://m.media-amazon.com/images/M/MV5BYjY0ZjJiMDQtNTY0Yy00ODJlLWEzYmYtMGZkZjNjNzc1NzE5XkEyXkFqcGc@._V1_QL75_UX190_CR0,2,190,281_.jpg"
   },
   {
     "name": "Pokémon Red",
     "release_year": 1996,
     "creator": "Game Freak",
-    "genre": ["RPG", "Adventure", "Fantasy"]
+    "genre": ["RPG", "Adventure", "Fantasy"],
+    "image": "https://m.media-amazon.com/images/M/MV5BZjBiZThkOTMtYWU5My00ZDg2LWI1NzktN2Q3MDMwODUwOTZkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
   },
   {
     "name": "Final Fantasy VII",
     "release_year": 1997,
     "creator": "Square",
-    "genre": ["RPG", "Adventure", "Fantasy"]
+    "genre": ["RPG", "Adventure", "Fantasy"],
+    "image": "https://e.snmc.io/lk/l/x/95243f385f6c26b8c8d0278846f7953e/11931118"
   },
   {
     "name": "League of Legends",
     "release_year": 2009,
     "creator": "Riot Games",
-    "genre": ["MOBA", "Multiplayer", "Strategy"]
+    "genre": ["MOBA", "Multiplayer", "Strategy"],
+    "image": "https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/leagueoflegends.png"
   },
   {
     "name": "Counter-Strike: Global Offensive",
     "release_year": 2012,
     "creator": "Valve",
-    "genre": ["Shooter", "Multiplayer", "Tactical"]
+    "genre": ["Shooter", "Multiplayer", "Tactical"],
+    "image": "https://upload.wikimedia.org/wikipedia/en/6/6e/CSGOcoverMarch2020.jpg"
   },
   {
     "name": "Fortnite",
     "release_year": 2017,
     "creator": "Epic Games",
-    "genre": ["Shooter", "Battle Royale", "Survival"]
+    "genre": ["Shooter", "Battle Royale", "Survival"],
+    "image": "https://m.media-amazon.com/images/M/MV5BMTZlMmIxM2EtN2Y4Zi00M2ZhLTk3NzgtNjJmZTU0MTQ3YjcwXkEyXkFqcGc@._V1_.jpg"
   },
   {
     "name": "Celeste",
     "release_year": 2018,
     "creator": "Maddy Makes Games",
-    "genre": ["Platform", "Indie", "Adventure"]
+    "genre": ["Platform", "Indie", "Adventure"],
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZeP09sBA4Hc9FEGpVbqNnsPpPemNYHy7GGA&s"
   }
 ]
 }

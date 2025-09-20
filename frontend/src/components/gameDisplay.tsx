@@ -11,6 +11,7 @@ interface GameDisplayProps {
 const GameDisplay = ({ game, detailed = false, onClick }: GameDisplayProps) => {
   return (
     <div className="card" onClick={onClick}>
+      <p><img src={game.image} style={{maxWidth: "264px", maxHeight: "352px"}}/></p>
       <p>Nombre: {game.name}</p>
       <p>Autor: {game.creator}</p>
       {detailed && (
