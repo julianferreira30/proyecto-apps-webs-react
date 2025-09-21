@@ -13,11 +13,13 @@ function App() {
 
   useEffect(() => {
     getAllGames()
-    .then((data) => {
-      setGames(data)
-    })
-    .catch((error) => {console.error("Error al obtener los juegos:", error)})
-  })
+      .then((data) => {
+        setGames(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los juegos:", error);
+      });
+  });
 
   const selectedGame =
     selectedGameIndex !== null ? games[selectedGameIndex] : null;
@@ -27,7 +29,7 @@ function App() {
       <div>
         <Header title="GameBoxd" />
         {!selectedGame ? (
-          <div style={{ marginTop: "80px" }}>
+          <div className="games-container" style={{ marginTop: "80px" }}>
             {games.map((game, index) => (
               <GameDisplay
                 key={index}
