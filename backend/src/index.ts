@@ -65,3 +65,59 @@ app.post("/api/games", (request, response, next) => {
         })
         .catch((error) => next(error));
 });
+
+app.put("/api/games/:id", (request, response, next) => {
+    const id = request.params.id;
+    const body = request.body;
+    
+    GameModel.findByIdAndUpdate(id, body, { new: true })
+        .then((updatedGame) => {
+            if (updatedGame) {
+                response.status(200).json(updatedGame);
+            } else {
+                response.status(404).end();
+            }
+        })
+        .catch((error) => next(error));
+});
+
+app.delete("/api/games/:id", (request, response, next) => {
+    const { id } = request.params;
+    
+    GameModel.findByIdAndRemove(id)
+        .then((result) => {
+            if (result) {
+                response.status(204).end();
+            } else {
+                response.status(404).end();
+            }
+        })
+        .catch((error) => next(error));
+});
+
+const errorHandler = (
+  error: { name: string; message: string },
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  console.error(error.message);
+
+  console.error(error.name);
+  if (error.name === "CastError") {
+    response.status(400).send({ error: "malformatted id" });
+  } else if (error.name === "ValidationError") {
+    response.status(400).json({ error: error.message });
+  }
+  next(error);
+};
+
+app.use(errorHandler);
+app.use(express.static("dist"));
+
+
+app.listen(config.PORT, () => {
+  logger.info(`Server running on port ${config.PORT}`)
+});
+
+export default app;
