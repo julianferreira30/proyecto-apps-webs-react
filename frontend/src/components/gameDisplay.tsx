@@ -1,9 +1,7 @@
-import React from "react";
-import { useState } from "react";
-import type { Game } from "../model/game";
+import type { GameData } from "../types/games";
 
 interface GameDisplayProps {
-  game: Game;
+  game: GameData;
   detailed?: boolean;
   onClick?: () => void;
 }
