@@ -1,16 +1,21 @@
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import type { GameData } from "../types/games";
+import type { User } from "../types/users";
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import CreateIcon from '@mui/icons-material/Create';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import userService from "../services/users";
 
 interface GameDetailsProps {
   games: GameData[];
+  user: User | null;
+  setUser: (u: User) => void;
 }
 
-const GameDetails = ({ games }: GameDetailsProps) => {
+const GameDetails = ({ games, user, setUser }: GameDetailsProps) => {
   const { id } = useParams<{id: string}>();
   const navigate = useNavigate();
 
@@ -22,6 +27,49 @@ const GameDetails = ({ games }: GameDetailsProps) => {
 
   const genreLabel = game.genre.length > 1 ? "Géneros" : "Género";
   const formattedGenres = game.genre.join(", ");
+
+  const [isFavourite, setIsFavourite] = useState(false);
+  const [isInWishlist, setIsInWishlist] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setIsFavourite(user.favourites.some((g) => g.id === game.id));
+      setIsInWishlist(user.wishlist.some((g) => g.id === game.id));
+    }
+  }, [user, game.id])
+
+  const toggleFavourite = async () => {
+    if (!user){
+      return;
+    }
+    setLoading(true);
+    let updatedFavourites;
+    if (isFavourite) {
+      updatedFavourites = await userService.removeFromFavorites(game.id);
+    } else {
+      updatedFavourites = await userService.addToFavorites(game.id);
+    }
+    setUser({...user, favourites: updatedFavourites});
+    setIsFavourite(!isFavourite);
+    setLoading(false)
+  }
+
+  const toggleWishlist = async () => {
+    if (!user){
+      return;
+    }
+    setLoading(true)
+    let updatedWishlist;
+    if (isInWishlist) {
+      updatedWishlist = await userService.removeFromWishlist(game.id)
+    } else {
+      updatedWishlist = await userService.addToWishlist(game.id)
+    }
+    setUser({...user, wishlist: updatedWishlist});
+    setIsFavourite(!isInWishlist);
+    setLoading(false);
+  }
 
   return (
     <>
@@ -108,7 +156,7 @@ const GameDetails = ({ games }: GameDetailsProps) => {
             alignItems: "flex-start",
           }}
         >
-          <ButtonGroup
+          { user && <ButtonGroup
             orientation="vertical"
             variant="contained"
             aria-label="Vertical button group"
@@ -125,16 +173,16 @@ const GameDetails = ({ games }: GameDetailsProps) => {
               },
             }}
           >
-            <Button sx={{backgroundColor:"black"}}>
-              Favorito <FavoriteIcon fontSize="small" sx={{ ml: 2 }} />
+            <Button sx={{backgroundColor:"black"}} onClick={toggleFavourite} disabled={loading}>
+              Favorito <FavoriteIcon fontSize="small" sx={{ ml: 2, color: isFavourite ? "red" : "white" }} />
             </Button>
-            <Button sx={{backgroundColor:"black"}}>
-              Wishlist <FormatListBulletedIcon fontSize="small" sx={{ ml: 2 }} />
+            <Button sx={{backgroundColor:"black"}} onClick={toggleWishlist} disabled={loading}>
+              Wishlist <BookmarkIcon fontSize="small" sx={{ ml: 2, color: isInWishlist ? "yellow" : "white" }} />
             </Button>
             <Button sx={{backgroundColor:"black"}}>
               Review <CreateIcon fontSize="small" sx={{ ml: 2 }} />
             </Button>
-          </ButtonGroup>
+          </ButtonGroup>}
         </div>
       </div>
     </>

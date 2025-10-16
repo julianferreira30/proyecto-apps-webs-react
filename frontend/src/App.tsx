@@ -3,7 +3,7 @@ import "./App.css";
 import Games from "./components/games";
 import { Header } from "./components/Header";
 import type { GameData } from "../src/types/games";
-import getAllGames from "./services/games";
+import gamesService from "./services/games";
 import loginService from "./services/login"
 import type { User } from "./types/users";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -24,7 +24,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getAllGames()
+    gamesService.getAllGames()
       .then((data) => {
         setGames(data);
         setFilteredGames(data)
@@ -87,7 +87,7 @@ function App() {
               </div>
               </>
             }/>
-            <Route path="/game/:id" element={<GameDetails games={games} />}/>
+            <Route path="/game/:id" element={<GameDetails games={games} user={user} setUser={setUser}/>}/>
             <Route path="/register" element={<Register onLogin={handleLogin}/>} />
           </Routes>
         </div>
