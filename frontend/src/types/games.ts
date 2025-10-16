@@ -8,5 +8,6 @@ export type GameData = {
     genre: string[];
     image: string;
     rating: number;
+    description: string;
     reviews: Review[];
 }

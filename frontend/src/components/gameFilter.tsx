@@ -12,6 +12,7 @@ interface FilterProps {
     genres: string[];
     platforms: string[];
     ratings: number[];
+    filters: FilterState;
     onFilterChange: (filters: FilterState) => void;
 }
 
@@ -22,14 +23,8 @@ export type FilterState = {
     rating: number | null;
 }
 
-const GameFilters = ({ years, genres, platforms, ratings, onFilterChange }: FilterProps) => {
+const GameFilters = ({ years, genres, platforms, ratings, filters, onFilterChange }: FilterProps) => {
     const [openDropdown , setOpenDropdown] = useState<string | null>(null);
-    const [filters, setFilters] = useState<FilterState>({
-        year: null,
-        genre: null,
-        platform: null,
-        rating: null,
-    });
 
     const toggleDropdown = (name: string) => {
         setOpenDropdown(openDropdown === name ? null : name);
@@ -37,7 +32,6 @@ const GameFilters = ({ years, genres, platforms, ratings, onFilterChange }: Filt
 
     const handleSelect = (key: keyof FilterState, value: FilterState[keyof FilterState]) => {
         const newFilters = { ...filters, [key]: value };
-        setFilters(newFilters);
         onFilterChange(newFilters);
         setOpenDropdown(null);
     };
@@ -47,7 +41,7 @@ const GameFilters = ({ years, genres, platforms, ratings, onFilterChange }: Filt
             <Button
                 variant="outlined"
                 onClick={() => toggleDropdown(key)}
-                style={{ color: "white", borderColor: "white" }}
+                style={{ color: "white", borderColor: "white", backgroundColor: "black" }}
             >
                 {label}: {filters[key] ?? "Todos"}
                 {openDropdown === key ? <ExpandLess /> : <ExpandMore />}
@@ -78,7 +72,7 @@ const GameFilters = ({ years, genres, platforms, ratings, onFilterChange }: Filt
             <h3>Filtrar por:</h3>
             {renderDropdown("Año", "year", years)}
             {renderDropdown("Género", "genre", genres)}
-            {renderDropdown("Plataforma", "platform", platforms)}
+            {renderDropdown("Creador", "platform", platforms)}
             {renderDropdown("Calificación", "rating", ratings)}
         </div>
     );

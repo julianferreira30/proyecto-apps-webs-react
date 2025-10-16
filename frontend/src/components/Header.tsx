@@ -155,7 +155,7 @@ export const Header = ({ title, user, onLogout, onLogin }: HeaderProps) => {
               }}
             >
               <List component="div" disablePadding>
-                {!user ? (
+                {user ? (
                     <div>
                       <ListItemButton sx={{ pl: 2 }} onClick={handleLoginClick}>
                         <ListItemText primary=" Iniciar sesión"/>
