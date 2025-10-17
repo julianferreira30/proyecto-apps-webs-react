@@ -1,8 +1,7 @@
-
 import dotenv from "dotenv";
 dotenv.config();
-const JWT_SECRET = process.env.JWT_SECRET || "my_secret"
-const PORT = process.env.PORT;
+const JWT_SECRET = process.env.JWT_SECRET || "my_secret";
+const PORT = Number(process.env.PORT) || 3001;
 const HOST = process.env.HOST || "localhost";
 
 const MONGODB_URI =

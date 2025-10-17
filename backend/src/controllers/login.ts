@@ -14,7 +14,7 @@ router.post("/", async (request, response) => {
   if (user) {
     const passwordCorrect = await bcrypt.compare(password, user.passwordHash);
     if (!passwordCorrect) {
-      response.status(401).json({
+      return response.status(401).json({
         error: "invalid username or password",
       });
     } else {
@@ -34,7 +34,7 @@ router.post("/", async (request, response) => {
       response.status(200).send({ username: user.username, name: user.name });
     }
   } else {
-    response.status(401).json({
+    return response.status(401).json({
       error: "invalid username or password",
     });
   }
@@ -42,11 +42,11 @@ router.post("/", async (request, response) => {
 router.get("/auth/me", withUser, async (request, response, next) => {
   const body = request.body;
   const user = await User.findById(request.userId);
-  response.status(200).json(user);
+  return response.status(200).json(user);
 });
 router.post("/logout", (request, response) => {
   response.clearCookie("token");
-  response.status(200).send({
+  return response.status(200).send({
     message: "Logged out succesfully",
   });
 });
