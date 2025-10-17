@@ -53,7 +53,7 @@ app.post("/api/games", (request, response, next) => {
     
     const game = new GameModel({
         name: body.name,
-        releaseDate: body.releaseDate,
+        release_year: body.release_year,
         creator: body.creator,
         genre: body.genre,
         image: body.image,
@@ -84,7 +84,7 @@ app.put("/api/games/:id", (request, response, next) => {
 app.delete("/api/games/:id", (request, response, next) => {
     const { id } = request.params;
     
-    GameModel.findByIdAndRemove(id)
+    GameModel.findByIdAndDelete(id)
         .then((result) => {
             if (result) {
                 response.status(204).end();

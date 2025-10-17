@@ -22,7 +22,7 @@ export interface Game{
 
 const gameSchema = new mongoose.Schema<Game>({
     name: {type: String, required: true},
-    release_year: {type: String, required: true},
+    release_year: {type: Number, required: true},
     creator: {type: String, required: false}, // Puse que no es necesario, pero se puede cambiar obvio
     genre: {type: [String], required: true},
     image: {type: String, required: true}

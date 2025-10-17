@@ -3,7 +3,7 @@ import assert from "node:assert";
 import mongoose from "mongoose";
 import GameModel from "../src/models/game";
 import supertest from "supertest";
-import app from "../src/app";
+import app from "../src/index";
 import games from "../db.json";
 
 
@@ -59,10 +59,15 @@ describe("GameBoxd API integration tests", () => {
     });
 
     test("PUT /api/games/:id", async () => {
-        const updatedGame: Partial<GameJson> = {
-            release_year: 2025
-        };
-        const response = await api.patch(`/api/games/${zeldaId}`).send(updatedGame);
+        const updatedGame: GameJson = { 
+        id: zeldaId,
+        name: "The Legend of Zelda: Ocarina of Time", 
+        release_year: 2025, 
+        creator: "...", 
+        genre: ["..."], 
+        image: "..." 
+    };
+        const response = await api.put(`/api/games/${zeldaId}`).send(updatedGame);
         assert.strictEqual(response.status, 200);
         assert.strictEqual(response.body.release_year, updatedGame.release_year);
         assert.strictEqual(response.body.name, "The Legend of Zelda: Ocarina of Time");
