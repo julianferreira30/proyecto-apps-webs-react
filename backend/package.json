@@ -4,27 +4,38 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "json-server --watch db.json --port 3001"
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "test": "cross-env NODE_ENV=test tsx --test --test-concurrency=1 tests/*.test.ts",
+    "test:watch": "cross-env NODE_ENV=test tsx --test --watch tests/*.test.ts",
+    "json-server": "json-server --watch db.json --port 3002"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "json-server": "^1.0.0-beta.3",
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/mongoose": "^5.11.96",
     "@types/node": "^24.6.0",
     "@types/supertest": "^6.0.3",
+    "cross-env": "^7.0.3",
+    "json-server": "^1.0.0-beta.3",
     "supertest": "^7.1.4",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "tsx": "^4.20.6"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.3",
-    "mongoose": "^8.19.1",
     "express": "^5.1.0",
-    "cors": "^2.8.5"
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.1"
   }
 }
