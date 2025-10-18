@@ -1,4 +1,4 @@
-import type { Review } from "./review";
+//import type { Review } from "./review";
 
 export type GameData = {
     id: string;
@@ -7,7 +7,7 @@ export type GameData = {
     creator: string;
     genre: string[];
     image: string;
-    rating: number;
     description: string;
-    reviews: Review[];
+    rating: number;
+    //reviews: Review[];
 }

@@ -1,5 +1,6 @@
 import axios from "axios";
 import axiosSecure from "../utils/axiosSecure";
+import type { GameData } from "../types/games";
 
 
 const getAllGames = () => {
@@ -12,4 +13,9 @@ const getGameById = async (id: string) => {
     return response.data;
 };
 
-export default { getAllGames, getGameById};
+const createGame = async (newObject: Omit<GameData, "id" | "rating">) => {
+  const request = axiosSecure.post("/api/games", newObject)
+  return request.then((response) => response.data);
+};
+
+export default { getAllGames, getGameById, createGame};

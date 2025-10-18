@@ -52,6 +52,9 @@ export const Header = ({ title, user, onLogout, onLogin }: HeaderProps) => {
     } catch (e) {
       console.error("Error al iniciar sesión", e);
       setError("Usuario o contraseña incorrectos");
+      setTimeout(() => {
+        setError(null)
+      }, 5000);
     }
   }
 
@@ -71,6 +74,16 @@ export const Header = ({ title, user, onLogout, onLogin }: HeaderProps) => {
 
   const handleGamesClick = () => {
     navigate("/");
+  }
+
+  const handleProfileClick = () => {
+    setOpen(false);
+    navigate("/perfil")
+  }
+
+  const handleAddGameClick = () => {
+    setOpen(false);
+    navigate("/add-game");
   }
 
   return (
@@ -166,7 +179,7 @@ export const Header = ({ title, user, onLogout, onLogin }: HeaderProps) => {
                     </div>
                     ) : (
                       <div>
-                        <ListItemButton sx={{ pl: 2 }}>
+                        <ListItemButton sx={{ pl: 2 }} onClick={handleProfileClick}>
                           <ListItemText primary="Perfil"/>
                         </ListItemButton>
                         <ListItemButton sx={{ pl: 2 }} onClick={handleLogout}>
@@ -177,7 +190,7 @@ export const Header = ({ title, user, onLogout, onLogin }: HeaderProps) => {
               </List>
             </Collapse>
           </div>
-          <Button variant="contained" style={{ backgroundColor: "black", fontSize: "0.7rem" }}>Añadir juego</Button>
+          {user && <Button variant="contained" style={{ backgroundColor: "black", fontSize: "0.7rem" }} onClick={handleAddGameClick}>Añadir juego</Button>}
         </div>
         </Fade>
       </div>

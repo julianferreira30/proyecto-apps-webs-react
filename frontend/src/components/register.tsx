@@ -17,6 +17,7 @@ const Register = ({ onLogin }: RegisterProps) => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -26,12 +27,18 @@ const Register = ({ onLogin }: RegisterProps) => {
             setError("Las contraseñas no coinciden");
             return;
         }
-
-        const navigate = useNavigate();
-        await registerService.register({username, name, password});
-        const userData = await loginService.login({username, password});
-        onLogin(userData);
-        setTimeout(() => navigate("/"), 1500);
+        try {
+            await registerService.register({username, name, password});
+            const userData = await loginService.login({username, password});
+            onLogin(userData);
+            navigate("/")
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setError(error.message)
+            } else {
+                setError("Error inesperado al registrar el usuario")
+            }
+        }
 
     };
 
@@ -44,6 +51,7 @@ const Register = ({ onLogin }: RegisterProps) => {
                 label="Nombre" 
                 variant="outlined" 
                 value={name} 
+                required
                 onChange={(e) => setName(e.target.value)}
                 sx={{
                 input: { color: "white" },
@@ -56,6 +64,7 @@ const Register = ({ onLogin }: RegisterProps) => {
                 label="Nombre de usuario" 
                 variant="outlined" 
                 value={username}
+                required
                 onChange={(e) => setUsername(e.target.value)}
                 sx={{
                 input: { color: "white" },
@@ -68,6 +77,7 @@ const Register = ({ onLogin }: RegisterProps) => {
                 label="Contraseña" 
                 variant="outlined" 
                 value={password} 
+                required
                 onChange={(e) => setPassword(e.target.value)} 
                 type="password"
                 sx={{
@@ -81,6 +91,7 @@ const Register = ({ onLogin }: RegisterProps) => {
                 label="Confirmar contraseña" 
                 variant="outlined" 
                 value={confirmPassword} 
+                required
                 onChange={(e) => setConfirmPassword(e.target.value)} 
                 type="password"
                 sx={{

@@ -10,6 +10,8 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Register from "./components/register";
 import GameFilters, { type FilterState } from "./components/gameFilter";
 import GameDetails from "./components/gameDetails";
+import Profile from "./components/profile";
+import AddGame from "./components/addGame";
 
 function App() {
   const [games, setGames] = useState<GameData[]>([]);
@@ -53,7 +55,7 @@ function App() {
 
   const handleFilterChange = (newFilters: FilterState) => {
     setFilters(newFilters)
-    const newFiltered = games.filter(game =>
+    const newFiltered = games.filter((game) =>
     (newFilters.year === null || game.release_year === newFilters.year) &&
     (newFilters.genre === null || game.genre.includes(newFilters.genre)) &&
     (newFilters.platform === null || game.creator.includes(newFilters.platform)) &&
@@ -75,20 +77,22 @@ function App() {
           <Routes>
             <Route path="/" element={
               <>
-              <GameFilters years={years} genres={genres} platforms={platforms} ratings={ratings} filters={filters} onFilterChange={handleFilterChange} />
+              {games.length > 0 && <GameFilters years={years} genres={genres} platforms={platforms} ratings={ratings} filters={filters} onFilterChange={handleFilterChange} />}
               <div className="games-container" style={{ marginTop: "50px" }}>
-                {filteredGames.map((game, index) => (
+                {filteredGames.length === 0 ? <p>No hay juegos para mostrar</p> : (filteredGames.map((game, index) => (
                   <Games
                     key={index}
                     game={game}
                     onClick={() => navigate(`/game/${game.id}`)}
                   />
-                ))}
+                )))}
               </div>
               </>
             }/>
             <Route path="/game/:id" element={<GameDetails games={games} user={user} setUser={setUser}/>}/>
             <Route path="/register" element={<Register onLogin={handleLogin}/>} />
+            <Route path="/perfil" element={<Profile user={user}/>} />
+            <Route path="/add-game" element={<AddGame />} />
           </Routes>
         </div>
       </div>

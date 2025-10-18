@@ -67,7 +67,7 @@ const GameDetails = ({ games, user, setUser }: GameDetailsProps) => {
       updatedWishlist = await userService.addToWishlist(game.id)
     }
     setUser({...user, wishlist: updatedWishlist});
-    setIsFavourite(!isInWishlist);
+    setIsInWishlist(!isInWishlist);
     setLoading(false);
   }
 

@@ -23,7 +23,7 @@ export type FilterState = {
     rating: number | null;
 }
 
-const GameFilters = ({ years, genres, platforms, ratings, filters, onFilterChange }: FilterProps) => {
+const GameFilters = ({ years = [], genres = [], platforms = [], ratings = [], filters, onFilterChange }: FilterProps) => {
     const [openDropdown , setOpenDropdown] = useState<string | null>(null);
 
     const toggleDropdown = (name: string) => {
