@@ -47,7 +47,6 @@
 
 .card {
   width: 100%;
-  max-width: 300px;
   justify-self: center;
   padding: 16px;
   border: 1px solid #ccc;       /* Contorno gris claro */
@@ -55,6 +54,14 @@
   border-radius: 8px;           /* Bordes redondeados opcionales */
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05); /* Pequeña sombra opcional */
   flex: 0 0 auto;
+}
+
+.card-details {
+  padding: 16px;
+  border: 1px solid #ccc;       /* Contorno gris claro */
+  background-color: #363636;    /* Fondo un poco más oscuro */
+  border-radius: 8px;           /* Bordes redondeados opcionales */
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05); /* Pequeña sombra opcional */
 }
 /* En pantallas pequeñas, tipo teléfono, hacemos 1 columna nomás */
 @media (max-width: 768px) {
