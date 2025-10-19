@@ -24,12 +24,11 @@ const Profile = ({ user }: ProfileProps) => {
                 <h2>{user.username}</h2>
             </div>
             <div>
-                <hr>
-                    <div>
-                        <h2>Favoritos</h2>
-                        <p>Mostrar más</p>
-                    </div>
-                </hr>
+                <div>
+                    <h2>Favoritos</h2>
+                    <p>Mostrar más</p>
+                </div>
+                <hr/>
                 <div>
                 {
                     favourites.map((game, index) => (
@@ -42,12 +41,11 @@ const Profile = ({ user }: ProfileProps) => {
                     ))
                 }
                 </div>
-                <hr>
-                    <div>
-                        <h2>Wishlist</h2>
-                        <p>Mostrar más</p>
-                    </div>
-                </hr>
+                <div>
+                    <h2>Wishlist</h2>
+                    <p>Mostrar más</p>
+                </div>
+                <hr/>
                 <div>
                 {
                     wishlist.map((game, index) => (
@@ -60,12 +58,11 @@ const Profile = ({ user }: ProfileProps) => {
                     ))
                 }
                 </div>
-                <hr>
-                    <div>
-                        <h2>Reviews</h2>
-                        <p>Mostrar más</p>
-                    </div>
-                </hr>
+                <div>
+                    <h2>Reviews</h2>
+                    <p>Mostrar más</p>
+                </div>
+                <hr/>
             </div>
         </div>
     )
