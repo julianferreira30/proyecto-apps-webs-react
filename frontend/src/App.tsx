@@ -91,7 +91,7 @@ function App() {
               <>
               {games.length > 0 && <div style={{paddingTop:"100px"}}><GameFilters years={years} genres={genres} platforms={platforms} ratings={ratings} filters={filters} onFilterChange={handleFilterChange} /></div>}
               <div style={{ marginTop:"50px", display: "flex", gap: "20px",justifyContent: "center",alignItems: "center", flexWrap:"wrap"}}>
-                {filteredGames.length === 0 ? <p style={{marginTop:"90px"}}>No hay juegos para mostrar</p> : (filteredGames.map((game, index) => (
+                {filteredGames.length === 0 ? <p style={{marginTop:"190px"}}>No hay juegos para mostrar</p> : (filteredGames.map((game, index) => (
                   <Games
                     key={index}
                     game={game}
@@ -101,7 +101,8 @@ function App() {
               </div>
               </>
             }/>
-            <Route path="/game/:id" element={<GameDetails games={games} user={user} setUser={setUser}/>}/>
+            <Route path="/game/:id" element={<GameDetails games={games} user={user} fromProfile={false} setUser={setUser}/>}/>
+            <Route path="/perfil/game/:id" element={<GameDetails games={games} user={user} fromProfile={true} setUser={setUser}/>}/>
             <Route path="/register" element={<Register onLogin={handleLogin}/>} />
             <Route path="/perfil" element={<Profile user={user}/>} />
             <Route path="/add-game" element={<AddGame user={user} addGameToState={addGameToState}/>} />

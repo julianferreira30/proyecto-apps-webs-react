@@ -17,7 +17,7 @@ const Profile = ({ user }: ProfileProps) => {
 
     const navigate = useNavigate();
 
-    console.log(favourites)
+
 
     return (
         <div style={{display:"flex", width:"100%", maxWidth:"100vw", padding:"2rem", boxSizing:"border-box", overflow:"hidden", justifyContent:"space-evenly", alignItems:"stretch", gap:"3rem", flexDirection:"column"}}>
@@ -38,7 +38,7 @@ const Profile = ({ user }: ProfileProps) => {
                 <div style={{ marginTop:"50px", display: "flex", gap: "20px",justifyContent: "center",alignItems: "center", flexWrap:"wrap"}}>
                 { favourites.length !== 0 ?
                     (favourites.map((game, index) => (
-                        <div className="card" key={index} onClick={() => navigate(`/game/${game.id}`)}>
+                        <div className="card" key={index} onClick={() => navigate(`/perfil/game/${game.id}`)}>
                             <p style={{margin:"5px"}}><img src={game.image} style={{maxWidth: "264px", maxHeight: "352px"}}/></p>
                             <h2 style={{margin:"5px"}}>{game.name}</h2>
                             <p style={{margin:"5px"}}>{game.creator}</p>
@@ -54,7 +54,7 @@ const Profile = ({ user }: ProfileProps) => {
                 <div style={{ marginTop:"50px", display: "flex", gap: "20px",justifyContent: "center",alignItems: "center", flexWrap:"wrap"}}>
                 { wishlist.length !== 0 ?
                     (wishlist.map((game, index) => (
-                        <div className="card" key={index} onClick={() => navigate(`/game/${game.id}`)}>
+                        <div className="card" key={index} onClick={() => navigate(`/perfil/game/${game.id}`)}>
                             <p style={{margin:"5px"}}><img src={game.image} style={{maxWidth: "264px", maxHeight: "352px"}}/></p>
                             <h2 style={{margin:"5px"}}>{game.name}</h2>
                             <p style={{margin:"5px"}}>{game.creator}</p>
