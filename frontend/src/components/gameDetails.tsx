@@ -22,23 +22,27 @@ const GameDetails = ({ games, user, fromProfile, setUser }: GameDetailsProps) =>
 
   const game = games.find((g) => g.id.toString() == id);
 
+  const [isFavourite, setIsFavourite] = useState(false);
+  const [isInWishlist, setIsInWishlist] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (user && game) {
+      setIsFavourite(user.favourites.some((g) => g.id === game.id));
+      setIsInWishlist(user.wishlist.some((g) => g.id === game.id));
+    }
+  }, [user, game?.id])
+
+  if (!user) {
+    return <p style={{ textAlign: "center", marginTop:"90px" }}>Debes iniciar sesión para ver los juegos de tu perfil.</p>;
+  }
+
   if (!game) {
     return <p style={{marginTop:"90px"}}>Juego no encontrado</p>
   }
 
   const genreLabel = game.genre.length > 1 ? "Géneros" : "Género";
   const formattedGenres = game.genre.join(", ");
-
-  const [isFavourite, setIsFavourite] = useState(false);
-  const [isInWishlist, setIsInWishlist] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (user) {
-      setIsFavourite(user.favourites.some((g) => g.id === game.id));
-      setIsInWishlist(user.wishlist.some((g) => g.id === game.id));
-    }
-  }, [user, game.id])
 
   const toggleFavourite = async () => {
     if (!user){
@@ -204,4 +208,4 @@ const GameDetails = ({ games, user, fromProfile, setUser }: GameDetailsProps) =>
   );
 };
 
-export default GameDetails;
+export default GameDetails

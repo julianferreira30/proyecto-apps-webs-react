@@ -47,7 +47,6 @@ const Register = ({ onLogin }: RegisterProps) => {
             <h1>Crear cuenta</h1>
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem", width: "300px", justifyContent:"center" }}>
                 <TextField 
-                id="outlined-basic" 
                 label="Nombre" 
                 variant="outlined" 
                 value={name} 
@@ -60,7 +59,6 @@ const Register = ({ onLogin }: RegisterProps) => {
                 }}/>
 
                 <TextField 
-                id="outlined-basic" 
                 label="Nombre de usuario" 
                 variant="outlined" 
                 value={username}
@@ -73,7 +71,6 @@ const Register = ({ onLogin }: RegisterProps) => {
                 }}/>
 
                 <TextField 
-                id="outlined-basic" 
                 label="Contraseña" 
                 variant="outlined" 
                 value={password} 
@@ -87,7 +84,6 @@ const Register = ({ onLogin }: RegisterProps) => {
                 }}/>
 
                 <TextField 
-                id="outlined-basic" 
                 label="Confirmar contraseña" 
                 variant="outlined" 
                 value={confirmPassword} 

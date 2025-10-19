@@ -27,6 +27,7 @@ export const Header = ({ title, user, onLogout, onLogin }: HeaderProps) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setOpen(!open);
@@ -49,6 +50,7 @@ export const Header = ({ title, user, onLogout, onLogin }: HeaderProps) => {
       const userData = await loginService.login({username, password});
       onLogin?.(userData);
       handleCloseLogin();
+      navigate("/perfil")
     } catch (e) {
       console.error("Error al iniciar sesión", e);
       setError("Usuario o contraseña incorrectos");
@@ -64,8 +66,6 @@ export const Header = ({ title, user, onLogout, onLogin }: HeaderProps) => {
     setPassword("");
     setError(null);
   };
-
-  const navigate = useNavigate();
 
   const handleRegisterClick = () => {
     setOpen(false);
@@ -111,7 +111,6 @@ export const Header = ({ title, user, onLogout, onLogin }: HeaderProps) => {
           >
             <IconButton onClick={handleCloseLogin} size="small" sx={{color:"white"}}><CloseIcon/></IconButton>
             <TextField 
-              id="outlined-basic" 
               label="Nombre de usuario"
               variant="outlined"
               size="small"
@@ -124,7 +123,6 @@ export const Header = ({ title, user, onLogout, onLogin }: HeaderProps) => {
               }}/>
 
             <TextField 
-              id="outlined-basic" 
               label="Contraseña"
               variant="outlined"
               size="small"

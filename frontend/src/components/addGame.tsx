@@ -20,7 +20,7 @@ const genreOptions = ["Action", "Adventure", "RPG",
     "Battle Royale", "Indie", "Rogue like", "souls like"];
 
 const currentYear = new Date().getFullYear();
-const yearOptions = Array.from({length: currentYear - 1971}, (_, i) => 1972 + i)
+const yearOptions = Array.from({length: currentYear - 1971}, (_, i) => 1972 + i).map((year) => year.toString())
 
 const AddGame = ({user,addGameToState}: AddGameProps) => {
     if (!user) {
@@ -28,7 +28,7 @@ const AddGame = ({user,addGameToState}: AddGameProps) => {
     };
 
     const [name, setName] = useState("");
-    const [releaseYear, setReleaseYear] = useState<number | null>(null);
+    const [releaseYear, setReleaseYear] = useState<string | null>(null);
     const [creator, setCreator] = useState("");
     const [genres, setGenres] = useState<string[]>([]);
     const [image, setImage] = useState("");
@@ -47,7 +47,7 @@ const AddGame = ({user,addGameToState}: AddGameProps) => {
         };
         const newGame: Omit<GameData, "id" | "rating">= {
             name,
-            release_year: releaseYear,
+            release_year: Number(releaseYear),
             creator: creator === "" ? "Desconocido" : creator,
             genre: genres,
             image,
@@ -75,7 +75,6 @@ const AddGame = ({user,addGameToState}: AddGameProps) => {
             <h1>Añadir nuevo Juego</h1>
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem", width: "300px" }}>
                 <TextField 
-                    id="outlined-multiline-flexible" 
                     label="Nombre del juego" 
                     multiline
                     required
@@ -104,7 +103,6 @@ const AddGame = ({user,addGameToState}: AddGameProps) => {
                 />
 
                 <TextField 
-                    id="outlined-basic" 
                     label="Creador" 
                     variant="outlined" 
                     value={creator}
@@ -117,7 +115,6 @@ const AddGame = ({user,addGameToState}: AddGameProps) => {
 
                 <Autocomplete
                     multiple
-                    id="tags-outlined"
                     options={genreOptions}
                     value={genres}
                     onChange={(_, value) => setGenres(value)}
@@ -146,7 +143,6 @@ const AddGame = ({user,addGameToState}: AddGameProps) => {
                 />
 
                 <TextField 
-                    id="outlined-basic" 
                     label="URL de imagen" 
                     required
                     value={image}
@@ -158,7 +154,6 @@ const AddGame = ({user,addGameToState}: AddGameProps) => {
                 }}/>
 
                 <TextField 
-                    id="outlined-multiline-flexible" 
                     label="Descripción" 
                     multiline
                     required
