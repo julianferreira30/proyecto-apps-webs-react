@@ -1,5 +1,6 @@
 import axiosSecure from "../utils/axiosSecure";
 import type { Review } from "../types/review";
+import axios from "axios";
 
 
 const createReview = async (review: Review) => {
@@ -8,7 +9,7 @@ const createReview = async (review: Review) => {
 };
 
 const getReviewsByGame = async (gameId: string) => {
-    const response = await axiosSecure.get(`/api/game/${gameId}/reviews`);
+    const response = await axios.get(`/api/game/${gameId}/reviews`);
     return response.data;
 };
 

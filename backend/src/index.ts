@@ -54,13 +54,13 @@ app.use(requestLogger);
 app.use("/api/login", loginRouter);
 app.use("/api/register", registerRouter);
 
-app.get("/api/games", (request, response) => {
+app.get("/api/games", async (request, response) => {
   GameModel.find({}).then((games) => {
     response.json(games);
   });
 });
 
-app.get("/api/games/:id", (request, response, next) => {
+app.get("/api/games/:id", async (request, response, next) => {
   const { id } = request.params;
   GameModel.findById(id)
     .then((game) => {
@@ -73,7 +73,7 @@ app.get("/api/games/:id", (request, response, next) => {
     .catch((error) => next(error));
 });
 
-app.post("/api/games", withUser, (request, response, next) => {
+app.post("/api/games", withUser, async (request, response, next) => {
   const body = request.body;
 
   const game = new GameModel({
@@ -82,6 +82,8 @@ app.post("/api/games", withUser, (request, response, next) => {
     creator: body.creator,
     genre: body.genre,
     image: body.image,
+    description: body.description,
+    rating: body.rating,
   });
 
   game
@@ -92,7 +94,7 @@ app.post("/api/games", withUser, (request, response, next) => {
     .catch((error) => next(error));
 });
 
-app.put("/api/games/:id", withUser, (request, response, next) => {
+app.put("/api/games/:id", withUser, async (request, response, next) => {
   const id = request.params.id;
   const body = request.body;
 
@@ -107,7 +109,7 @@ app.put("/api/games/:id", withUser, (request, response, next) => {
     .catch((error) => next(error));
 });
 
-app.delete("/api/games/:id", withUser, (request, response, next) => {
+app.delete("/api/games/:id", withUser, async (request, response, next) => {
   const { id } = request.params;
 
   GameModel.findByIdAndDelete(id)
@@ -141,8 +143,10 @@ const errorHandler = (
 app.use(errorHandler);
 app.use(express.static("dist"));
 
-app.listen(config.PORT, () => {
-  logger.info(`Server running on port ${config.PORT}`);
-});
+if (process.env.NODE_ENV !== "test") {
+  app.listen(config.PORT, () => {
+    logger.info(`Server running on port ${config.PORT}`);
+  });
+}
 
 export default app;

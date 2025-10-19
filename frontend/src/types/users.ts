@@ -5,7 +5,7 @@ export interface User {
     id: string;
     username: string;
     name: string;
-    image: string;
+    //image: string;
     //reviews: Review[];
     favourites: GameData[];
     wishlist: GameData[];

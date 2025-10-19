@@ -18,7 +18,7 @@ const Profile = ({ user }: ProfileProps) => {
             <div>
                 <Avatar
                 alt="Remy Sharp"
-                src={user.image}
+                src="/broken-image.jpg"
                 sx={{ width: 100, height: 100 }}
                 />
                 <h2>{user.username}</h2>

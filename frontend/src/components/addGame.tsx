@@ -31,14 +31,14 @@ const AddGame = () => {
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setErrorMessage(null);
-        if (!name || !releaseYear || !creator || genres.length === 0 || !image || !description) {
-            setErrorMessage("Por favor complete todos los campos")
+        if (!name || !releaseYear || genres.length === 0 || !image || !description) {
+            setErrorMessage("Por favor complete todos los campos obligatorios*")
             return;
         };
         const newGame: Omit<GameData, "id" | "rating">= {
             name,
             release_year: releaseYear,
-            creator,
+            creator: creator === "" ? "Desconocido" : creator,
             genre: genres,
             image,
             description
@@ -88,8 +88,7 @@ const AddGame = () => {
                     id="outlined-basic" 
                     label="Creador" 
                     variant="outlined" 
-                    value={creator} 
-                    required
+                    value={creator}
                     onChange={(e) => setCreator(e.target.value)}
                     sx={{
                     input: { color: "white" },

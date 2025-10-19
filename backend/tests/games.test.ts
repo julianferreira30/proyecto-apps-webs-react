@@ -15,6 +15,8 @@ interface GameJson {
   creator: string;
   genre: string[];
   image: string;
+  description: string;
+  rating: number;
 }
 
 let zeldaId: string;
@@ -69,6 +71,8 @@ describe("GameBoxd API integration tests", () => {
       creator: "Test Creator",
       genre: ["Test Genre"],
       image: "http://example.com/image.jpg",
+      description: "Juego para testear",
+      rating: 0,
     };
     const response = await api
       .post("/api/games")
@@ -90,6 +94,8 @@ describe("GameBoxd API integration tests", () => {
       creator: "...",
       genre: ["..."],
       image: "...",
+      description: "...",
+      rating: 0,
     };
     const response = await api
       .put(`/api/games/${zeldaId}`)
@@ -122,6 +128,8 @@ describe("GameBoxd API integration tests", () => {
       creator: "Test Creator",
       genre: ["Test Genre"],
       image: "http://example.com/image.jpg",
+      description: "Juego para testear",
+      rating: 0,
     };
     const responseWithoutAuth = await api
       .post("/api/games")
@@ -151,6 +159,8 @@ describe("GameBoxd API integration tests", () => {
       creator: "Test Creator",
       genre: ["Test Genre"],
       image: "http://example.com/image.jpg",
+      description: "Juego para testear",
+      rating: 0,
     };
     const response = await api
       .post("/api/games")
@@ -172,6 +182,8 @@ describe("GameBoxd API integration tests", () => {
       creator: "Nintendo",
       genre: ["Adventure"],
       image: "http://example.com/zelda.jpg",
+      description: "Juego de acción-aventura",
+      rating: 0,
     };
 
     // Sin autenticación debe fallar
@@ -204,6 +216,8 @@ describe("GameBoxd API integration tests", () => {
       creator: "Nintendo",
       genre: ["Adventure"],
       image: "http://example.com/zelda.jpg",
+      description: "Juego de acción-aventura",
+      rating: 0,
     };
 
     // Con cookie pero CSRF token inválido

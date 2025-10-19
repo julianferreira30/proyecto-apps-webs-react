@@ -17,7 +17,7 @@ router.post("/", async (request, response) => {
     return response.status(409).json({ error: "username already exists" });
   }
   const passwordHash = await bcrypt.hash(password, 10);
-  const user = new User({ username, name, passwordHash });
+  const user = new User({ username, name, passwordHash, favourites: [], wishlist: [] });
   await user.save();
   return response
     .status(201)

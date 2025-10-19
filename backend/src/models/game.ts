@@ -13,11 +13,14 @@ if (url) {
 }
 
 export interface Game{
+    id: string,
     name: string,
     release_year: number,
     creator: string,
     genre: string[], 
     image: string,
+    description: string,
+    rating: number,
 }
 
 const gameSchema = new mongoose.Schema<Game>({
@@ -25,7 +28,9 @@ const gameSchema = new mongoose.Schema<Game>({
     release_year: {type: Number, required: true},
     creator: {type: String, required: false}, // Puse que no es necesario, pero se puede cambiar obvio
     genre: {type: [String], required: true},
-    image: {type: String, required: true}
+    image: {type: String, required: true},
+    description: {type: String, required: true},
+    rating: {type: Number, required: true, default: 0}
 })
 
 gameSchema.set("toJSON", {
