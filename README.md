@@ -17,10 +17,10 @@ NODE_ENV=development
 JWT_SECRET = process.env.JWT_SECRET || "my_secret"
 
 # --- Base de datos principal (para cuando corres el servidor normalmente) ---
-MONGODB_URI=mongodb://127.0.0.1:27017/lab6
+MONGODB_URI=mongodb://127.0.0.1:27017/proyecto
 
 # --- Base de datos de testing (usada automáticamente cuando NODE_ENV=test) ---
-TEST_MONGODB_URI=mongodb://127.0.0.1:27017/lab6_test
+TEST_MONGODB_URI=mongodb://127.0.0.1:27017/proyecto_test
 ```
 
 
