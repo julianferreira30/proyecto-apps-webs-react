@@ -11,6 +11,7 @@ import type { User } from "../types/users";
 interface AddGameProps {
   user: User | null;
   addGameToState?: (newGame: GameData) => void;
+  openLogin: () => void;
 }
 
 const genreOptions = ["Action", "Adventure", "RPG", 
@@ -22,8 +23,9 @@ const genreOptions = ["Action", "Adventure", "RPG",
 const currentYear = new Date().getFullYear();
 const yearOptions = Array.from({length: currentYear - 1971}, (_, i) => 1972 + i).map((year) => year.toString())
 
-const AddGame = ({user,addGameToState}: AddGameProps) => {
+const AddGame = ({user,addGameToState, openLogin}: AddGameProps) => {
     if (!user) {
+        openLogin();
         return <p style={{marginTop:"90px"}}>Debes Iniciar sesión para poder agregar juegos</p>;
     };
 

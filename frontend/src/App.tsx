@@ -23,6 +23,7 @@ function App() {
     platform: null,
     rating: null,
   })
+  const [showLoginForm, setShowLoginForm] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -84,7 +85,7 @@ function App() {
   return (
     <>
       <div>
-        <Header title="GameBoxd" user={user} onLogout={handleLogout} onLogin={handleLogin} />
+        <Header title="GameBoxd" user={user} onLogout={handleLogout} onLogin={handleLogin} showLoginForm={showLoginForm} setShowLoginForm={setShowLoginForm}/>
         <div>
           <Routes>
             <Route path="/" element={
@@ -102,10 +103,10 @@ function App() {
               </>
             }/>
             <Route path="/game/:id" element={<GameDetails games={games} user={user} fromProfile={false} setUser={setUser}/>}/>
-            <Route path="/perfil/game/:id" element={<GameDetails games={games} user={user} fromProfile={true} setUser={setUser}/>}/>
+            <Route path="/perfil/game/:id" element={<GameDetails games={games} user={user} fromProfile={true} setUser={setUser} openLogin={() => setShowLoginForm(true)}/>}/>
             <Route path="/register" element={<Register onLogin={handleLogin}/>} />
-            <Route path="/perfil" element={<Profile user={user}/>} />
-            <Route path="/add-game" element={<AddGame user={user} addGameToState={addGameToState}/>} />
+            <Route path="/perfil" element={<Profile user={user} openLogin={() => setShowLoginForm(true)}/>} />
+            <Route path="/add-game" element={<AddGame user={user} addGameToState={addGameToState} openLogin={() => setShowLoginForm(true)}/>} />
           </Routes>
         </div>
       </div>
