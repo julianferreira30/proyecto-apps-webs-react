@@ -34,6 +34,8 @@ describe("Register API tests", () => {
     const usersInDb = await User.find({});
     assert.strictEqual(usersInDb.length, 1);
     assert.strictEqual(usersInDb[0].username, newUser.username);
+    assert.deepStrictEqual(usersInDb[0].favourites, []);
+    assert.deepStrictEqual(usersInDb[0].wishlist, []);
   });
 
   test("POST /api/register fails without username", async () => {

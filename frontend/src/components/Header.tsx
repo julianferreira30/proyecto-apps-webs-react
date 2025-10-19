@@ -94,7 +94,8 @@ export const Header = ({ title, user, onLogout, onLogin }: HeaderProps) => {
         justifyContent: "space-between",
         alignItems: "center",
         padding: "0.1rem",
-        height: "70px"
+        height: "70px",
+        zIndex: 2000,
       }}
     >
       <h1 style={{ margin: 0, fontSize: "2rem", fontWeight: "500", paddingLeft: "2rem" }}>{title}</h1>
@@ -111,7 +112,7 @@ export const Header = ({ title, user, onLogout, onLogin }: HeaderProps) => {
             <IconButton onClick={handleCloseLogin} size="small" sx={{color:"white"}}><CloseIcon/></IconButton>
             <TextField 
               id="outlined-basic" 
-              label="Usuario"
+              label="Nombre de usuario"
               variant="outlined"
               size="small"
               value={username}

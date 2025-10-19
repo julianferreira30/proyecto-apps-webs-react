@@ -9,8 +9,8 @@ const getAllGames = () => {
 }
 
 const getGameById = async (id: string) => {
-    const response = await axiosSecure.get(`/api/games/${id}`);
-    return response.data;
+    const response = axiosSecure.get(`/api/games/${id}`);
+    return response.then((response) => response.data);
 };
 
 const createGame = async (newObject: Omit<GameData, "id" | "rating">) => {

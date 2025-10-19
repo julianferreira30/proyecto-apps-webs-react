@@ -12,17 +12,18 @@ import userService from "../services/users";
 interface GameDetailsProps {
   games: GameData[];
   user: User | null;
+  fromProfile: boolean;
   setUser: (u: User) => void;
 }
 
-const GameDetails = ({ games, user, setUser }: GameDetailsProps) => {
+const GameDetails = ({ games, user, fromProfile, setUser }: GameDetailsProps) => {
   const { id } = useParams<{id: string}>();
   const navigate = useNavigate();
 
   const game = games.find((g) => g.id.toString() == id);
 
   if (!game) {
-    return <p>Juego no encontrado</p>
+    return <p style={{marginTop:"90px"}}>Juego no encontrado</p>
   }
 
   const genreLabel = game.genre.length > 1 ? "Géneros" : "Género";
@@ -72,27 +73,41 @@ const GameDetails = ({ games, user, setUser }: GameDetailsProps) => {
   }
 
   return (
-    <>
-        <div style={{ textAlign: "right", marginTop: "80px" }}>
-        <Button
-          onClick={() => navigate("/")}
-          variant="outlined"
-          sx={{
-            color: "white",
-            border:"none",
-            backgroundColor: "black"
-          }}
-        >
-          Volver a la lista
-        </Button>
+    <div style={{ marginTop:"50px", display: "flex", gap: "20px", flexWrap:"wrap"}}>
+        <div style={{ textAlign: "right", marginTop: "20px" }}>
+          {
+            fromProfile ? (
+              <Button
+                onClick={() => navigate("/perfil")}
+                variant="outlined"
+                sx={{
+                  color: "white",
+                  border:"none",
+                  backgroundColor: "black"
+                }}
+              >
+                Volver al perfil
+              </Button>
+            ) : (
+              <Button
+                onClick={() => navigate("/")}
+                variant="outlined"
+                sx={{
+                  color: "white",
+                  border:"none",
+                  backgroundColor: "black"
+                }}
+              >
+                Volver a la lista
+              </Button>
+            )
+          }
       </div>
       <div className="card-details"
         style={{
           display: "flex",
           marginTop: "20px",
           justifyContent: "center",
-          height: "400px",
-          width: "1000px",
           padding: "20px",
         }}
       >
@@ -185,7 +200,7 @@ const GameDetails = ({ games, user, setUser }: GameDetailsProps) => {
           </ButtonGroup>}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
