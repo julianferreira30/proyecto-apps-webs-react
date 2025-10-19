@@ -19,11 +19,12 @@ interface HeaderProps {
   user: User | null;
   onLogout?: () => void;
   onLogin?: (user: User) => void;
+  showLoginForm?: boolean;
+  setShowLoginForm?: (show: boolean) => void;
 }
 
-export const Header = ({ title, user, onLogout, onLogin }: HeaderProps) => {
+export const Header = ({ title, user, onLogout, onLogin, showLoginForm, setShowLoginForm }: HeaderProps) => {
   const [open, setOpen] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -39,7 +40,7 @@ export const Header = ({ title, user, onLogout, onLogin }: HeaderProps) => {
   }
 
   const handleLoginClick = () => {
-    setShowLoginForm(true);
+    setShowLoginForm?.(true);
     setOpen(false);
   };
 
@@ -61,7 +62,7 @@ export const Header = ({ title, user, onLogout, onLogin }: HeaderProps) => {
   }
 
   const handleCloseLogin = () => {
-    setShowLoginForm(false);
+    setShowLoginForm?.(false);
     setUsername("");
     setPassword("");
     setError(null);

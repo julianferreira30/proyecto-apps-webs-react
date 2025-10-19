@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 
 interface ProfileProps {
     user: User | null;
+    openLogin: () => void;
 }
 
-const Profile = ({ user }: ProfileProps) => {
+const Profile = ({ user, openLogin }: ProfileProps) => {
     if (!user) {
+        openLogin();
         return <p style={{ textAlign: "center", marginTop:"90px" }}>Debes iniciar sesión para ver tu perfil.</p>;;
     }
 
