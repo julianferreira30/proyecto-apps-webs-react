@@ -31,7 +31,15 @@ router.post("/", async (request, response) => {
         httpOnly: true,
         secure: process.env.NODE_ENV == "production",
       });
-      response.status(200).send({ id: user.id, username: user.username, name: user.name, favourites: user.favourites, wishlist: user.wishlist });
+      const fullUser = await User.findById(user._id).populate("favourites").populate("wishlist").lean();
+      if (!fullUser) {
+        return response.status(404).json({error:"Ususario no encontrado"})
+      }
+      const mapGames = (games: any[]) => games.map(g => ({
+        ...g,
+        id: g._id.toString()
+      }));
+            response.status(200).send({ id: fullUser._id.toString(), username: fullUser.username, name: fullUser.name, favourites: mapGames(fullUser.favourites), wishlist: mapGames(fullUser.wishlist) });
     }
   } else {
     return response.status(401).json({
@@ -41,8 +49,15 @@ router.post("/", async (request, response) => {
 });
 router.get("/auth/me", withUser, async (request, response, next) => {
   const body = request.body;
-  const user = await User.findById(request.userId);
-  return response.status(200).json(user);
+  const user = await User.findById(request.userId).populate("favourites").populate("wishlist").lean();
+  if (!user) {
+    return response.status(404).json({error:"Ususario no encontrado"})
+  }
+  const mapGames = (games: any[]) => games.map(g => ({
+    ...g,
+    id: g._id.toString()
+  }));
+  response.status(200).send({ id: user._id.toString(), username: user.username, name: user.name, favourites: mapGames(user.favourites), wishlist: mapGames(user.wishlist) });
 });
 router.post("/logout", (request, response) => {
   response.clearCookie("token");

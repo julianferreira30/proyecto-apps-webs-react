@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import registerRouter from "./controllers/register";
 import loginRouter from "./controllers/login";
+import usersRouter from "./controllers/users";
 import { withUser } from "./utils/middleware";
 
 declare global {
@@ -53,6 +54,8 @@ app.use(requestLogger);
 
 app.use("/api/login", loginRouter);
 app.use("/api/register", registerRouter);
+
+app.use("/api/users", usersRouter);
 
 app.get("/api/games", async (request, response) => {
   GameModel.find({}).then((games) => {
