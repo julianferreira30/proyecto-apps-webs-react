@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  width: 100%;
 }
 
 .logo {
@@ -46,14 +47,20 @@
 }
 
 .card {
-  width: 100%;
-  justify-self: center;
+  width: 250px;                 /* ancho fijo */
+  height: 500px;                /* alto fijo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   padding: 16px;
   border: 1px solid #ccc;       /* Contorno gris claro */
   background-color: #363636;    /* Fondo un poco más oscuro */
   border-radius: 8px;           /* Bordes redondeados opcionales */
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05); /* Pequeña sombra opcional */
-  flex: 0 0 auto;
 }
 
 .card-details {

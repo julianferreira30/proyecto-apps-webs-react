@@ -64,6 +64,18 @@ function App() {
     setFilteredGames(newFiltered);
   };
 
+  const addGameToState = (newGame: GameData) => {
+    const updatedGames = [...games, newGame];
+    setGames(updatedGames);
+    const newFiltered = updatedGames.filter((game) =>
+    (filters.year === null || game.release_year === filters.year) &&
+    (filters.genre === null || game.genre.includes(filters.genre)) &&
+    (filters.platform === null || game.creator.includes(filters.platform)) &&
+    (filters.rating === null || game.rating === filters.rating)
+    );
+    setFilteredGames(newFiltered);
+  }
+
   const years = Array.from(new Set(games.map((g) => g.release_year))).sort((a,b) => b-a);
   const genres = Array.from(new Set(games.flatMap(g => g.genre)));
   const platforms = Array.from(new Set(games.flatMap(g => g.creator || [])));
@@ -77,9 +89,9 @@ function App() {
           <Routes>
             <Route path="/" element={
               <>
-              {games.length > 0 && <GameFilters years={years} genres={genres} platforms={platforms} ratings={ratings} filters={filters} onFilterChange={handleFilterChange} />}
-              <div className="games-container" style={{ marginTop: "50px" }}>
-                {filteredGames.length === 0 ? <p>No hay juegos para mostrar</p> : (filteredGames.map((game, index) => (
+              {games.length > 0 && <div style={{paddingTop:"100px"}}><GameFilters years={years} genres={genres} platforms={platforms} ratings={ratings} filters={filters} onFilterChange={handleFilterChange} /></div>}
+              <div style={{ marginTop:"50px", display: "flex", gap: "20px",justifyContent: "center",alignItems: "center", flexWrap:"wrap"}}>
+                {filteredGames.length === 0 ? <p style={{marginTop:"90px"}}>No hay juegos para mostrar</p> : (filteredGames.map((game, index) => (
                   <Games
                     key={index}
                     game={game}
@@ -92,7 +104,7 @@ function App() {
             <Route path="/game/:id" element={<GameDetails games={games} user={user} setUser={setUser}/>}/>
             <Route path="/register" element={<Register onLogin={handleLogin}/>} />
             <Route path="/perfil" element={<Profile user={user}/>} />
-            <Route path="/add-game" element={<AddGame />} />
+            <Route path="/add-game" element={<AddGame user={user} addGameToState={addGameToState}/>} />
           </Routes>
         </div>
       </div>

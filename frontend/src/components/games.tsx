@@ -11,9 +11,9 @@ const Games = ({ game, onClick }: GamesProps) => {
   }
   return (
     <div className="card" onClick={onClick}>
-      <p><img src={game.image} style={{maxWidth: "264px", maxHeight: "352px"}}/></p>
-      <p>Nombre: {game.name}</p>
-      <p>Autor: {game.creator}</p>
+      <p style={{margin:"10px"}}><img src={game.image} style={{maxWidth: "264px", maxHeight: "352px"}}/></p>
+      <h2 style={{margin:"0px"}}>{game.name}</h2>
+      <p style={{margin:"10px"}}>{game.creator}</p>
     </div>
   );
 };

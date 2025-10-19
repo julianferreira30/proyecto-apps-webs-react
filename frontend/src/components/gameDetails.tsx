@@ -22,7 +22,7 @@ const GameDetails = ({ games, user, setUser }: GameDetailsProps) => {
   const game = games.find((g) => g.id.toString() == id);
 
   if (!game) {
-    return <p>Juego no encontrado</p>
+    return <p style={{marginTop:"90px"}}>Juego no encontrado</p>
   }
 
   const genreLabel = game.genre.length > 1 ? "Géneros" : "Género";
@@ -72,8 +72,8 @@ const GameDetails = ({ games, user, setUser }: GameDetailsProps) => {
   }
 
   return (
-    <>
-        <div style={{ textAlign: "right", marginTop: "80px" }}>
+    <div style={{ marginTop:"50px", display: "flex", gap: "20px", flexWrap:"wrap"}}>
+        <div style={{ textAlign: "right", marginTop: "20px" }}>
         <Button
           onClick={() => navigate("/")}
           variant="outlined"
@@ -91,8 +91,6 @@ const GameDetails = ({ games, user, setUser }: GameDetailsProps) => {
           display: "flex",
           marginTop: "20px",
           justifyContent: "center",
-          height: "400px",
-          width: "1000px",
           padding: "20px",
         }}
       >
@@ -185,7 +183,7 @@ const GameDetails = ({ games, user, setUser }: GameDetailsProps) => {
           </ButtonGroup>}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

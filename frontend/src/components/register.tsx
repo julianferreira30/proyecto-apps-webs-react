@@ -43,9 +43,9 @@ const Register = ({ onLogin }: RegisterProps) => {
     };
 
     return (
-        <Box>
+        <Box sx={{alignItems:"center", display:"flex", flexDirection:"column", marginTop:"30px"}}>
             <h1>Crear cuenta</h1>
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem", width: "300px" }}>
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem", width: "300px", justifyContent:"center" }}>
                 <TextField 
                 id="outlined-basic" 
                 label="Nombre" 

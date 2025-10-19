@@ -68,7 +68,7 @@ const GameFilters = ({ years = [], genres = [], platforms = [], ratings = [], fi
     );
 
     return (
-        <div style={{ display: "flex", gap: "1rem", padding: "0 2rem", marginTop: "90px", textAlign: "center",alignContent: "stretch",flexDirection: "row",justifyContent: "center",alignItems: "center"}}>
+        <div style={{ top:"90px", left:0, right:0, display: "flex", gap: "1rem", zIndex:1000, height:"0px", padding: "0 2rem", textAlign: "center",alignContent: "stretch",flexDirection: "row",justifyContent: "center",alignItems: "center"}}>
             <h3>Filtrar por:</h3>
             {renderDropdown("Año", "year", years)}
             {renderDropdown("Género", "genre", genres)}
