@@ -194,13 +194,38 @@ const GameDetails = ({ games, user, fromProfile, setUser, openLogin }: GameDetai
               },
             }}
           >
-            <Button sx={{backgroundColor:"black"}} onClick={toggleFavourite} disabled={loading}>
+            <Button 
+            sx={{
+              backgroundColor:"black",
+              "&.Mui-disabled": {
+                backgroundColor:"black",
+                opacity:1,
+                color:"white",
+              }}} 
+              onClick={toggleFavourite} 
+              disabled={loading}>
               Favorito <FavoriteIcon fontSize="small" sx={{ ml: 2, color: isFavourite ? "red" : "white" }} />
             </Button>
-            <Button sx={{backgroundColor:"black"}} onClick={toggleWishlist} disabled={loading}>
+            <Button 
+            sx={{
+              backgroundColor:"black",
+              "&.Mui-disabled": {
+                backgroundColor:"black",
+                opacity:1,
+                color:"white",
+              }}}  
+              onClick={toggleWishlist} 
+              disabled={loading}>
               Wishlist <BookmarkIcon fontSize="small" sx={{ ml: 2, color: isInWishlist ? "yellow" : "white" }} />
             </Button>
-            <Button sx={{backgroundColor:"black"}}>
+            <Button 
+            sx={{
+              backgroundColor:"black",
+              "&.Mui-disabled": {
+                backgroundColor:"black",
+                opacity:1,
+                color:"white",
+              }}} >
               Review <CreateIcon fontSize="small" sx={{ ml: 2 }} />
             </Button>
           </ButtonGroup>}
