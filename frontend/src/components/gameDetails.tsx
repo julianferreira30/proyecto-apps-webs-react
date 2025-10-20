@@ -14,7 +14,7 @@ interface GameDetailsProps {
   user: User | null;
   fromProfile: boolean;
   setUser: (u: User) => void;
-  openLogin?: () => void;
+  openLogin: () => void;
 }
 
 const GameDetails = ({ games, user, fromProfile, setUser, openLogin }: GameDetailsProps) => {
@@ -34,8 +34,8 @@ const GameDetails = ({ games, user, fromProfile, setUser, openLogin }: GameDetai
     }
   }, [user, game?.id])
 
-  if (!user) {
-    openLogin?.();
+  if (!user && fromProfile) {
+    openLogin();
     return <p style={{ textAlign: "center", marginTop:"90px" }}>Debes iniciar sesión para ver los juegos desde tu perfil.</p>;
   }
 
