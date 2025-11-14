@@ -10,7 +10,7 @@ export const addReview = async (request: Request, response: Response, next: Next
 
         const user = await User.findById(request.userId);
         if (!user) {
-            return response.status(404).json({ error: "Usuario no encontrado" });
+            return response.status(401).json({ error: "Solo un usuario autenticado puede agregar una review a un juego" });
         };
 
         const game = await Game.findById(body.gameId);

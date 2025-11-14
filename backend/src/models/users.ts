@@ -7,38 +7,45 @@ interface UserData{
   name: string;
   passwordHash: string;
   played: mongoose.Types.ObjectId[];
-  favourites: mongoose.Types.ObjectId[];
+  favorites: mongoose.Types.ObjectId[];
   wishlist: mongoose.Types.ObjectId[];
   reviews: mongoose.Types.ObjectId[];
 }
-
 const userSchema = new mongoose.Schema<UserData>({
-  profile_image: {type: String, required: true},
-  username:{type:String, required: true, unique: true},
-  name: String,
-  passwordHash: String,
+  profile_image: {type: String, required: true, default: "/broken-image.jpg"},
+  username: {type: String, required: true, unique: true},
+  name: {type: String, required: true, unique: true},
+  passwordHash: {type: String, required: true, unique: true},
   played: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Game",
+      required: true,
+      default: [],
     },
   ],
-  favourites: [
+  favorites: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Game",
+      required: true,
+      default: [],
     },
   ],
   wishlist: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Game",
+      required: true,
+      default: [],
     },
   ],
   reviews: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Review",
+      required: true,
+      default: [],
     },
   ],
 })
