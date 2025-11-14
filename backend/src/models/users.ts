@@ -6,6 +6,7 @@ interface UserData{
   username: string;
   name: string;
   passwordHash: string;
+  added: mongoose.Types.ObjectId[];
   played: mongoose.Types.ObjectId[];
   favorites: mongoose.Types.ObjectId[];
   wishlist: mongoose.Types.ObjectId[];
@@ -16,6 +17,14 @@ const userSchema = new mongoose.Schema<UserData>({
   username: {type: String, required: true, unique: true},
   name: {type: String, required: true, unique: true},
   passwordHash: {type: String, required: true, unique: true},
+  added: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Game",
+      required: true,
+      default: [],
+    },
+  ],
   played: [
     {
       type: mongoose.Schema.Types.ObjectId,

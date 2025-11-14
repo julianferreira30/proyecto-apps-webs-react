@@ -30,7 +30,7 @@ export const login = async (request: Request, response: Response, next: NextFunc
           secure: process.env.NODE_ENV == "production",
         });
 
-        const fullUser = await user.populate(["played", "favourites", "wishlist", "reviews"]);
+        const fullUser = await user.populate(["added", "played", "favourites", "wishlist", "reviews"]);
         return response.status(200).json(fullUser);
       }
     } else {
@@ -45,7 +45,7 @@ export const login = async (request: Request, response: Response, next: NextFunc
 
 export const getCurrentUser = async (request: Request, response: Response, next: NextFunction) => {
   try {
-    const user = await User.findById(request.userId).populate(["played", "favourites", "wishlist", "reviews"]);
+    const user = await User.findById(request.userId).populate(["added", "played", "favourites", "wishlist", "reviews"]);
     if (!user) {
       return response.status(404).json({ error: "Usuario no encontrado" });
     }
