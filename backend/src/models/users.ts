@@ -1,31 +1,48 @@
 import mongoose from "mongoose";
-import { ref } from "process";
 
 interface UserData{
-    id:string;
-    username: string;
-    name: string;
-    passwordHash: string;
-    favourites: mongoose.Types.ObjectId[];
-    wishlist: mongoose.Types.ObjectId[];
+  id:string;
+  profile_image: string;
+  username: string;
+  name: string;
+  passwordHash: string;
+  played: mongoose.Types.ObjectId[];
+  favourites: mongoose.Types.ObjectId[];
+  wishlist: mongoose.Types.ObjectId[];
+  reviews: mongoose.Types.ObjectId[];
 }
+
 const userSchema = new mongoose.Schema<UserData>({
-    username:{type:String, required: true, unique: true},
-    name: String,
-    passwordHash: String,
-    favourites: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Game",
-      },
-    ],
-    wishlist: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Game",
-      },
-    ],
+  profile_image: {type: String, required: true},
+  username:{type:String, required: true, unique: true},
+  name: String,
+  passwordHash: String,
+  played: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Game",
+    },
+  ],
+  favourites: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Game",
+    },
+  ],
+  wishlist: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Game",
+    },
+  ],
+  reviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 })
+
 const User = mongoose.model("User", userSchema)
 userSchema.set("toJSON", {
   transform: (
@@ -43,4 +60,5 @@ userSchema.set("toJSON", {
     delete returnedObject.passwordHash;
   },
 });
+
 export default User;
