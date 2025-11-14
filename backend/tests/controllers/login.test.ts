@@ -1,9 +1,9 @@
 import { test, after, beforeEach, describe } from "node:test";
 import assert from "node:assert";
 import mongoose from "mongoose";
-import User from "../src/models/users";
+import User from "../../src/models/users";
 import supertest from "supertest";
-import app from "../src/index";
+import app from "../../src/index";
 
 const api = supertest(app);
 

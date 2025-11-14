@@ -1,10 +1,10 @@
 import { test, after, beforeEach, describe } from "node:test";
 import assert from "node:assert";
 import mongoose from "mongoose";
-import GameModel from "../src/models/game";
+import GameModel from "../../src/models/game";
 import supertest from "supertest";
-import app from "../src/index";
-import User from "../src/models/users";
+import app from "../../src/index";
+import User from "../../src/models/users";
 
 const api = supertest(app);
 describe("Register API tests", () => {
