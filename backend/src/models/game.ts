@@ -27,7 +27,7 @@ export interface GameData{
 const gameSchema = new mongoose.Schema<GameData>({
   name: {type: String, required: true},
   release_year: {type: Number, required: true},
-  creator: {type: String, required: false}, // Puse que no es necesario, pero se puede cambiar obvio
+  creator: {type: String, required: false, default: "Desconocido"}, // Puse que no es necesario, pero se puede cambiar obvio
   genre: {type: [String], required: true},
   image: {type: String, required: true},
   description: {type: String, required: true},

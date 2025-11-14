@@ -30,7 +30,7 @@ export const addToFavorites = async (request: Request, response: Response, next:
         user.favorites.splice(0, 0, gameId);
         await user.save();
       }
-      await user.populate("favourites")
+      await user.populate("favorites")
       return response.status(200).json(user.favorites);
     } catch (err) {
       console.error(err);
@@ -142,7 +142,7 @@ export const deleteFromFavorites = async (request: Request, response: Response, 
       
       user.favorites = user.favorites.filter((id) => id.toString() !== gameId);
       await user.save();
-      await user.populate("favourites")
+      await user.populate("favorites")
       return response.status(200).json(user.favorites);
     } catch (err) {
       console.error(err);

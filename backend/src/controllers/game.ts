@@ -41,7 +41,7 @@ export const addGame = async (request: Request, response: Response, next: NextFu
             !validateInputNumber(body.release_year, 1972, new Date().getFullYear()) || 
             !validateInputGenre(body.genre) || 
             !validateInputStringImage(body.image) || 
-            !validateInputString(body.description, 300, 500) ||
+            !validateInputString(body.description, 150, 500) ||
             (creator === "")) {
             return response.status(400).json({ error: "Faltan datos o no son del tipo correcto"});
         }
@@ -92,7 +92,7 @@ export const setGame = async (request: Request, response: Response, next: NextFu
         const creator = body.creator ? (validateInputString(body.creator, 1, 100) ? body.creator.trim() : "") : undefined;
         const genre = body.genre ? (validateInputGenre(body.genre) ? body.genre : "") : undefined;
         const image = body.image ? (validateInputStringImage(body.image) ? body.image.trim() : "") : undefined;
-        const description = body.description ? (validateInputString(body.description, 300, 500) ? body.description.trim() : "") : undefined;
+        const description = body.description ? (validateInputString(body.description, 150, 500) ? body.description.trim() : "") : undefined;
         if (name === "" || release_year === "" || creator === "" || genre === "" || image === "" || description === "") {
             return response.status(400).json({ error: "Los datos enviados no son del tipo correcto"})
         }
