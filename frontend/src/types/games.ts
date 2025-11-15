@@ -1,4 +1,4 @@
-//import type { Review } from "./review";
+import type { Review } from "./review";
 
 export type GameData = {
     id: string;
@@ -9,5 +9,5 @@ export type GameData = {
     image: string;
     description: string;
     rating: number;
-    //reviews: Review[];
+    reviews: Review[];
 }

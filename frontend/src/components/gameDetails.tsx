@@ -29,7 +29,7 @@ const GameDetails = ({ games, user, fromProfile, setUser, openLogin }: GameDetai
 
   useEffect(() => {
     if (user && game) {
-      setIsFavourite(user.favourites.some((g) => g.id === game.id));
+      setIsFavourite(user.favorites.some((g) => g.id === game.id));
       setIsInWishlist(user.wishlist.some((g) => g.id === game.id));
     }
   }, [user, game?.id])
@@ -57,7 +57,7 @@ const GameDetails = ({ games, user, fromProfile, setUser, openLogin }: GameDetai
     } else {
       updatedFavourites = await userService.addToFavorites(game.id);
     }
-    setUser({...user, favourites: updatedFavourites});
+    setUser({...user, favorites: updatedFavourites});
     setIsFavourite(!isFavourite);
     setLoading(false)
   }

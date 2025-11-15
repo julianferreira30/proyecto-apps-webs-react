@@ -14,7 +14,7 @@ const Profile = ({ user, openLogin }: ProfileProps) => {
         return <p style={{ textAlign: "center", marginTop:"90px" }}>Debes iniciar sesión para ver tu perfil.</p>;;
     }
 
-    const favourites = user.favourites.slice(0,3);
+    const favourites = user.favorites.slice(0,3);
     const wishlist = user.wishlist.slice(0,3);
 
     const navigate = useNavigate();

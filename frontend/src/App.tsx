@@ -102,7 +102,7 @@ function App() {
               </div>
               </>
             }/>
-            <Route path="/game/:id" element={<GameDetails games={games} user={user} fromProfile={false} setUser={setUser}/>}/>
+            <Route path="/game/:id" element={<GameDetails games={games} user={user} fromProfile={false} setUser={setUser} openLogin={() => setShowLoginForm(true)}/>}/>
             <Route path="/perfil/game/:id" element={<GameDetails games={games} user={user} fromProfile={true} setUser={setUser} openLogin={() => setShowLoginForm(true)}/>}/>
             <Route path="/register" element={<Register onLogin={handleLogin}/>} />
             <Route path="/perfil" element={<Profile user={user} openLogin={() => setShowLoginForm(true)}/>} />

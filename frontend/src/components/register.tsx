@@ -28,7 +28,7 @@ const Register = ({ onLogin }: RegisterProps) => {
             return;
         }
         try {
-            await registerService.register({username, name, password});
+            await registerService.register({profile_image: "", username, name, password});
             const userData = await loginService.login({username, password});
             onLogin(userData);
             navigate("/")

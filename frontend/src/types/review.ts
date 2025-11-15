@@ -1,8 +1,8 @@
-import type { User } from "./users";
-
 export type Review = {
     id: string;
     rating: number;
     content: string;
-    author: User;
+    author_name: string;
+    author_profile_image: string;
+    game: string;
 }
