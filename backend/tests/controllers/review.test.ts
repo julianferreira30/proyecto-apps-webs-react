@@ -60,7 +60,7 @@ describe("Reviews API tests", () => {
     const newReview = {
       rating: 5,
       content: "Juego bueniiiiiiiisimo",
-      gameId: zeldaId,
+      game: zeldaId,
     };
 
     const response = await api
@@ -98,7 +98,7 @@ describe("Reviews API tests", () => {
     const newReview = {
       rating: 0.5,
       content: "Juego malo",
-      gameId: zeldaId
+      game: zeldaId
     };
 
     const response = await api
@@ -133,7 +133,7 @@ describe("Reviews API tests", () => {
     const newReview2 = {
       rating: 5,
       content: "Juego Bueno",
-      gameId: zeldaId
+      game: zeldaId
     };
 
     const response2 = await api
@@ -169,7 +169,7 @@ describe("Reviews API tests", () => {
     const newReview = {
       rating: 0.5,
       content: "Juego malo",
-      gameId: zeldaId
+      game: zeldaId
     };
 
     const response = await api
@@ -192,7 +192,7 @@ describe("Reviews API tests", () => {
     const newReview = {
       rating: 0.5,
       content: "Juego malo",
-      gameId: 1
+      game: 1
     };
 
     const response = await api
@@ -218,7 +218,7 @@ describe("Reviews API tests", () => {
     const newReview = {
       rating: 10,
       content: "Juego Buenisimo",
-      gameId: zeldaId
+      game: zeldaId
     };
 
     const response = await api
@@ -245,7 +245,7 @@ describe("Reviews API tests", () => {
     const newReview = {
       rating: 10,
       content: "",
-      gameId: zeldaId
+      game: zeldaId
     };
 
     const response = await api
@@ -272,7 +272,7 @@ describe("Reviews API tests", () => {
     const newReview = {
       rating: 0.3,
       content: "Juego Buenisimo",
-      gameId: zeldaId
+      game: zeldaId
     };
 
     const response = await api

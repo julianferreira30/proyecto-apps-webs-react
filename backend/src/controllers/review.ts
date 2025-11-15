@@ -13,7 +13,7 @@ export const addReview = async (request: Request, response: Response, next: Next
             return response.status(401).json({ error: "Solo un usuario autenticado puede agregar una review a un juego" });
         };
 
-        const game = await Game.findById(body.gameId);
+        const game = await Game.findById(body.game);
         if (!game) {
             return response.status(404).json({ error: "Juego no encontrado" });
         };
