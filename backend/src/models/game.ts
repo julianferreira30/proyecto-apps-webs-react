@@ -8,7 +8,7 @@ const dbName = process.env.MONGODB_DBNAME;
 mongoose.set("strictQuery", false);
 if (url) {
   mongoose.connect(url, { dbName }).catch((error) => {
-    console.log("error connecting to MongoDB: ", error.menssage);
+    console.log("error connecting to MongoDB: ", error.message);
   });
 }
 
