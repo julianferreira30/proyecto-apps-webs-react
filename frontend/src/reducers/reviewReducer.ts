@@ -1,0 +1,53 @@
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { AppDispatch } from "../store";
+import reviewsService from "../services/reviews";
+import type { Review } from "../types/review";
+
+interface ReviewState {
+    showReviewForm: boolean;
+    loading: boolean;
+    error: string | null;
+};
+
+const initialState: ReviewState = {
+    showReviewForm: false,
+    loading: false,
+    error: null,
+};
+
+export const createNewReview = (data: Omit<Review, "id" | "likes" | "author">) => {
+    return async (dispatch: AppDispatch) => {
+        try {
+            dispatch(setLoading(true));
+            dispatch(setError(null));
+
+            const review = await reviewsService.createReview(data)
+            if (!review) {
+                dispatch(setError("Error al intentar crear la review"));
+            };
+        } catch {
+            dispatch(setError("Error al intentar crear la review"));
+        } finally {
+            dispatch(setLoading(false));
+        }
+    };
+};
+
+const slice = createSlice({
+    name: "reviews",
+    initialState,
+    reducers: {
+        setShowReviewForm(state: ReviewState, action: PayloadAction<boolean>) {
+            state.showReviewForm = action.payload;
+        },
+        setLoading(state: ReviewState, action: PayloadAction<boolean>) {
+            state.loading = action.payload;
+        },
+        setError(state: ReviewState, action: PayloadAction<string | null>) {
+            state.error = action.payload;
+        },
+    },
+});
+
+export const { setShowReviewForm, setLoading, setError } = slice.actions;
+export default slice.reducer;

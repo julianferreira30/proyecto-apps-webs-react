@@ -1,6 +1,6 @@
 import axios from "axios";
 
-type RegisterData = {
+export type RegisterData = {
     profile_image: string;
     username: string;
     name: string;
