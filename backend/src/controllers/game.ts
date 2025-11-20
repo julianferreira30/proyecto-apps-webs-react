@@ -16,7 +16,7 @@ export const getAllGames = async (
 ) => {
   try {
     const games = await Game.find({});
-    return response.status(201).json(games);
+    return response.status(201).json(games.reverse());
   } catch (error) {
     next(error);
   }
