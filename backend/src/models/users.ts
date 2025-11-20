@@ -1,31 +1,64 @@
 import mongoose from "mongoose";
-import { ref } from "process";
 
 interface UserData{
-    id:string;
-    username: string;
-    name: string;
-    passwordHash: string;
-    favourites: mongoose.Types.ObjectId[];
-    wishlist: mongoose.Types.ObjectId[];
+  id:string;
+  profile_image: string;
+  username: string;
+  name: string;
+  passwordHash: string;
+  added: mongoose.Types.ObjectId[];
+  played: mongoose.Types.ObjectId[];
+  favorites: mongoose.Types.ObjectId[];
+  wishlist: mongoose.Types.ObjectId[];
+  reviews: mongoose.Types.ObjectId[];
 }
 const userSchema = new mongoose.Schema<UserData>({
-    username:{type:String, required: true, unique: true},
-    name: String,
-    passwordHash: String,
-    favourites: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Game",
-      },
-    ],
-    wishlist: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Game",
-      },
-    ],
+  profile_image: {type: String, required: true, default: "/broken-image.jpg"},
+  username: {type: String, required: true, unique: true},
+  name: {type: String, required: true, unique: true},
+  passwordHash: {type: String, required: true, unique: true},
+  added: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Game",
+      required: true,
+      default: [],
+    },
+  ],
+  played: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Game",
+      required: true,
+      default: [],
+    },
+  ],
+  favorites: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Game",
+      required: true,
+      default: [],
+    },
+  ],
+  wishlist: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Game",
+      required: true,
+      default: [],
+    },
+  ],
+  reviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Review",
+      required: true,
+      default: [],
+    },
+  ],
 })
+
 const User = mongoose.model("User", userSchema)
 userSchema.set("toJSON", {
   transform: (
@@ -43,4 +76,5 @@ userSchema.set("toJSON", {
     delete returnedObject.passwordHash;
   },
 });
+
 export default User;

@@ -14,16 +14,16 @@ interface AddGameProps {
   openLogin: () => void;
 }
 
-const genreOptions = ["Action", "Adventure", "RPG", 
-    "Platform", "Sandbox", "Survival", "Shooter", 
-    "Sci-Fi", "Fantasy", "Open World", "Multiplayer", 
-    "Team-Based", "MOBA", "Strategy", "Tactical", 
-    "Battle Royale", "Indie", "Rogue like", "souls like"];
-
+const genreOptions = ["Acción", "Aventura", "Battle Royale", "Carrrera", "Ciencia Ficción",
+    "Deportes", "Estrategia", "Fantasia", "Indie", "Metroidvania", "MOBA", "Multiplayer",
+    "Mundo Abierto", "Party Game", "Peleas", "Plataforma", "Rogue Like", "RPG", "Sandbox",
+    "Shooter", "Sigilo", "Simulador", "Souls Like", "Superheroes", "Survival", "Tactical",
+    "Team-Based", "Terror"
+];
 const currentYear = new Date().getFullYear();
 const yearOptions = Array.from({length: currentYear - 1971}, (_, i) => 1972 + i).map((year) => year.toString())
 
-const AddGame = ({user,addGameToState, openLogin}: AddGameProps) => {
+const AddGame = ({user, addGameToState, openLogin}: AddGameProps) => {
     if (!user) {
         openLogin();
         return <p style={{marginTop:"90px"}}>Debes Iniciar sesión para poder agregar juegos</p>;
@@ -47,7 +47,7 @@ const AddGame = ({user,addGameToState, openLogin}: AddGameProps) => {
             setErrorMessage("Por favor complete todos los campos obligatorios*")
             return;
         };
-        const newGame: Omit<GameData, "id" | "rating">= {
+        const newGame: Omit<GameData, "id" | "rating" | "reviews">= {
             name,
             release_year: Number(releaseYear),
             creator: creator === "" ? "Desconocido" : creator,
