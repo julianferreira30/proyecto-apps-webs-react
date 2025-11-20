@@ -13,7 +13,6 @@ import { Rating, Avatar } from '@mui/material';
  * @component
  * @remarks
  * - Las reviews pueden ser vistas por todos los usuarios logueados y no logueados.
- * - Solo los usuarios logueados pueden dar like a otras reviews.
  * 
  * @returns Lista con todas las reviews dadas de los distintos usuarios sobre el juego.
  */

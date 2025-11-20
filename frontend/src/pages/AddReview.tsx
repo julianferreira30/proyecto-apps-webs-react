@@ -10,12 +10,12 @@ import CloseIcon from "@mui/icons-material/Close";
 
 
 /**
- * Componente que permite añadir a un usuario autenticado una review de un juego existente en la base de datos.
- * Permite al usuario calificarlo y agregar un comentario de este.
+ * Componente que permite añadir a un usuario autenticado una review a un juego existente en la base de datos.
+ * Permite al usuario calificarlo y agregar un comentario.
  * 
  * @component
  * @remarks
- * - Solo los usuarios autenticados pueden ver el formulario para agregar la review
+ * - Solo los usuarios autenticados pueden ver el formulario para agregar la review.
  * - Solo se pueden hacer reviews a un juego seleccionado que exista en la base de datos.
  * - El contenido del comentario esta limitado a 1000 caracteres.
  * 
@@ -43,11 +43,11 @@ const AddReview = () => {
         return;
     };
     if (!game) {
-        return <p style={{marginTop:"100px"}}>No es posible hacer una review a un juego inexistente</p>;
+        return <div className="add-review-container"><p style={{marginTop:"100px"}}>No es posible hacer una review a un juego inexistente</p></div>;
     };
     if (!user) {
         dispatch(setShowLoginForm(true));
-        return <p style={{marginTop:"100px"}}>No es posible hacer una review sin un usuario</p>;
+        return <div className="add-review-container"><p style={{marginTop:"100px"}}>No es posible hacer una review sin un usuario</p></div>;
     };
 
     const contentError = content.length > 1000;
@@ -71,36 +71,36 @@ const AddReview = () => {
     }
 
     return (
-        <div id="add-review-container">
-            <form onSubmit={handleSubmit} id="add-review-form">
-                <div id="add-review-header">
-                    <div id="add-review-header-content">
-                        <h3 id="add-review-header-text">Yo jugué...</h3>
-                        <IconButton onClick={() => dispatch(setShowReviewForm(false))} size="small" id="add-review-header-close"><CloseIcon/></IconButton>
+        <div className="add-review-container">
+            <form onSubmit={handleSubmit} className="add-review-form">
+                <div className="add-review-header">
+                    <div className="add-review-header-content">
+                        <h3 className="add-review-header-text">Yo jugué...</h3>
+                        <IconButton onClick={() => dispatch(setShowReviewForm(false))} size="small" className="add-review-header-close"><CloseIcon/></IconButton>
                     </div>
                 </div>
-                <div id="add-review-content">
-                    <div id="add-review-image-container">
+                <div className="add-review-content">
+                    <div className="add-review-image-container">
                         <img src={game.image} 
                             alt={"No es posible procesar la imágen"}
-                            id="add-review-image">
+                            className="add-review-image">
                         </img>
                     </div>
-                    <div id="add-review-details">
-                        <div id="add-review-game">
-                            <h2 id="add-review-game-name">{game.name.length > 25 ? game.name.slice(0,25).concat("...") : game.name}</h2> 
-                            <p id="add-review-game-year">{game.release_year}</p>
+                    <div className="add-review-details">
+                        <div className="add-review-game">
+                            <h2 className="add-review-game-name">{game.name.length > 25 ? game.name.slice(0,25).concat("...") : game.name}</h2> 
+                            <p className="add-review-game-year">{game.release_year}</p>
                         </div>
-                        <div id="add-review-rating">
-                            <p id="add-review-rating-p">Calificación</p>
+                        <div className="add-review-rating">
+                            <p className="add-review-rating-p">Calificación</p>
                             <Rating name="half-rating"
-                                id="add-review-rating-r"
+                                className="add-review-rating-r"
                                 value={rating} 
                                 onChange={(_, newValue) => setRating(newValue ?? 0)}
                                 defaultValue={0} 
                                 precision={0.5} />
                         </div>
-                        <div id="add-review-comment">
+                        <div className="add-review-comment">
                             <TextField
                                 label="Añade un comentario..."
                                 value={content}
@@ -123,8 +123,8 @@ const AddReview = () => {
                         </span>}
                     </div>
                 </div>
-                <div id="add-review-submit-container">
-                    <Button id="add-review-submit" type="submit" variant="contained">Guardar</Button>
+                <div className="add-review-submit-container">
+                    <Button className="add-review-submit" type="submit" variant="contained">Guardar</Button>
                 </div>
             </form>
         </div>
