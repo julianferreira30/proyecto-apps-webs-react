@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { type AppDispatch, type RootState } from "../store";
 import { setShow, setShowLoginForm } from "../reducers/userReducer";
-import GameFilter from "../components/GameFilter";
 import type { GameData } from "../types/games";
 import type { Review } from "../types/review";
 
