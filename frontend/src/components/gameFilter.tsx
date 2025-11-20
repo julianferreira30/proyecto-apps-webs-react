@@ -8,21 +8,14 @@ import { setFilters, setOpenDropdown } from "../reducers/filterReducer";
 import { setFilteredGames } from "../reducers/gameReducer";
 
 
-/**
- * Componente que permite filtrar los juegos que se muestren según las categorías seleccionadas.
- * 
- * @component
- * @remarks
- * - Las opciones de cada categoría del filtro son opciones presentes por lo menos en un juego.
- * 
- * @returns filtro.
- */
+
 const GameFilter = () => {
     // Store
     const dispatch = useDispatch<AppDispatch>();
     const openDropdown = useSelector((state: RootState) => state.filters.openDropdown);
     const filters = useSelector((state: RootState) => state.filters.filters);
     const games = useSelector((state: RootState) => state.games.games);
+
 
     // Selección de algún filtro
     const handleSelect = (key: keyof Filter, value: Filter[keyof Filter]) => {
@@ -66,11 +59,13 @@ const GameFilter = () => {
         dispatch(setOpenDropdown(null));
     };
 
+
     // Opciones disponibles para las categorías del filtro
     const years = Array.from(new Set(games.map((g) => g.release_year))).sort((a,b) => b-a);
     const genres = Array.from(new Set(games.flatMap(g => g.genre)));
     const creators = Array.from(new Set(games.flatMap(g => g.creator || [])));
     const ratings = Array.from(new Set(games.map(g => g.rating))).sort((a,b) => a-b);
+
 
     // Renderiza el filtro con cada opción disponible
     const renderDropdown = (label: string, key: keyof Filter, options: Exclude<Filter[keyof Filter], null>[]) => (

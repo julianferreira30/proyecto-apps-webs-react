@@ -3,25 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../store";
 import { createNewReview, setError, setShowReviewForm } from "../reducers/reviewReducer";
 import { restoreSession, setShowLoginForm } from "../reducers/userReducer";
-import { getOneGame } from "../reducers/gameReducer";
 import { validateInputString } from "../utils/validations";
 import { Rating, TextField, IconButton, Fade, Button } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 
-/**
- * Componente que permite añadir a un usuario autenticado una review a un juego existente en la base de datos.
- * Permite al usuario calificarlo y agregar un comentario.
- * 
- * @component
- * @remarks
- * - Solo los usuarios autenticados pueden ver el formulario para agregar la review.
- * - Solo se pueden hacer reviews a un juego seleccionado que exista en la base de datos.
- * - El contenido del comentario esta limitado a 1000 caracteres.
- * 
- * @returns formulario para crear una review con sus mensajes de error si es que no se validan correctamente
- * los inputs de una review.
- */
+
 const AddReview = () => {
     // Store
     const dispatch = useDispatch<AppDispatch>();
@@ -34,8 +21,6 @@ const AddReview = () => {
     // Estados locales
     const [rating, setRating] = useState(0);
     const [content, setContent] = useState("");
-
-    console.log(user)
 
 
     // Errores y carga
@@ -65,7 +50,6 @@ const AddReview = () => {
             return;
         }
         await dispatch(createNewReview({rating, content, game: game.id}));
-        await dispatch(getOneGame(game.id));
         dispatch(restoreSession());
         dispatch(setShowReviewForm(false))
     }
@@ -76,7 +60,7 @@ const AddReview = () => {
                 <div className="add-review-header">
                     <div className="add-review-header-content">
                         <h3 className="add-review-header-text">Yo jugué...</h3>
-                        <IconButton onClick={() => dispatch(setShowReviewForm(false))} size="small" className="add-review-header-close"><CloseIcon/></IconButton>
+                        <IconButton onClick={() => dispatch(setShowReviewForm(false))} size="small" className="add-review-header-close"><CloseIcon className="add-review-close"/></IconButton>
                     </div>
                 </div>
                 <div className="add-review-content">

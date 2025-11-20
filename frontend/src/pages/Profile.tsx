@@ -1,21 +1,30 @@
-import { Button } from "@mui/material";
+import { Box, Button, Divider, Rating } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { type AppDispatch, type RootState } from "../store";
-import { setShowLoginForm } from "../reducers/userReducer";
-import Rating from '@mui/material/Rating';
-
+import { setShow, setShowLoginForm } from "../reducers/userReducer";
+import GameFilter from "../components/GameFilter";
+import type { GameData } from "../types/games";
+import type { Review } from "../types/review";
 
 const Profile = () => {
+    // Parámetros y navegación
+    const { field } = useParams<{field: string}>()
+    const navigate = useNavigate();
+
+
+    // Store
     const dispatch = useDispatch<AppDispatch>();
     const user = useSelector((state: RootState) => state.user.user);
+    const show = useSelector((state: RootState) => state.user.show);
     const loading = useSelector((state: RootState) => state.user.loading);
-    const games = useSelector((state: RootState) => state.games.games);
-    const navigate = useNavigate();
+
+
+    // Errores y carga
     if (!user && !loading) {
         dispatch(setShowLoginForm(true));
-        return <p style={{ textAlign: "center", marginTop:"90px" }}>Debes iniciar sesión para ver tu perfil.</p>;;
+        return <p className="profile-login-required">Debes iniciar sesión para ver tu perfil.</p>;
     }
 
     if (loading) {
@@ -23,134 +32,102 @@ const Profile = () => {
         return;
     }
 
-    const favourites = user?.favorites.slice(0,3);
-    const wishlist = user?.wishlist.slice(0,3);
-    const played = user?.played.slice(0,3);
-    const reviews = user?.reviews.slice(0,3);
+    if (!field) {
+        return;
+    }
 
-    const getGame = (id: string) =>  games.find((g) => g.id === id);
+    dispatch(setShow(field));
 
+    const isGameData = (element: GameData | Review) => {
+        return "image" in element && "name" in element;
+    }
 
     return (
-        <div style={{display:"flex", justifyContent:"center"}}>
-        <div style={{display:"flex", width:"70%", maxWidth:"100vw",  boxSizing:"border-box", overflow:"hidden", justifyContent:"space-evenly", alignItems:"stretch", gap:"3rem", flexDirection:"column"}}>
-            <div style={{display:"flex", gap:"30px", marginTop:"70px", alignItems:"center", flexWrap:"wrap"}}>
-                <Avatar
-                alt="Remy Sharp"
-                src={user?.profile_image}
-                sx={{ width: "100px", height:"100px" }}
-                />
-                <h2>{user?.username}</h2>
-            </div>
-            <div>
-
-
-                <div style={{display:"flex", justifyContent:"space-between", alignItems:"baseline"}}>
-                    <h2 style={{margin:"0px"}}>Jugados</h2>
-                    <Button variant="text" onClick={() => navigate("/perfil/jugados")} sx={{ fontFamily: "Roboto, sans-serif", textTransform: "none", color: "white", margin:"0px"}}>Mostrar más</Button>
-                </div>
-                <hr  style={{marginTop:"0px"}}/>
-                <div style={{ marginTop:"20px", display: "flex", gap: "20px",justifyContent:played?.length!== 0 ? "flex-start": "center",alignItems: "flex-start", flexWrap:"wrap"}}>
-                { played?.length !== 0 ?
-                    (played?.map((game, index) => (
-                        <div className="card" key={index} onClick={() => navigate(`/game/${game.id}`)}>
-                            <p style={{margin:"5px"}}><img src={game.image} style={{maxWidth: "264px", maxHeight: "300px"}}/></p>
-                            <h2 style={{margin:"5px"}}>{game.name}</h2>
+        <div className="profile-container">
+            <div className="profile-wrapper">
+                <div className="profile-header">
+                    <div className="profile-header-left">
+                        <Avatar
+                            alt="Remy Sharp"
+                            src={user?.profile_image}
+                            className="profile-image"
+                        />
+                        <div className="profile-name">
+                            <h2>{user?.username}</h2>
+                            <p>{user?.name}</p>
                         </div>
-                    ))) : <p style={{marginBottom:"70px"}}>No hay juegos para mostrar</p>
-                }
-                </div>
-
-
-                <div style={{display:"flex", justifyContent:"space-between", alignItems:"baseline"}}>
-                    <h2 style={{marginTop:"70px", marginBottom:"0px"}}>Favoritos</h2>
-                    <Button variant="text" onClick={() => navigate("/perfil/favoritos")} sx={{ fontFamily: "Roboto, sans-serif", textTransform: "none", color: "white", margin:"0px"}}>Mostrar más</Button>
-                </div>
-                <hr style={{marginTop:"0px"}}/>
-                <div style={{ marginTop:"20px", display: "flex", gap: "20px",justifyContent:favourites?.length!== 0 ? "flex-start": "center",alignItems: "flex-start", flexWrap:"wrap"}}>
-                { favourites?.length !== 0 ?
-                    (favourites?.map((game, index) => (
-                        <div className="card" key={index} onClick={() => navigate(`/game/${game.id}`)}>
-                            <p style={{margin:"5px"}}><img src={game.image} style={{maxWidth: "264px", maxHeight: "300px"}}/></p>
-                            <h2 style={{margin:"0px"}}>{game.name}</h2>
+                        <Button className="profile-set-games">Editar un juego añadido</Button>
+                    </div>
+                    <Box className="profile-header-right">
+                        <div>
+                            <p className="profile-header-resume">{user?.played.length}</p>
+                            <p className="profile-header-resume">Jugados</p>
                         </div>
-                    ))) : <p style={{marginBottom:"70px"}}>No hay juegos para mostrar</p>
-                }
-                </div>
-
-
-                <div style={{display:"flex", justifyContent:"space-between", alignItems:"baseline"}}>
-                    <h2 style={{marginTop:"70px", marginBottom:"0px"}}>Wishlist</h2>
-                    <Button variant="text"  onClick={() => navigate("/perfil/wishlist")} sx={{ fontFamily: "Roboto, sans-serif", textTransform: "none", color: "white", margin:"0px"}}>Mostrar más</Button>
-                </div>
-                <hr  style={{marginTop:"0px"}}/>
-                <div style={{ marginTop:"20px", display: "flex", gap: "20px",justifyContent:wishlist?.length!== 0 ? "flex-start": "center",alignItems: "flex-start", flexWrap:"wrap"}}>
-                { wishlist?.length !== 0 ?
-                    (wishlist?.map((game, index) => (
-                        <div className="card" key={index} onClick={() => navigate(`/game/${game.id}`)}>
-                            <p style={{margin:"5px"}}><img src={game.image} style={{maxWidth: "264px", maxHeight: "300px"}}/></p>
-                            <h2 style={{margin:"5px"}}>{game.name}</h2>
+                        <Divider orientation="vertical" variant="middle" flexItem className="profile-header-divider"/>
+                        <div>
+                            <p className="profile-header-resume">{user?.reviews.length}</p>
+                            <p className="profile-header-resume">Reviews</p>
                         </div>
-                    ))) : <p style={{marginBottom:"70px"}}>No hay juegos para mostrar</p>
-                }
+                    </Box>
                 </div>
 
-
-                <div style={{display:"flex", justifyContent:"space-between", alignItems:"baseline"}}>
-                    <h2 style={{marginTop:"70px", marginBottom:"0px"}}>Mis reviews</h2>
-                    <Button variant="text" onClick={() => navigate("/perfil/reviews")} sx={{ fontFamily: "Roboto, sans-serif", textTransform: "none", color: "white", margin:"0px"}}>Mostrar más</Button>
+                <div className="profile-sections">
+                    <div className="profile-sections-container">
+                        <Button 
+                            className={`profile-sections-button ${field === "played" && "selected"}`}
+                            onClick={() => navigate("/profile/played")}
+                        >
+                            Jugados
+                        </Button>
+                        <Button 
+                            className={`profile-sections-button ${field === "favorites" && "selected"}`}
+                            onClick={() => navigate("/profile/favorites")}
+                        >
+                            Favoritos
+                        </Button>
+                        <Button 
+                            className={`profile-sections-button ${field === "wishlist" && "selected"}`}
+                            onClick={() => navigate("/profile/wishlist")}
+                        >
+                            Wishlist
+                        </Button>
+                        <Button 
+                            className={`profile-sections-button ${field === "reviews" && "selected"}`}
+                            onClick={() => navigate("/profile/reviews")}
+                        >
+                            Reviews
+                        </Button>
+                    </div>
                 </div>
-                <hr  style={{marginTop:"0px"}}/>
-                <div style={{ marginTop:"20px", display: "flex", gap: "20px",justifyContent:"center",alignItems: "flex-start", flexWrap:"wrap"}}>
-                { reviews?.length !== 0 ?
-                    (reviews?.map((review) => (
-                        <div style={{backgroundColor:"#252637", 
-                        border: "1px solid white", 
-                        borderRadius:"5px", 
-                        padding:"20px",
-                        display:"flex",
-                        width:"90%"}}>
-                            <div>
-                                <img
-                                    src={getGame(review.game)?.image}
-                                    alt={getGame(review.game)?.name}
-                                    style={{maxWidth: "264px", maxHeight: "300px", marginRight:"10px" }}
-                                />
-                            </div>
-                            <div style={{display:"flex",
-                                flexDirection:"column",
-                                alignItems:"flex-start",
-                                marginLeft:"20px",
-                                width:"100%",
-                            }}>
-                                <h2 style={{margin:"0px 0px 10px 0px", padding:"0px"}}>{getGame(review.game)?.name}</h2>
-                                <div style={{display:"flex",
-                                    alignItems:"center",
-                                    gap:"10px"
-                                }}>
-                                    <p style={{width:"100%"}}>Calificación</p><Rating name="half-rating-read" value={review.rating} precision={0.5} readOnly/>
+
+                    { show?.length !== 0 ?
+                        (show?.map((element, index) => {
+                            if (isGameData(element)) {
+                               return <div className="games-card" key={index} onClick={() => navigate(`/game/${element.id}`)}>
+                                    <img src={element.image} alt="No se encontró la imágen" className="games-image"/>
+                                    <h2 className="games-name">{element.name.length > 35 ? element.name.slice(0,30).concat("...") : element.name}</h2>
+                                </div> 
+                            } else {
+                                return <div className="game-reviews-review">
+                                    <div className="game-reviews-review-header">
+                                        <div className="game-reviews-info-user"> 
+                                            <Avatar className="game-reviews-profile-image" src={element.author_profile_image} />
+                                            <div className="game-reviews-username">
+                                                <p className="game-reviews-made-by">Review hecha por</p><h3>{element.author_name}</h3>
+                                            </div>
+                                        </div>
+                                        <Rating className="game-reviews-rating" name="half-rating-read" value={element.rating} precision={0.5} readOnly />
+                                    </div>
+                                    <div className="game-reviews-content">
+                                        {element.content}
+                                    </div>
                                 </div>
-                                <div style={{
-                                    backgroundColor: "#14152a",
-                                    padding: "20px",
-                                    borderRadius: "5px",
-                                    whiteSpace: "pre-wrap",     
-                                    overflowWrap: "break-word", 
-                                    wordBreak: "break-word",     
-                                    width: "90%", 
-                                    textAlign:"left"             
-                                }}>
-                                    {review.content}
-                                </div>
-                            </div>
-                        </div>
-                    ))) : <p style={{marginBottom:"70px"}}>No hay reviews para mostrar</p>
-                }
-                </div>
+                            }
+                        })) : <p className="profile-empty-msg">No hay nada para mostrar</p>
+                    }
             </div>
         </div>
-        </div>
-    )
-}
+    );
+};
 
 export default Profile;

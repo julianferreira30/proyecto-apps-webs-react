@@ -19,16 +19,21 @@ import { loginUser, logoutUser, setShowLoginForm, setError } from "../reducers/u
 
 
 export const Header = () => {
+  // Store
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.user.user);
   const showLoginForm = useSelector((state: RootState) => state.user.showLoginForm)
   const error = useSelector((state: RootState) => state.user.error);
 
+  
+  // Estados locales y navegación
   const [open, setOpen] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+
+  // Manejo de botones del header
   const handleClick = () => {
     setOpen(!open);
   };
@@ -83,11 +88,7 @@ export const Header = () => {
         <SportsEsportsIcon className="header-icon"></SportsEsportsIcon>
 
         <div className="title-container">
-          <h1 className="title-g">G</h1>
-          <h1 className="title-a">a</h1>
-          <h1 className="title-m">m</h1>
-          <h1 className="title-e">e</h1>
-          <h1>Boxd</h1>
+          <h1>GameBoxd</h1>
         </div>
       </div>
 

@@ -6,127 +6,165 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { type AppDispatch, type RootState } from "../store";
 import { registerUser, setError } from "../reducers/userReducer";
-
+import { validateInputString } from "../utils/validations";
+import { Fade } from "@mui/material";
 
 const Register = () => {
+    // Store
     const dispatch = useDispatch<AppDispatch>();
+    const error = useSelector((state: RootState) => state.user.error)
 
+
+    // Estados locales y navegación
+    const navigate = useNavigate();
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [profileImage, setProfileImage] = useState("");
-    const error = useSelector((state: RootState) => state.user.error)
 
-    const navigate = useNavigate();
 
+    // Errores
+    const nameError = name.trim().length > 50;
+    const usernameError = username.trim().length > 30;
+    const passwordError = password.trim().length > 30;
+    const pattern = /^https?:\/\/.*\.(png|jpg|jpeg|gif|bmp|webp|svg)$/i;
+    const urlError = profileImage.trim() ? !pattern.test(profileImage.trim()) : false;
+    const urlLenError = profileImage.trim().length > 300;
+
+
+    // Submit user
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch(setError(null))
         if (password !== confirmPassword) {
             dispatch(setError("Las contraseñas no coinciden"));
+            setTimeout(() => {
+                dispatch(setError(null));
+            }, 10000);
+            return;
+        }
+        if (!validateInputString(name, 1, 50) ||
+            !validateInputString(username, 5, 30) ||
+            !validateInputString(password, 8, 30)) {
+            dispatch(setError("Asegúrate de llenar al menos los campos requeridos de la forma correcta"));
+            setTimeout(() => {
+                dispatch(setError(null));
+            }, 10000);
             return;
         }
         dispatch(registerUser({profile_image: profileImage, username, name, password}))
+        setName("");
+        setUsername("");
+        setPassword("");
+        setConfirmPassword("");
+        setProfileImage("");
         navigate("/")
     };
 
     return (
-        <div style={{display:"flex", justifyContent:"center"}}>
-        <Box sx={{alignItems:"center", 
-            display:"flex", 
-            flexDirection:"column", 
-            marginTop:"80px", 
-            width: "400px", 
-            paddingBottom:"30px", 
-            justifyContent:"center", 
-            backgroundColor:"#14152A",
-            borderColor: "white",
-            borderRadius:"10px",
-            boxShadow:"0 0 20px rgba(1, 200, 24, 0.5)"}}>
-            <h1>Crear cuenta</h1>
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem", width: "300px", justifyContent:"center", alignItems:"center" }}>
-                <TextField 
-                label="Nombre" 
-                variant="outlined" 
-                value={name} 
-                required
-                onChange={(e) => setName(e.target.value)}
-                sx={{
-                    input: { color: "white", fontSize: "1.2rem" },
-                    label: { color: "white", fontSize: "1rem", "&.Mui-focused": { color: "white" } },
-                    borderColor: "#353752", 
-                    backgroundColor: "#353752",
-                    borderRadius: "5px",
-                    display: "flex",
-                    justifyContent:"center"
-                }}/>
+        <div className="register">
+        <Box className="register-box">
+            <h1 className="register-title">Crear cuenta</h1>
 
-                <TextField 
-                label="Nombre de usuario" 
-                variant="outlined" 
-                value={username}
-                required
-                onChange={(e) => setUsername(e.target.value)}
-                sx={{
-                    input: { color: "white", fontSize: "1.2rem" },
-                    label: { color: "white", fontSize: "1rem", "&.Mui-focused": { color: "white" } },
-                    borderColor: "#353752", 
-                    backgroundColor: "#353752",
-                    borderRadius: "5px",
-                    display: "flex"
-                }}/>
+            <form onSubmit={handleSubmit} className="register-form">
 
-                <TextField 
-                label="Contraseña" 
-                variant="outlined" 
-                value={password} 
-                required
-                onChange={(e) => setPassword(e.target.value)} 
-                type="password"
-                sx={{
-                    input: { color: "white", fontSize: "1.2rem" },
-                    label: { color: "white", fontSize: "1rem", "&.Mui-focused": { color: "white" } },
-                    borderColor: "#353752", 
-                    backgroundColor: "#353752",
-                    borderRadius: "5px",
-                    display: "flex"
-                }}/>
+                <TextField
+                    className="register-textfield"
+                    label="Nombre"
+                    variant="filled"
+                    value={name}
+                    required
+                    onChange={(e) => setName(e.target.value)}
+                />
+                {nameError && (
+                    <Fade in={!!nameError} timeout={1000}>
+                        <span className="error-register">
+                        El nombre debe tener menos de 50 caracteres
+                        </span>
+                    </Fade>
+                )}
 
-                <TextField 
-                label="Confirmar contraseña" 
-                variant="outlined" 
-                value={confirmPassword} 
-                required
-                onChange={(e) => setConfirmPassword(e.target.value)} 
-                type="password"
-                sx={{
-                    input: { color: "white", fontSize: "1.2rem" },
-                    label: { color: "white", fontSize: "1rem", "&.Mui-focused": { color: "white" } },
-                    borderColor: "#353752", 
-                    backgroundColor: "#353752",
-                    borderRadius: "5px",
-                    display: "flex"
-                }}/>
+                <TextField
+                    className="register-textfield"
+                    label="Nombre de usuario (mínimo 5 caracteres)"
+                    variant="filled"
+                    value={username}
+                    required
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+                {usernameError && (
+                    <Fade in={!!usernameError} timeout={1000}>
+                        <span className="error-register">
+                        El nombre de usuario debe tener menos de 30 caracteres
+                        </span>
+                    </Fade>
+                )}
 
-                <TextField 
-                label="Url foto de Perfil" 
-                variant="outlined" 
-                value={profileImage}
-                onChange={(e) => setProfileImage(e.target.value)}
-                sx={{
-                    input: { color: "white", fontSize: "1.2rem" },
-                    label: { color: "white", fontSize: "1rem", "&.Mui-focused": { color: "white" } },
-                    borderColor: "#353752", 
-                    backgroundColor: "#353752",
-                    borderRadius: "5px",
-                    display: "flex",
-                    justifyContent:"center"
-                }}/>
+                <TextField
+                    className="register-textfield"
+                    label="Contraseña (mínimo 8 caracteres)"
+                    variant="filled"
+                    type="password"
+                    value={password}
+                    required
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                {passwordError && (
+                    <Fade in={!!passwordError} timeout={1000}>
+                        <span className="error-register">
+                        La contraseña debe tener menos de 30 caracteres
+                        </span>
+                    </Fade>
+                )}
 
-                {error && <span style={{color:"red"}}>{error}</span>}
+                <TextField
+                    className="register-textfield"
+                    label="Confirmar contraseña"
+                    variant="filled"
+                    type="password"
+                    value={confirmPassword}
+                    required
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                />
 
-                <Button type="submit" variant="contained" style={{backgroundColor: "#01C818", fontWeight:"bolder", fontSize: "1.2rem"}}>Registrarse</Button>
+                <TextField
+                    className="register-textfield"
+                    label="Url foto de Perfil"
+                    variant="filled"
+                    value={profileImage}
+                    onChange={(e) => setProfileImage(e.target.value)}
+                />
+                {urlError && (
+                    <Fade in={!!urlError} timeout={1000}>
+                        <span className="error-register">
+                        Asegúrate de que la url comience con http:// o https:// y termine con una extensión de imagen como .jpg, .png, .gif, etc.
+                        </span>
+                    </Fade>
+                )}
+                {urlLenError && (
+                    <Fade in={!!urlLenError} timeout={1000}>
+                        <span className="error-register">
+                        La url debe tener menos de 300 caracteres
+                        </span>
+                    </Fade>
+                )}
+
+                <div className="register-submit-container">
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        className="register-submit"
+                    >
+                        Registrarse
+                    </Button>
+                </div>
+                {error && 
+                    <Fade in={!!error} timeout={1000}>
+                    <span className="error-register">
+                        {error}
+                    </span>
+                    </Fade>}
             </form>
         </Box>
         </div>

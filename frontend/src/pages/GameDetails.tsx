@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import type { RootState, AppDispatch } from "../store";
-import { Button, ButtonGroup, Rating, Chip, Slide } from '@mui/material';
+import { Button, ButtonGroup, Rating, Chip, Slide, CircularProgress } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CreateIcon from '@mui/icons-material/Create';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
@@ -10,30 +9,21 @@ import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import { setError, setShowLoginForm, toggleFavourite, togglePlayed, toggleWishlist } from "../reducers/userReducer";
 import { getOneGame } from "../reducers/gameReducer";
 import { setShowReviewForm } from "../reducers/reviewReducer";
-import Review from "./AddReview";
+import Review from "../components/AddReview";
 import GameReviews from "../components/GameReviews";
+import { useEffect } from "react";
 
 
-/**
- * Componente que muestra todos los detalles de un juego y permite agregar estos juegos a jugados, favoritos, wishlist y
- * hacer reviews si un usuario esta logueado.
- * 
- * @component
- * @remarks
- * - Si el usuario no esta logueado solo puede ver los detalles de un juego (titulo, año, creador, género, imagen, descripción,
- * calificación y reviews)
- * - Si el usuario esta logueado puede agregar este juego a jugados, favoritos, wishlist y hacer una review de este.
- * 
- * @returns pantalla de todos los detalles de un juego.
- */
+
 const GameDetails = () => {
   // Store
   const { id } = useParams<{id: string}>();
   const dispatch = useDispatch<AppDispatch>();
-
   useEffect(() => {
-    dispatch(getOneGame(id!));
-  }, []);
+    if (id) {
+      dispatch(getOneGame(id));
+    }
+  }, [id, dispatch]);
 
   const showReviewForm = useSelector((state: RootState) => state.reviews.showReviewForm);
   const game = useSelector((state: RootState) => state.games.selectedGame);
@@ -43,8 +33,8 @@ const GameDetails = () => {
   const error = useSelector((state: RootState) => state.user.error);
 
   // Carga y errores
-  if (loadingGame || loadingUser) {
-    return;
+  if (loadingGame) {
+    return <CircularProgress color="success" />;
   };
 
   if (!game) {
@@ -69,7 +59,7 @@ const GameDetails = () => {
   return (
     <div className="game-details">
         <div className="game-details-container">
-        <Slide in={!!error} timeout={500}>
+        <Slide in={!!(error === "No se puede quitar de jugados porque ya hiciste una review")} timeout={500}>
             <span className="game-details-error">
                 {error}
             </span>
@@ -118,7 +108,7 @@ const GameDetails = () => {
                     disabled={true}
                     >
                     <div className="game-details-rating-container">
-                        <p className="game-details-rating-label">Calificación</p>
+                        <p className="game-details-rating-label">Calificación usuarios</p>
                         <div className="game-details-rating-row">
                         <Rating
                             sx={{fontSize: "2vw"}}
@@ -167,7 +157,7 @@ const GameDetails = () => {
                         disabled={loadingUser}
                     >
                         <SportsEsportsIcon
-                        sx={{color: isInPlayed ? "#00AC9F" : "white", fontSize: "2vw"}}
+                        sx={{color: isInPlayed ? "#0020acff" : "white", fontSize: "2vw"}}
                         />
                         <p className={`game-details-icon ${isInPlayed ? "active" : ""}`}>Jugado</p>
                     </Button>
@@ -226,7 +216,7 @@ const GameDetails = () => {
             </div>
         )}
         </div>
-        <div>
+        <div style={{width:"100%"}}>
             <GameReviews />
         </div>
     </div>

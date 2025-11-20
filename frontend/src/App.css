@@ -26,7 +26,7 @@
   max-width: 700px;
   min-width: 300px;
   padding: 1vw 2vw;
-  background-color: #3e5161;
+  background-color: #2ca243;
   border-radius: 10px;
   margin-top: 1vw;
   box-shadow: 0 0 6px rgb(0, 0, 0);
@@ -113,7 +113,7 @@
   font-weight: bolder;
 }
 .add-game-autocomplete-input .MuiChip-root {
-  background-color: #3e5161;
+  background-color: #107c10;
   color: white;
   font-weight: bolder;
   margin-top: 2vw;
@@ -131,13 +131,13 @@
 }
 
 .add-game-submit {
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-  font-size: clamp(12px, 1.2vw, 18px);
-  padding: 1vh 2vw;
-  background-color: #107c10; 
-  font-weight: bolder; 
+  display: flex !important; 
+  align-items: center !important; 
+  justify-content: center !important;
+  font-size: 1.2vw !important;
+  padding: 1vh 2vw !important;
+  background-color: #107c10 !important; 
+  font-weight: bolder !important; 
 }
 
 .add-game-submit-container {
@@ -160,7 +160,7 @@
 
 .add-review-form {
   display: flex;
-  background-color: #001a2c;
+  background-color: #2ca243;
   flex-direction: column;
   width: 70%;
   border: 1px solid white;
@@ -309,18 +309,23 @@
 }
 
 .add-review-submit-container {
-  background-color: #000b13;
+  background-color: #09270f;
   padding: 1.5vw;
   display: flex;
   flex-direction: row-reverse;
 }
 
 .add-review-submit {
-  background-color: #107c10;
-  font-weight: bolder;
-  width: 10vw;
-  height: 3vw;
-  font-size: 1.5vw;
+  background-color: #107c10 !important;
+  font-weight: bolder !important;
+  width: 10vw !important;
+  height: 3vw !important;
+  font-size: 1.5vw !important;
+}
+
+.add-review-close {
+  color: white;
+  padding-right: 2vw;
 }
 
 .add-review-error {
@@ -340,9 +345,9 @@
 /* Game details */
 .game-details {
   position: relative;
-  top: 90px;
+  top: 7vw;
   left:0;
-  margin-bottom: 90px;
+  margin-bottom: 9vw;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -428,7 +433,7 @@
 }
 
 .game-details-genre {
-  background-color: #3e5161 !important;
+  background-color: #107c10 !important;
   color: white !important;
   height: 2vw !important;
   line-height: 0 !important;
@@ -507,7 +512,7 @@
 .game-details-vertical-buttongroup {
   margin-top: 0.5vw;
   margin-bottom: 1.5vw !important;
-  background-color: #3e5161;
+  background-color: #107c10;
   border: 1px solid white !important;
   display: inline-flex;
   flex-direction: column;
@@ -515,21 +520,21 @@
 }
 
 .game-details-vertical-buttongroup .MuiButtonGroup-root {
-  background-color: #3e5161 !important;
+  background-color: #107c10 !important;
   font-size: 1vw;
   color: white;
 }
 
 .game-details-rating-button,
 .game-details-my-rating-button {
-  background-color: #3e5161;
+  background-color: #107c10;
   width: 100% !important;
   height: 5vw !important;
   padding: 0 !important;
 }
 
 .game-details-login {
-  background-color: #3e5161 !important;
+  background-color: #107c10 !important;
   width: 100% !important;
   height: 4vw !important;
   text-transform: capitalize !important;
@@ -538,7 +543,7 @@
 }
 
 .game-details-login:hover {
-  color: #4d8bd1;
+  color: #0212ff;
 }
 
 .game-details-rating-button {
@@ -558,7 +563,7 @@
 .game-details-rating-button.Mui-disabled .game-details-rating-text,
 .game-details-my-rating-button.Mui-disabled,
 .game-details-my-rating-button.Mui-disabled .game-details-rating-text {
-  background-color: #3e5161 !important;
+  background-color: #107c10 !important;
   opacity: 1 !important;
   color: white !important;
 }
@@ -576,7 +581,7 @@
 }
 
 .game-details-horizontal-buttongroup {
-  background-color: #3e5161 !important;
+  background-color: #107c10 !important;
   border-radius: 0 !important;;
   display: inline-flex;
   align-items: stretch;
@@ -587,7 +592,7 @@
 
 .game-details-horizontal-buttongroup .MuiButton-root {
   width: 100% !important;
-  background-color: #3e5161 !important;
+  background-color: #107c10 !important;
   font-size: 1vw;
   padding: 0;
   color: white !important;
@@ -600,7 +605,7 @@
 }
 
 .game-details-horizontal-buttongroup .MuiButton-root.Mui-disabled {
-  background-color: #3e5161 !important;
+  background-color: #107c10 !important;
   opacity: 1 !important;
   color: white !important;
 }
@@ -614,7 +619,7 @@
 }
 
 .game-details-played-button:hover .game-details-icon {
-  color: #00AC9F;
+  color: #0020acff;
 }
 
 .game-details-favourite-button:hover .game-details-icon {
@@ -626,7 +631,7 @@
 }
 
 .game-details-played-button .game-details-icon.active {
-  color: #00AC9F;
+  color: #0020acff;
 }
 
 .game-details-favourite-button .game-details-icon.active {
@@ -651,7 +656,7 @@
 }
 
 .game-details-review-button {
-  background-color: #3e5161 !important;
+  background-color: #107c10 !important;
   font-weight: bolder !important;
   text-transform: capitalize !important;
   display: flex;
@@ -665,7 +670,7 @@
 }
 
 .game-details-review-button.Mui-disabled {
-  background-color: #14152A !important;
+  background-color: #107c10 !important;
   opacity: 1 !important;
   color: white !important;
 }
@@ -776,7 +781,7 @@
 
 .game-filter {
   position: relative;
-  top: 80px;
+  top: 6vw;
   left: 0;
   width: 100%;
   height: 4vw;
@@ -791,7 +796,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
-  border-bottom: 2px solid black;
+  border-bottom: 3px solid white;
   width: 100%;
   height: 4vw;
   padding-bottom: 0.5vw;
@@ -799,7 +804,7 @@
 
 .game-filter-title {
   font-size: 2vw;
-  color: black;
+  color: white;
 }
 
 .game-filter-dropdown-collapse .MuiList-root {
@@ -842,11 +847,11 @@
 
 .game-filter-options.selected {
   background-color: #107c10 !important;
-  color: black !important;
+  color: white !important;
 }
 
 .game-filter-options.selected .MuiListItemText-primary {
-  color: black !important;
+  color: white !important;
 }
 
 .game-filter-options:hover {
@@ -854,7 +859,7 @@
 }
 
 .game-filter-options:hover .MuiListItemText-primary {
-  color: black !important;
+  color: white !important;
 }
 
 .game-filter-container-dropdown {
@@ -865,20 +870,23 @@
 .game-filter-dropdown {
   position: relative;
   z-index: 20;
+  min-width: 0 !important;
 }
 
 .game-filter-dropdown-button {
-  color: black !important; 
+  color: white !important; 
   border: none !important; 
   padding: 0.5vw !important; 
   text-transform: none !important; 
   line-height: 0 !important;
   font-size: 1vw !important;
+  font-weight: bolder !important;
+  min-width: 0 !important;
 }
 
 .game-filter-dropdown-button.selected {
   background-color: #77bb44 !important;
-  color: black !important;
+  color: white !important;
   border: none !important; 
   padding: 0.5vw !important; 
   text-transform: none !important; 
@@ -888,7 +896,7 @@
 }
 
 .game-filter-dropdown-collapse {
-  color: black !important;
+  color: white !important;
   position: absolute !important;
   z-index: 10 !important;
   background-color: #77bb44 !important;
@@ -950,8 +958,8 @@
 }
 
 .game-reviews-content {
-  background-color: #a1acb4;
-  color: #334957;
+  background-color: #107c10;
+  color: white;
   padding: 1vw;
   border-radius: 5px;
   white-space: pre-wrap;     
@@ -999,7 +1007,7 @@
 /* Games */
 .games {
   position: relative;
-  top: 13vw;
+  top: 10vw;
   left: 0;
   width: 100%;
   display: flex;
@@ -1031,11 +1039,11 @@
 .games-no {
   margin-top: 50px;
   font-size: 1.5vw;
-  color: black;
+  color: white;
 }
 
 .games-no-sad {
-  color: black;
+  color: white;
   font-size: 3vw !important;
 }
 
@@ -1050,7 +1058,7 @@
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   padding: 1vw;
-  background-color: #000b13;    /* Fondo un poco más oscuro */
+  background-color: #107c10;    /* Fondo un poco más oscuro */
   border-radius: 8px;           /* Bordes redondeados opcionales */
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05); /* Pequeña sombra opcional */
 }
@@ -1233,13 +1241,13 @@
 }
 
 .account .MuiList-root {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .account-button {
   min-width: 12vw;
   height: 4vw;
-  padding: 0;
+  padding: 0 !important;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1261,7 +1269,12 @@
 
 .account-collapse {
   position: absolute;
-  background-color: #353535 !important;
+  background-color: #77bb44 !important;
+  font-weight: bolder !important;
+}
+
+.account-item:hover {
+  background-color: #107c10 !important;
 }
 
 .account-list {
@@ -1270,7 +1283,7 @@
 
 .account-item {
   padding-left: 1vw !important;
-  width: 10vw;
+  width: 8vw;
   height: 4vw;
 }
 
@@ -1289,4 +1302,228 @@
   justify-content: center !important;
   align-items: center !important;
   text-align: center !important;
+}
+
+
+
+/* Register*/
+.register {
+  position: relative;
+  top: 5vw;
+  left:0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 600px;
+  height: 50vw;
+  padding:1vw 0;
+  box-sizing: border-box;
+}
+
+.register-box {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  justify-content: flex-start; 
+  width: 50vw;
+  max-width: 700px;
+  min-width: 300px;
+  padding: 1vw 2vw;
+  background-color: #2ca243;
+  border-radius: 10px;
+  margin-top: 1vw;
+  box-shadow: 0 0 6px rgb(0, 0, 0);
+  box-sizing: border-box;
+}
+
+.register-title {
+  font-size: clamp(20px, 3vw, 40px);
+  margin-top: 0;
+}
+
+.register-form { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 1.5vh;
+  width: 90%;
+}
+
+.register-textfield {
+  background-color: #a1acb4;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  border-color: #a1acb4;
+  font-weight: bolder;
+}
+
+.register-textfield .MuiInputBase-input {
+  color: #4c575e;
+}
+.register-textfield .MuiInputLabel-root {
+  color: #4c575e;
+  font-weight: bolder;
+}
+.register-textfield .MuiFilledInput-root.Mui-focused {
+  background-color: white;
+}
+.register-textfield .MuiInputLabel-root.Mui-focused {
+  color: #4c575e;
+  font-weight: bolder;
+}
+.register-textfield .MuiFilledInput-root fieldset {
+  border-color: #4c575e;
+  font-weight: bolder;
+}
+.register-textfield .MuiFilledInput-root.Mui-focused fieldset {
+  border-color: #4c575e;
+  font-weight: bolder;
+}
+.register-textfield .MuiFilledInput-root:hover {
+  background-color: white;
+}
+
+.error-register {
+  color: white;
+  background-color: orangered;
+  font-size: clamp(10px, 1vw, 16px);
+  padding: 1vh 1vw;
+  font-weight: bolder;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.register-submit {
+  display: flex !important; 
+  align-items: center !important; 
+  justify-content: center !important;
+  font-size: 1.2vw !important;
+  padding: 1vh 2vw !important;
+  background-color: #107c10 !important; 
+  font-weight: bolder !important; 
+}
+
+.register-submit-container {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+/* Profile */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 7vw;
+}
+
+.profile-wrapper {
+  display: flex;
+  width: 70%;
+  box-sizing: border-box;
+  overflow: hidden;
+  justify-content: space-evenly;
+  align-items: stretch;
+  gap: 3vw;
+  flex-direction: column;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.profile-header-left {
+  display: flex;
+  align-items: center;
+}
+
+.profile-image {
+  width: 8vw !important;
+  height: 8vw !important;
+}
+
+.profile-name {
+  margin-left: 2vw;
+  font-size: 1.2vw;
+}
+
+.profile-name h2,
+.profile-name p{
+  padding: 0;
+  margin: 0;
+}
+
+.profile-set-games {
+  color: white !important;
+  text-transform: none !important;
+  font-weight: bold !important;
+  font-size: 1.2vw !important;
+  background-color: #107c10 !important;
+  width: 15vw !important;
+  margin-left: 2vw !important;
+}
+
+.profile-header-right {
+  display: flex;
+  font-size: 1.2vw;
+  gap: 1vw;
+  color: white !important;
+}
+
+.profile-header-divider.MuiDivider-root {
+  border-color: white !important;
+}
+
+.profile-header-divider.MuiDivider-vertical {
+  border-right-width: 0.1vw !important;
+}
+
+.profile-header-resume {
+  margin: 0;
+  padding: 0;
+}
+
+.profile-sections {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-sections-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5vw;
+  background-color: black;
+  width: 70%;
+  height: 3.3vw;
+}
+
+.profile-sections-button {
+  text-transform: none !important;
+  color: #868686 !important;
+  font-size: 1.2vw !important;
+  font-weight: bold !important;
+  min-width: none !important;
+  width: 2vw !important;
+  height: 3.2vw !important;
+}
+
+.profile-sections-button:hover {
+  color: white !important;
+  background-color: black !important;
+  border-radius: 0 !important;
+  border-bottom: 3px solid #107c10 !important;
+}
+
+.profile-sections-button.selected {
+  color: white !important;
+  border-radius: 0 !important;
+  border-bottom: 3px solid #107c10 !important;
 }

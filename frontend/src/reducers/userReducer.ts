@@ -7,11 +7,12 @@ import registerService from "../services/register";
 import loginService from "../services/login";
 import userService from "../services/users";
 import type { GameData } from "../types/games";
+import type { Review } from "../types/review";
 
 interface UserState {
     user: User | null;
     showLoginForm: boolean;
-    showGames: GameData[];
+    show: GameData[] | Review[];
     loading: boolean;
     error: string | null;
 };
@@ -19,7 +20,7 @@ interface UserState {
 const initialState: UserState = {
     user: null,
     showLoginForm: false,
-    showGames: [],
+    show: [],
     loading: false,
     error: null,
 };
@@ -187,8 +188,19 @@ const slice = createSlice({
         setShowLoginForm(state: UserState, action: PayloadAction<boolean>) {
             state.showLoginForm = action.payload;
         },
-        setShow(state: UserState, action: PayloadAction<GameData[]>) {
-            state.showGames = action.payload;
+        setShow(state: UserState, action: PayloadAction<string>) {
+            if (action.payload === "played") {
+                state.show = state.user?.played || [];
+            }
+            if (action.payload === "favorites") {
+                state.show = state.user?.favorites || [];
+            }
+            if (action.payload === "wishlist") {
+                state.show = state.user?.wishlist || [];
+            }
+            if (action.payload === "reviews") {
+                state.show = state.user?.reviews || [];
+            }
         },
         setLoading(state: UserState, action: PayloadAction<boolean>) {
             state.loading = action.payload;

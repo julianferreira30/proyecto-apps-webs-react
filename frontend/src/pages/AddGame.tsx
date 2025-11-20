@@ -21,19 +21,7 @@ const currentYear = new Date().getFullYear();
 const yearOptions = Array.from({length: currentYear - 1971}, (_, i) => 1972 + i).map((year) => year.toString())
 
 
-/**
- * Componente que permite a un usuario autenticado añadir un juego a la base de datos a traves de un formulario
- * que valida que los inputs tengan la forma correcta deseada por el backend para poder ser agregado a la base de datos.
- * 
- * @component
- * @remarks
- * - Solo un usuario autenticado puede ver el formulario y añadir efectivamente el juego.
- * - Los inputs nombre, año de lanzamiento, géneros, url de imagen y descripción del juego son obligatorios de rellenar
- * y deben estar llenados en el formato correcto.
- * 
- * @returns Formulario para añadir un juego en la base de datos y con sus mensajes de error si es que no se validan correctamente
- * los inputs de un juego.
- */
+
 const AddGame = () => {
     // Store
     const dispatch = useDispatch<AppDispatch>();

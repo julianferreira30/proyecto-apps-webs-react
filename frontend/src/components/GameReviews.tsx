@@ -1,37 +1,25 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import type { AppDispatch, RootState } from "../store"; 
-import { getOneGame } from "../reducers/gameReducer";
 import { restoreSession } from "../reducers/userReducer";
 import { Rating, Avatar } from '@mui/material';
 
 
-/**
- * Componente que permite ver las reviews hechas a un videojuego seleccionado por el usuario.
- * 
- * @component
- * @remarks
- * - Las reviews pueden ser vistas por todos los usuarios logueados y no logueados.
- * 
- * @returns Lista con todas las reviews dadas de los distintos usuarios sobre el juego.
- */
+
 const GameReviews = () => {
     // Store
-    const { id } = useParams<{id: string}>();
     const dispatch = useDispatch<AppDispatch>();
     const game = useSelector((state: RootState) => state.games.selectedGame);
-    const loadingUser = useSelector((state: RootState) => state.user.loading);
     const loadingGame = useSelector((state: RootState) => state.games.loading);
+
 
     // Carga de recursos
     useEffect(() => {
-        dispatch(getOneGame(id!));
         dispatch(restoreSession());
         
     }, []);
 
-    if (loadingGame || loadingUser) {
+    if (loadingGame) {
         return;
     };
 
