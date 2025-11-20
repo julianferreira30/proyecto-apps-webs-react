@@ -15,7 +15,7 @@ const initialState: ReviewState = {
     error: null,
 };
 
-export const createNewReview = (data: Omit<Review, "id" | "likes" | "author">) => {
+export const createNewReview = (data: Omit<Review, "id" | "author_name" | "author_profile_image">) => {
     return async (dispatch: AppDispatch) => {
         try {
             dispatch(setLoading(true));
