@@ -6,12 +6,13 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import CreateIcon from '@mui/icons-material/Create';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
-import { setError, setShowLoginForm, toggleFavourite, togglePlayed, toggleWishlist } from "../reducers/userReducer";
+import { restoreSession, setError, setShowLoginForm, toggleFavourite, togglePlayed, toggleWishlist } from "../reducers/userReducer";
 import { getOneGame } from "../reducers/gameReducer";
 import { setShowReviewForm } from "../reducers/reviewReducer";
 import Review from "../components/AddReview";
 import GameReviews from "../components/GameReviews";
 import { useEffect } from "react";
+import { SearchOff } from "@mui/icons-material";
 
 
 
@@ -22,6 +23,7 @@ const GameDetails = () => {
   useEffect(() => {
     if (id) {
       dispatch(getOneGame(id));
+      dispatch(restoreSession())
     }
   }, [id, dispatch]);
 
@@ -38,7 +40,10 @@ const GameDetails = () => {
   };
 
   if (!game) {
-    return <p style={{marginTop:"90px"}}>Juego no encontrado</p>
+    return <div>
+        <p style={{marginTop:"10vw"}}>Juego no encontrado</p>
+        <SearchOff />
+        </div>
   };
 
   // Favoritos, jugados y wishlist

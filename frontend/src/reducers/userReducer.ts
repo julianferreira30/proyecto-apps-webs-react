@@ -12,6 +12,7 @@ import type { Review } from "../types/review";
 interface UserState {
     user: User | null;
     showLoginForm: boolean;
+    showSelectSetGame: boolean;
     show: GameData[] | Review[];
     loading: boolean;
     error: string | null;
@@ -20,6 +21,7 @@ interface UserState {
 const initialState: UserState = {
     user: null,
     showLoginForm: false,
+    showSelectSetGame: false,
     show: [],
     loading: false,
     error: null,
@@ -188,6 +190,9 @@ const slice = createSlice({
         setShowLoginForm(state: UserState, action: PayloadAction<boolean>) {
             state.showLoginForm = action.payload;
         },
+        setShowSelectSetGame(state: UserState, action: PayloadAction<boolean>) {
+            state.showSelectSetGame = action.payload;
+        },
         setShow(state: UserState, action: PayloadAction<string>) {
             if (action.payload === "played") {
                 state.show = state.user?.played || [];
@@ -211,5 +216,5 @@ const slice = createSlice({
     },
 });
 
-export const { setUser, setShowLoginForm, setShow, setLoading, setError } = slice.actions;
+export const { setUser, setShowLoginForm, setShowSelectSetGame, setShow, setLoading, setError } = slice.actions;
 export default slice.reducer;

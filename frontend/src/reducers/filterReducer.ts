@@ -5,7 +5,7 @@ export type Filter = {
     genre: string | null;
     creator: string | null;
     rating: number | null;
-    order: string | null;
+    sort: string | null;
 }
 
 interface FilterState {
@@ -19,7 +19,7 @@ const initialState: FilterState = {
         genre: null,
         creator: null,
         rating: null,
-        order: null,
+        sort: null,
     },
     openDropdown: null,
 };

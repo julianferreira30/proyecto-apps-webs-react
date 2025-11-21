@@ -1,14 +1,15 @@
 import { TextField, Box, Autocomplete, Fade, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import type { GameData } from "../types/games";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { type AppDispatch, type RootState } from "../store";
 import { restoreSession, setShowLoginForm } from "../reducers/userReducer";
-import { createNewGame, setError, setFilteredGames, setGames } from "../reducers/gameReducer";
+import { setError, setFilteredGames, setGames, updateOneGame } from "../reducers/gameReducer";
 import { validateInputGenre, validateInputNumber, validateInputString, validateInputStringImage } from "../utils/validations";
 import { setFilters, type Filter } from "../reducers/filterReducer";
 import LoginIcon from '@mui/icons-material/Login';
+import { SearchOff } from "@mui/icons-material";
 
 
 // Opciones para categorias del formulario
@@ -24,9 +25,11 @@ const yearOptions = Array.from({length: currentYear - 1971}, (_, i) => 1972 + i)
 
 
 
-const AddGame = () => {
-    // Store
+const SetGame = () => {
+    // Store Navegación y parámetros
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
+    const { id } = useParams<{id: string}>();
     const games = useSelector((state: RootState) => state.games.games)
     const error = useSelector((state: RootState) => state.games.error);
     const loadingGames = useSelector((state: RootState) => state.games.loading);
@@ -35,31 +38,47 @@ const AddGame = () => {
     const filters = useSelector((state: RootState) => state.filters.filters);
 
 
-    // Estados locales y navegación
-    const navigate = useNavigate();
+    // Estados locales
     const [name, setName] = useState("");
-    const [releaseYear, setReleaseYear] = useState<string | null>(null);
+    const [releaseYear, setReleaseYear] = useState<string>("");
     const [creator, setCreator] = useState("");
     const [genres, setGenres] = useState<string[]>([]);
     const [image, setImage] = useState("");
     const [description, setDescription] = useState("");
+    const [initialized, setInitialized] = useState(false);
+    const [initialName, setInitialName] = useState("");
 
 
     // Errores y carga
     useEffect(() => {
         dispatch(restoreSession());
-    }, []);
-    if (!user && !loadingUser) {
-        dispatch(setShowLoginForm(true))
-        return <div>
-                <p style={{marginTop:"10vw"}}>Debes Iniciar sesión para poder agregar juegos</p>
-                <LoginIcon />
-            </div>;
-    };
-    if (loadingUser) {
-        dispatch(setShowLoginForm(false))
-        return;
-    };
+    }, [dispatch]);
+    useEffect(() => {
+        if (!loadingUser) {
+            dispatch(setShowLoginForm(!user))
+            return;
+        };
+    }, [loadingUser, user, dispatch])
+    useEffect(() => {
+        if (!user) {
+            setInitialized(false);
+            return;
+        };
+
+        const found = user.added.find((g) => g.id === id)
+        if (found) {
+            setName(found.name);
+            setReleaseYear(found.release_year.toString());
+            setCreator(found.creator);
+            setGenres(found.genre);
+            setImage(found.image);
+            setDescription(found.description);
+            setInitialName(found.name);
+            setInitialized(true);
+        } else {
+            setInitialized(false);
+        }
+    }, [user, id])
 
     const nameError = name.trim().length > 100;
     const creatorError = creator.trim().length > 100;
@@ -67,6 +86,22 @@ const AddGame = () => {
     const urlError = image.trim() ? !pattern.test(image.trim()) : false;
     const urlLenError = image.trim().length > 300;
     const descriptionError = description.trim().length > 500;
+
+    if (loadingUser) {
+        return;
+    }
+    if (!user) {
+        return <div style={{marginTop:"10vw"}}>
+            <p>Debes iniciar sesión para poder editar juegos</p>
+            <LoginIcon />
+        </div>
+    }
+    if (!initialized) {
+        return <div style={{marginTop:"10vw"}}>
+            <p>Juego no encontrado</p>
+            <SearchOff />
+        </div>
+    }
 
 
     // Submit game
@@ -78,7 +113,7 @@ const AddGame = () => {
             !validateInputGenre(genres) ||
             !validateInputStringImage(image) ||
             !validateInputString(description, 300, 500)) {
-            dispatch(setError("Asegúrate de llenar al menos nombre, año, géneros, imagen y descripción del juego de la forma correcta"));
+            dispatch(setError("Asegúrate de llenar los campos en forma correcta"));
             setTimeout(() => {
                 dispatch(setError(null));
             }, 10000);
@@ -93,8 +128,8 @@ const AddGame = () => {
             image,
             description
         };
-        const createdGame = await dispatch(createNewGame(newGame));
-        const updatedGames = [createdGame, ...games];
+        const updatedGame = await dispatch(updateOneGame(newGame, id!!));
+        const updatedGames = games.map((game) => game.id === id ? updatedGame : game);
         dispatch(setGames(updatedGames))
         const newFiltered = updatedGames.filter((game) =>
         (filters.year === null || game.release_year === filters.year) &&
@@ -104,12 +139,12 @@ const AddGame = () => {
         );
         dispatch(setFilteredGames(newFiltered))
         
-        setName("");
-        setReleaseYear(null);
-        setCreator("");
-        setGenres([]);
-        setImage("");
-        setDescription("");
+        setName(updatedGame.name);
+        setReleaseYear(updatedGame.release_year.toString());
+        setCreator(updatedGame.creator);
+        setGenres(updatedGame.genre);
+        setImage(updatedGame.image);
+        setDescription(updatedGame.description);
 
         const initialFilter: Filter = {
             year: null,
@@ -126,13 +161,12 @@ const AddGame = () => {
     return (
         <div className="add-game">
         <Box className="add-game-box">
-            <h1 className="add-game-title">Añadir un nuevo Juego</h1>
+            <h1 className="add-game-title">Editar {initialName}</h1>
             <form className="add-game-form" onSubmit={handleSubmit}>
                 <TextField 
                     className="add-game-text-input"
                     label="Nombre del juego" 
                     multiline
-                    required 
                     variant="filled" 
                     maxRows={4}
                     value={name}
@@ -150,7 +184,7 @@ const AddGame = () => {
                     className="add-game-autocomplete-input"
                     options={yearOptions}
                     value={releaseYear}
-                    onChange={(_, value) => setReleaseYear(value)}
+                    onChange={(_, value) => setReleaseYear(value!!)}
                     slotProps={{
                         paper: {
                         sx: {
@@ -173,7 +207,6 @@ const AddGame = () => {
                     renderInput={(params) => <TextField 
                         {...params} 
                         label="Año de lanzamiento" 
-                        required
                         variant="filled"
                         className="add-game-text-autocomplete"
                     />}
@@ -235,7 +268,6 @@ const AddGame = () => {
                     label="URL de imagen" 
                     multiline
                     maxRows={7}
-                    required
                     variant="filled"
                     value={image}
                     onChange={(e) => setImage(e.target.value)}
@@ -261,7 +293,6 @@ const AddGame = () => {
                     className="add-game-text-input"
                     label="Descripción (mínimo 300 caracteres)" 
                     multiline
-                    required
                     variant="filled"
                     maxRows={10}
                     value={description}
@@ -277,7 +308,7 @@ const AddGame = () => {
                 )}
 
                 <div className="add-game-submit-container">
-                    <Button type="submit" variant="contained" disabled={loadingGames} className="add-game-submit">{loadingGames ? "Agregando..." : "Agregar juego"}</Button>
+                    <Button type="submit" variant="contained" disabled={loadingGames} className="add-game-submit">{loadingGames ? "Editando..." : "Editar juego"}</Button>
                 </div>
                 {error && 
                     <Fade in={!!error} timeout={1000}>
@@ -291,4 +322,4 @@ const AddGame = () => {
     )
 };
 
-export default AddGame;
+export default SetGame;

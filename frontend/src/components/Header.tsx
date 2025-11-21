@@ -74,7 +74,7 @@ export const Header = () => {
 
   const handleProfileClick = () => {
     setOpen(false);
-    navigate("/profile")
+    navigate("/profile/played")
   }
 
   const handleAddGameClick = () => {

@@ -36,7 +36,7 @@ export const validateInputGenre = (input: string[]) => {
         return false;
     } else {
         if (Array.isArray(input)) {
-            const genreOptions = ["Acción", "Aventura", "Battle Royale", "Carrrera", "Ciencia Ficción",
+            const genreOptions = ["Acción", "Aventura", "Battle Royale", "Carrera", "Ciencia Ficción",
                 "Deportes", "Estrategia", "Fantasia", "Indie", "Metroidvania", "MOBA", "Multiplayer",
                 "Mundo Abierto", "Party Game", "Peleas", "Plataforma", "Rogue Like", "RPG", "Sandbox",
                 "Shooter", "Sigilo", "Simulador", "Souls Like", "Superheroes", "Survival", "Tactical",

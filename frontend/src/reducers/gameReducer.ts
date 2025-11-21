@@ -32,8 +32,7 @@ export const getGames = () => {
                 return;
             };
 
-            dispatch(setGames(games.reverse()));
-            dispatch(setFilteredGames(games));
+            dispatch(setGames(games));
             return;
         } catch {
             dispatch(setError("Error al intentar obtener los juegos"));
@@ -110,6 +109,7 @@ export const updateOneGame = (data: Omit<GameData, "id" | "rating" | "reviews">,
                 throw new Error("No se actualizar el juego");
             };
             dispatch(updateGame(game))
+            return game;
         } catch {
             dispatch(setError("Error al intentar actualizar el juego"));
         } finally {

@@ -3,9 +3,15 @@ import Avatar from '@mui/material/Avatar';
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { type AppDispatch, type RootState } from "../store";
-import { setShow, setShowLoginForm } from "../reducers/userReducer";
+import { restoreSession, setShow, setShowLoginForm, setShowSelectSetGame } from "../reducers/userReducer";
 import type { GameData } from "../types/games";
 import type { Review } from "../types/review";
+import BlindIcon from '@mui/icons-material/Blind';
+import { useEffect } from "react";
+import { getGames } from "../reducers/gameReducer";
+import LoginIcon from '@mui/icons-material/Login';
+import SelectSetGame from "../components/SelectSetGame";
+
 
 const Profile = () => {
     // Parámetros y navegación
@@ -18,12 +24,26 @@ const Profile = () => {
     const user = useSelector((state: RootState) => state.user.user);
     const show = useSelector((state: RootState) => state.user.show);
     const loading = useSelector((state: RootState) => state.user.loading);
+    const games = useSelector((state: RootState) => state.games.games);
+    const showSelectSetGame = useSelector((state: RootState) => state.user.showSelectSetGame);
 
 
     // Errores y carga
+    useEffect(() => {
+        dispatch(getGames());
+        dispatch(restoreSession());
+    }, []);
+    useEffect(() => {
+        if (field) {
+            dispatch(setShow(field));
+        }
+    }, [field, user]);
     if (!user && !loading) {
         dispatch(setShowLoginForm(true));
-        return <p className="profile-login-required">Debes iniciar sesión para ver tu perfil.</p>;
+        return <div>
+                <p style={{marginTop:"10vw"}}>Debes Iniciar sesión para poder ver tu perfil</p>
+                <LoginIcon />
+            </div>;
     }
 
     if (loading) {
@@ -35,11 +55,10 @@ const Profile = () => {
         return;
     }
 
-    dispatch(setShow(field));
-
     const isGameData = (element: GameData | Review) => {
         return "image" in element && "name" in element;
     }
+    const getGame = (id: string) =>  games?.find((g) => g.id === id);
 
     return (
         <div className="profile-container">
@@ -55,7 +74,7 @@ const Profile = () => {
                             <h2>{user?.username}</h2>
                             <p>{user?.name}</p>
                         </div>
-                        <Button className="profile-set-games">Editar un juego añadido</Button>
+                        <Button className="profile-set-games" onClick={() => dispatch(setShowSelectSetGame(true))}>Editar un juego que añadí</Button>
                     </div>
                     <Box className="profile-header-right">
                         <div>
@@ -100,31 +119,52 @@ const Profile = () => {
                 </div>
 
                     { show?.length !== 0 ?
-                        (show?.map((element, index) => {
+                        <div className="games-container">
+                        {show?.map((element, index) => {
                             if (isGameData(element)) {
-                               return <div className="games-card" key={index} onClick={() => navigate(`/game/${element.id}`)}>
+                                return <div className="games-card" key={index} onClick={() => navigate(`/game/${element.id}`)}>
                                     <img src={element.image} alt="No se encontró la imágen" className="games-image"/>
                                     <h2 className="games-name">{element.name.length > 35 ? element.name.slice(0,30).concat("...") : element.name}</h2>
                                 </div> 
                             } else {
-                                return <div className="game-reviews-review">
-                                    <div className="game-reviews-review-header">
-                                        <div className="game-reviews-info-user"> 
-                                            <Avatar className="game-reviews-profile-image" src={element.author_profile_image} />
-                                            <div className="game-reviews-username">
-                                                <p className="game-reviews-made-by">Review hecha por</p><h3>{element.author_name}</h3>
-                                            </div>
-                                        </div>
-                                        <Rating className="game-reviews-rating" name="half-rating-read" value={element.rating} precision={0.5} readOnly />
+                                console.log("Buscando juego con id:", element.game);
+                                console.log("Resultado:", getGame(element.game));
+                                console.log("Reviews:", show);
+                                return <div key={index} className="profile-reviews">
+                                    <div>
+                                        <img
+                                        src={getGame(element.game)?.image}
+                                        alt="No se encontró la imágen"
+                                        className="profile-reviews-game-image"
+                                        />
                                     </div>
-                                    <div className="game-reviews-content">
-                                        {element.content}
+                                    <div className="profile-reviews-right">
+                                        <div className="profile-reviews-game">
+                                            <h2>{getGame(element.game)?.name}</h2>
+                                            <p>{getGame(element.game)?.release_year}</p>
+                                        </div>
+                                        <div className="profile-reviews-rating">
+                                            <p>Calificación</p>
+                                            <Rating className="profile-reviews-stars" name="half-rating-read" value={element.rating} precision={0.5} readOnly />
+                                        </div>
+                                        <div className="profile-reviews-content">
+                                            {element.content}
+                                        </div>
                                     </div>
                                 </div>
                             }
-                        })) : <p className="profile-empty-msg">No hay nada para mostrar</p>
+                        })}
+                        </div> : <div>
+                            <p className="games-no">No hay nada para mostrar</p>
+                            <BlindIcon className="games-no-sad"/>
+                            </div>
                     }
             </div>
+            {showSelectSetGame && (
+                <div className="game-details-overlay">
+                    <SelectSetGame />
+                </div>
+            )}
         </div>
     );
 };

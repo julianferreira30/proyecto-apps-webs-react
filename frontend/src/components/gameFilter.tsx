@@ -28,8 +28,8 @@ const GameFilter = () => {
         (newFilters.rating === null || game.rating === newFilters.rating)
         );
 
-        if (newFilters.order != null) {
-            switch (newFilters.order) {
+        if (newFilters.sort != null) {
+            switch (newFilters.sort) {
                 case "Añadido más antiguo":
                     newFiltered = [...newFiltered].reverse();
                     break;
@@ -75,7 +75,7 @@ const GameFilter = () => {
                 onClick={() => dispatch(setOpenDropdown(key))}
                 className={openDropdown === key ? "game-filter-dropdown-button selected" : "game-filter-dropdown-button"}
             >
-                {key === "order" && "Ordernar por: "}{filters[key] ? (filters[key].toString().length > 15 ? filters[key].toString().slice(0, 15).concat("...") : filters[key]) : (key === "order" ? "Añadido más reciente" : label)}
+                {key === "sort" && "Ordenar por: "}{filters[key] !== null ? (filters[key].toString().length > 15 ? filters[key].toString().slice(0, 15).concat("...") : filters[key]) : (key === "sort" ? "Añadido más reciente" : label)}
                 {openDropdown === key ? <ExpandLess sx={{fontSize: "2vw"}}/> : <ExpandMore sx={{fontSize: "2vw"}}/>}
             </Button>
 
@@ -87,7 +87,7 @@ const GameFilter = () => {
             >
                 <List component="div" disablePadding>
                     <ListItemButton onClick={() => handleSelect(key, null)} className={filters[key] === null ? "game-filter-options selected" : "game-filter-options"}>
-                        <ListItemText primary={key === "order" ? "Añadido más reciente" : "Todos"}/>
+                        <ListItemText primary={key === "sort" ? "Añadido más reciente" : "Todos"}/>
                     </ListItemButton>
                     {options.map((option, i) => (
                         <ListItemButton key={i} onClick={() => handleSelect(key, option)} className={filters[key] === option ? "game-filter-options selected" : "game-filter-options"}>
@@ -107,7 +107,7 @@ const GameFilter = () => {
             {renderDropdown("Género", "genre", genres)}
             {renderDropdown("Creador", "creator", creators)}
             {renderDropdown("Calificación", "rating", ratings)}
-            {renderDropdown("Ordenar por", "order", [
+            {renderDropdown("Ordenar por", "sort", [
                 "Añadido más antiguo",
                 "Mayor calificación",
                 "Menor calificación",
