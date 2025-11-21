@@ -6,7 +6,7 @@
     "creator": "Nintendo",
     "genre": ["Acción", "Aventura", "RPG"],
     "image": "https://www.vgfacts.com/media/boxart/1/25.png",
-    "description": "Juego de acción-aventura con elementos de RPG ambientado en Hyrule, donde se exploran mazmorras, se resuelven acertijos y se combaten enemigos en tiempo real."
+    "description": "Ocarina of Time presenta una aventura épica en el reino de Hyrule, donde el jugador acompaña a Link en un viaje que combina exploración, combates dinámicos y resolución de acertijos en mazmorras llenas de secretos. A lo largo de su travesía, se alterna entre distintas épocas para alterar el destino del mundo, enfrentándose a criaturas, descubriendo nuevas habilidades y utilizando la música como herramienta clave para avanzar."
   },
   {
     "name": "Super Mario 64",
@@ -14,7 +14,87 @@
     "creator": "Nintendo",
     "genre": ["Aventura", "Plataforma"],
     "image": "https://m.media-amazon.com/images/M/MV5BNjhmNzg4ZTMtNWVhMy00NjgwLThhZjUtZjY4ZmU2YTVhYjUwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-    "description": "Juego de plataformas en 3D que combina exploración de niveles, recolección de objetos y saltos precisos en entornos interactivos con diferentes desafíos."
+    "description": "Super Mario 64 invita al jugador a recorrer un castillo repleto de mundos accesibles mediante pinturas mágicas, cada uno con desafíos únicos que requieren precisión y creatividad. Con controles en 3D revolucionarios para su época, Mario debe recolectar estrellas completando misiones variadas, desde carreras y acertijos hasta enfrentamientos contra enemigos, mientras explora escenarios amplios y dinámicos llenos de secretos ocultos."
+  },
+  {
+    "name": "Minecraft",
+    "release_year": 2011,
+    "creator": "Mojang",
+    "genre": ["Sandbox", "Survival", "Aventura"],
+    "image": "https://www.nint.hu/cdn/shop/files/minecraft-java-edition-457367.11.jpg",
+    "description": "Minecraft ofrece un mundo generativo infinito donde el jugador puede recolectar recursos, construir estructuras de cualquier tipo y sobrevivir enfrentando criaturas nocturnas. La libertad para modificar el entorno permite crear desde refugios simples hasta ciudades gigantes, mientras se explora cuevas profundas y biomas variados. Su modo supervivencia combina combate, exploración y gestión de recursos en un entorno totalmente abierto."
+  },
+  {
+    "name": "Half-Life 2",
+    "release_year": 2004,
+    "creator": "Valve",
+    "genre": ["Shooter", "Acción", "Ciencia Ficción"],
+    "image": "https://upload.wikimedia.org/wikipedia/en/thumb/2/25/Half-Life_2_cover.jpg/250px-Half-Life_2_cover.jpg",
+    "description": "Half-Life 2 mezcla una narrativa inmersiva con un sistema de físicas avanzadas que influye en el combate y la resolución de acertijos ambientales. El jugador encarna a Gordon Freeman, quien debe abrirse paso a través de escenarios opresivos controlados por una fuerza alienígena. Vehículos, armas innovadoras y personajes memorables acompañan una trama que progresa sin cortes, manteniendo al jugador dentro de la acción en todo momento."
+  },
+  {
+    "name": "The Witcher 3: Wild Hunt",
+    "release_year": 2015,
+    "creator": "CD Projekt Red",
+    "genre": ["RPG", "Aventura", "Fantasia"],
+    "image": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Witcher_3_cover_art.jpg/250px-Witcher_3_cover_art.jpg",
+    "description": "The Witcher 3 presenta un vasto mundo abierto donde Geralt de Rivia recorre regiones llenas de conflictos, criaturas y decisiones morales. Las misiones, tanto principales como secundarias, tienen impacto real en el mundo y sus habitantes. Su sistema de combate combina espadas, señales mágicas y alquimia, mientras que la narrativa profunda se centra en la búsqueda de Ciri y el enfrentamiento con la misteriosa Cacería Salvaje."
+  },
+  {
+    "name": "Dark Souls",
+    "release_year": 2011,
+    "creator": "FromSoftware",
+    "genre": ["Acción", "RPG", "Fantasia"],
+    "image": "https://sm.ign.com/t/ign_latam/screenshot/d/dark-souls/dark-souls-1-concept-cover_2va4.200.jpg",
+    "description": "Dark Souls plantea un mundo interconectado lleno de peligros, donde cada enemigo y jefe exige precisión, paciencia y estrategia. La muerte es parte del aprendizaje y conduce a descubrir atajos, secretos y nuevas rutas. Su atmósfera oscura y críptica invita a interpretar la historia a través del entorno y los objetos, mientras se afrontan combates intensos que ponen a prueba la habilidad del jugador."
+  },
+  {
+    "name": "Red Dead Redemption 2",
+    "release_year": 2018,
+    "creator": "Rockstar Games",
+    "genre": ["Acción", "Aventura", "Mundo Abierto"],
+    "image": "https://image.api.playstation.com/cdn/UP1004/CUSA03041_00/Hpl5MtwQgOVF9vJqlfui6SDB5Jl4oBSq.png",
+    "description": "Ambientado en el ocaso del Viejo Oeste, Red Dead Redemption 2 sigue a Arthur Morgan mientras lucha entre la lealtad a su banda y la transformación del mundo que lo rodea. Su mapa extenso incluye ecosistemas variados, fauna detallada y múltiples actividades como caza, campamentos y encuentros aleatorios. La narrativa profunda se complementa con un sistema de honor que modifica la percepción de los personajes hacia el jugador."
+  },
+  {
+    "name": "Overwatch",
+    "release_year": 2016,
+    "creator": "Blizzard Entertainment",
+    "genre": ["Shooter", "Multiplayer", "Team-Based"],
+    "image": "https://m.media-amazon.com/images/M/MV5BYjY0ZjJiMDQtNTY0Yy00ODJlLWEzYmYtMGZkZjNjNzc1NzE5XkEyXkFqcGc@._V1_QL75_UX190_CR0,2,190,281_.jpg",
+    "description": "Overwatch es un shooter competitivo donde dos equipos se enfrentan cumpliendo objetivos específicos según el mapa. Cada héroe posee habilidades únicas, lo que incentiva combinaciones estratégicas y cooperación constante. El juego destaca por su ritmo rápido, roles bien definidos y variedad de modos, permitiendo que cada partida sea diferente según la composición del equipo y las decisiones tomadas en tiempo real."
+  },
+  {
+    "name": "Pokémon Red",
+    "release_year": 1996,
+    "creator": "Game Freak",
+    "genre": ["RPG", "Aventura", "Fantasia"],
+    "image": "https://m.media-amazon.com/images/M/MV5BZjBiZThkOTMtYWU5My00ZDg2LWI1NzktN2Q3MDMwODUwOTZkXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+    "description": "Pokémon Red introduce un mundo donde el jugador viaja entre ciudades capturando criaturas diversas, entrenándolas para enfrentarse a otros entrenadores y completando la Pokédex. El sistema por turnos permite elaborar estrategias basadas en tipos y habilidades, mientras que la progresión se centra en obtener medallas y desafiar a la Liga Pokémon. Su combinación de exploración, recolección y combate lo convierte en un clásico del género."
+  },
+  {
+    "name": "League of Legends",
+    "release_year": 2009,
+    "creator": "Riot Games",
+    "genre": ["MOBA", "Multiplayer", "Estrategia"],
+    "image": "https://mediaproxy.tvtropes.org/width/1200/https://static.tvtropes.org/pmwiki/pub/images/leagueoflegends.png",
+    "description": "League of Legends enfrenta a dos equipos de cinco jugadores en un mapa donde deben coordinarse para destruir la base rival. Cada campeón posee habilidades únicas que permiten estrategias diversas, ya sea en combates intensos o en control de objetivos. La partida exige decisión rápida, gestión de recursos y una comprensión profunda del mapa, creando un entorno competitivo en constante evolución."
+  },
+  {
+    "name": "Counter-Strike: Global Offensive",
+    "release_year": 2012,
+    "creator": "Valve",
+    "genre": ["Shooter", "Multiplayer", "Tactical"],
+    "image": "https://upload.wikimedia.org/wikipedia/en/6/6e/CSGOcoverMarch2020.jpg",
+    "description": "CS:GO propone enfrentamientos tácticos donde la precisión, la comunicación y la estrategia determinan el resultado. Terroristas y antiterroristas compiten en modos que requieren desactivar bombas, proteger zonas o rescatar rehenes. El manejo de armas, la economía por rondas y la importancia del posicionamiento generan partidas intensas en las que cada decisión influye de manera directa en el progreso del equipo."
+  },
+  {
+    "name": "Fortnite",
+    "release_year": 2017,
+    "creator": "Epic Games",
+    "genre": ["Shooter", "Battle Royale", "Survival"],
+    "image": "https://m.media-amazon.com/images/M/MV5BMTZlMmIxM2EtN2Y4Zi00M2ZhLTk3NzgtNjJmZTU0MTQ3YjcwXkEyXkFqcGc@._V1_.jpg",
+    "description": "Fortnite combina un modo battle royale frenético con mecánicas de construcción que permiten crear defensas y obtener ventaja táctica. Los jugadores compiten en un mapa que se reduce progresivamente, obligando al enfrentamiento constante. Su estilo visual colorido y sus actualizaciones frecuentes mantienen la experiencia fresca, mientras que la libertad para construir y modificar el entorno agrega profundidad estratégica al combate."
   }
 ]
 }

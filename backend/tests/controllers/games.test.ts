@@ -90,7 +90,7 @@ describe("GameBoxd API integration tests", () => {
       creator: "Test Creator",
       genre: ["Acción"],
       image: "http://example.com/image.jpg",
-      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear"
+      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear"
     };
     await api
       .post("/api/games")
@@ -121,7 +121,7 @@ describe("GameBoxd API integration tests", () => {
       creator: "Test Creator",
       genre: ["Acción"],
       image: "http://example.com/image.jpg",
-      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear",
+      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear"
     };
     await api
       .post("/api/games")
@@ -139,7 +139,7 @@ describe("GameBoxd API integration tests", () => {
       creator: "Test Creator",
       genre: ["Acción"],
       image: "http://example.com/image.jpg",
-      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear",
+      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear"
     };
     const response = await api
       .post("/api/games")
@@ -164,7 +164,7 @@ describe("GameBoxd API integration tests", () => {
       creator: "Test Creator",
       genre: ["Acción"],
       image: "http://example.com/image.jpg",
-      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear",
+      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear"
     };
     const response = await api
       .post("/api/games")
@@ -189,7 +189,7 @@ describe("GameBoxd API integration tests", () => {
       release_year: 2023,
       creator: "Test Creator",
       image: "http://example.com/image.jpg",
-      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear",
+      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear"
     };
     const response = await api
       .post("/api/games")
@@ -214,7 +214,7 @@ describe("GameBoxd API integration tests", () => {
       release_year: 2023,
       creator: "Test Creator",
       genre: ["Acción"],
-      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear",
+      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear"
     };
     const response = await api
       .post("/api/games")
@@ -264,7 +264,7 @@ describe("GameBoxd API integration tests", () => {
       release_year: 2023,
       genre: ["Acción"],
       image: "http://example.com/image.jpg",
-      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear",
+      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear"
     };
     await api
       .post("/api/games")
@@ -296,7 +296,7 @@ describe("GameBoxd API integration tests", () => {
       creator: "Test Creator",
       genre: ["Acción"],
       image: "http://example.com/image.jpg",
-      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear",
+      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear"
     };
     const response = await api
       .post("/api/games")
@@ -322,7 +322,7 @@ describe("GameBoxd API integration tests", () => {
       creator: "Test Creator",
       genre: ["Acción"],
       image: "http://example.com/image.jpg",
-      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear",
+      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear"
     };
     const response = await api
       .post("/api/games")
@@ -348,7 +348,7 @@ describe("GameBoxd API integration tests", () => {
       genre: ["test"],
       creator: "Test Creator",
       image: "http://example.com/image.jpg",
-      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear",
+      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear"
     };
     const response = await api
       .post("/api/games")
@@ -374,7 +374,7 @@ describe("GameBoxd API integration tests", () => {
       creator: "Test Creator",
       genre: ["Acción"],
       image: "https://example.mp4",
-      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear",
+      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear"
     };
     const response = await api
       .post("/api/games")
@@ -426,7 +426,7 @@ describe("GameBoxd API integration tests", () => {
       creator: 2023,
       genre: ["Acción"],
       image: "http://example.com/image.jpg",
-      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear",
+      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear"
     };
     const response = await api
       .post("/api/games")
@@ -453,7 +453,7 @@ describe("GameBoxd API integration tests", () => {
       creator: "Test Creator",
       genre: ["Acción"],
       image: "http://example.com/image.jpg",
-      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear",
+      description: "Juego para testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear, testear"
     };
     const response = await api
       .post("/api/games")
@@ -571,7 +571,7 @@ describe("GameBoxd API integration tests", () => {
 
   test("set description of a specific game", async () => {
     const updatedGame = {
-      description: " Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego     ",
+      description: " Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego     ",
     };
     await api
       .put(`/api/games/${zeldaId}`)
@@ -586,14 +586,14 @@ describe("GameBoxd API integration tests", () => {
     const description = game?.description;
 
     assert.strictEqual(title, "The Legend of Zelda: Ocarina of Time");
-    assert.strictEqual(description, "Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego");
+    assert.strictEqual(description, "Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego");
   });
 
   test("set multiples fields of a specific game", async () => {
     const updatedGame = {
       release_year: 2006,
       image: "      https://example.png",
-      description: " Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego     ",
+      description: " Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego     ",
     };
     await api
       .put(`/api/games/${zeldaId}`)
@@ -612,7 +612,7 @@ describe("GameBoxd API integration tests", () => {
     assert.strictEqual(title, "The Legend of Zelda: Ocarina of Time");
     assert.strictEqual(year, 2006);
     assert.strictEqual(image, "https://example.png");
-    assert.strictEqual(description, "Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego");
+    assert.strictEqual(description, "Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego Buen juego");
   });
 
   test("set a specific game requires authentication", async () => {
@@ -806,7 +806,7 @@ describe("GameBoxd API integration tests", () => {
     const description = game?.description;
 
     assert.strictEqual(title, "The Legend of Zelda: Ocarina of Time");
-    assert.strictEqual(description, "Juego de acción-aventura con elementos de RPG ambientado en Hyrule, donde se exploran mazmorras, se resuelven acertijos y se combaten enemigos en tiempo real.");
+    assert.strictEqual(description, "Ocarina of Time presenta una aventura épica en el reino de Hyrule, donde el jugador acompaña a Link en un viaje que combina exploración, combates dinámicos y resolución de acertijos en mazmorras llenas de secretos. A lo largo de su travesía, se alterna entre distintas épocas para alterar el destino del mundo, enfrentándose a criaturas, descubriendo nuevas habilidades y utilizando la música como herramienta clave para avanzar.");
     assert(response.body.error.includes("Al menos un campo es requerido"));
   });
 
