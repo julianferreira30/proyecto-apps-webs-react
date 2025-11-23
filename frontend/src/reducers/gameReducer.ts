@@ -2,7 +2,6 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { AppDispatch } from "../store";
 import gamesService from "../services/games";
 import type { GameData } from "../types/games";
-import type { Review } from "../types/review";
 
 interface GamesState {
   games: GameData[];
@@ -154,11 +153,6 @@ const slice = createSlice({
         state.selectedGame = action.payload;
       }
     },
-    addReviewToSelectedGame(state: GamesState, action: PayloadAction<Review>) {
-      if (state.selectedGame) {
-        state.selectedGame.reviews.unshift(action.payload);
-      }
-    },
     setLoading(state: GamesState, action: PayloadAction<boolean>) {
       state.loading = action.payload;
     },
@@ -174,7 +168,6 @@ export const {
   setSelectedGame,
   addGame,
   updateGame,
-  addReviewToSelectedGame,
   setLoading,
   setError,
 } = slice.actions;
