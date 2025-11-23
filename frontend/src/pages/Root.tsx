@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import GameFilter from "../components/gameFilter";
+import GameFilter from "../components/GameFilter";
 import Games from "../components/Games";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../store";

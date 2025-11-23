@@ -1,0 +1,179 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.setGame = exports.addGame = exports.getGameById = exports.getAllGames = void 0;
+const game_1 = __importDefault(require("../models/game"));
+const users_1 = __importDefault(require("../models/users"));
+const validations_1 = require("../utils/validations");
+const mongoose_1 = __importDefault(require("mongoose"));
+const getAllGames = async (request, response, next) => {
+    try {
+        const games = await game_1.default.find({});
+        return response.status(201).json(games.reverse());
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.getAllGames = getAllGames;
+const getGameById = async (request, response, next) => {
+    try {
+        const { id } = request.params;
+        const game = await game_1.default.findById(id);
+        if (game) {
+            await game.populate(["reviews"]);
+            return response.status(201).json(game);
+        }
+        else {
+            return response
+                .status(404)
+                .json({ error: "No se pudo encontrar el juego con ese id" })
+                .end();
+        }
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.getGameById = getGameById;
+const addGame = async (request, response, next) => {
+    try {
+        const user = await users_1.default.findById(request.userId);
+        if (!user) {
+            return response
+                .status(401)
+                .json({ error: "Solo un usuario autenticado puede agregar un juego" });
+        }
+        const body = request.body;
+        const creator = body.creator
+            ? (0, validations_1.validateInputString)(body.creator, 1, 100)
+                ? body.creator.trim()
+                : ""
+            : undefined;
+        if (!(0, validations_1.validateInputString)(body.name, 1, 100) ||
+            !(0, validations_1.validateInputNumber)(body.release_year, 1972, new Date().getFullYear()) ||
+            !(0, validations_1.validateInputGenre)(body.genre) ||
+            !(0, validations_1.validateInputStringImage)(body.image) ||
+            !(0, validations_1.validateInputString)(body.description, 5, 500) ||
+            creator === "") {
+            return response
+                .status(400)
+                .json({ error: "Faltan datos o no son del tipo correcto" });
+        }
+        const game = new game_1.default({
+            name: body.name.trim(),
+            release_year: body.release_year,
+            creator,
+            genre: body.genre,
+            image: body.image.trim(),
+            description: body.description.trim(),
+        });
+        await game.save();
+        if (!user.added.includes(game._id)) {
+            user.added.splice(0, 0, game._id);
+            await user.save();
+        }
+        return response.status(201).json(game);
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.addGame = addGame;
+const setGame = async (request, response, next) => {
+    try {
+        const user = await users_1.default.findById(request.userId);
+        if (!user) {
+            return response.status(401).json({
+                error: "Solo un usuario autenticado puede cambiar atributos de un juego",
+            });
+        }
+        const id = request.params.id;
+        const objectId = new mongoose_1.default.Types.ObjectId(id);
+        const body = request.body;
+        if (!user.added.includes(objectId)) {
+            return response.status(401).json({
+                error: "Solo un usuario que haya agregado ese juego puede cambiar sus atributos",
+            });
+        }
+        if (!(body.name ||
+            body.release_year ||
+            body.creator ||
+            body.genre ||
+            body.image ||
+            body.description)) {
+            return response
+                .status(400)
+                .json({ error: "Al menos un campo es requerido" });
+        }
+        if (body.rating || body.rating === 0 || body.reviews) {
+            return response
+                .status(400)
+                .json({ error: "No es posible cambiar estos campos" });
+        }
+        const name = body.name
+            ? (0, validations_1.validateInputString)(body.name, 1, 100)
+                ? body.name.trim()
+                : ""
+            : undefined;
+        const release_year = body.release_year
+            ? (0, validations_1.validateInputNumber)(body.release_year, 1972, new Date().getFullYear())
+                ? body.release_year
+                : ""
+            : undefined;
+        const creator = body.creator
+            ? (0, validations_1.validateInputString)(body.creator, 1, 100)
+                ? body.creator.trim()
+                : ""
+            : undefined;
+        const genre = body.genre
+            ? (0, validations_1.validateInputGenre)(body.genre)
+                ? body.genre
+                : ""
+            : undefined;
+        const image = body.image
+            ? (0, validations_1.validateInputStringImage)(body.image)
+                ? body.image.trim()
+                : ""
+            : undefined;
+        const description = body.description
+            ? (0, validations_1.validateInputString)(body.description, 300, 500)
+                ? body.description.trim()
+                : ""
+            : undefined;
+        if (name === "" ||
+            release_year === "" ||
+            creator === "" ||
+            genre === "" ||
+            image === "" ||
+            description === "") {
+            return response
+                .status(400)
+                .json({ error: "Los datos enviados no son del tipo correcto" });
+        }
+        const newBody = {
+            name: name,
+            release_year: release_year,
+            creator: creator,
+            genre: genre,
+            image: image,
+            description: description,
+        };
+        const game = await game_1.default.findByIdAndUpdate(id, newBody, { new: true });
+        if (game) {
+            return response.status(200).json(game);
+        }
+        else {
+            return response
+                .status(404)
+                .json({ error: "No se pudo encontrar el juego con ese id" })
+                .end();
+        }
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.setGame = setGame;

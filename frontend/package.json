@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:ui": "npm run build && xcopy dist ..\\backend\\ /E /I /Y"
+    "build:ui": "npm run build && xcopy dist ..\\backend\\public\\ /E /I /Y"
 
   },
   "dependencies": {
