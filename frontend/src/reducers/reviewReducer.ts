@@ -2,7 +2,8 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { AppDispatch } from "../store";
 import reviewsService from "../services/reviews";
 import type { Review } from "../types/review";
-import { addReviewToSelectedGame } from "./gameReducer";
+import { getOneGame } from "./gameReducer";
+import { restoreSession } from "./userReducer";
 
 interface ReviewState {
     showReviewForm: boolean;
@@ -26,7 +27,8 @@ export const createNewReview = (data: Omit<Review, "id" | "author_name" | "autho
             if (!review) {
                 dispatch(setError("Error al intentar crear la review"));
             };
-            dispatch(addReviewToSelectedGame(review));
+            dispatch(restoreSession());
+            dispatch(getOneGame(review.game));
         } catch {
             dispatch(setError("Error al intentar crear la review"));
         } finally {

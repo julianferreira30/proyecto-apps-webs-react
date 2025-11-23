@@ -68,7 +68,7 @@ export const addGame = async (
       !validateInputNumber(body.release_year, 1972, new Date().getFullYear()) ||
       !validateInputGenre(body.genre) ||
       !validateInputStringImage(body.image) ||
-      !validateInputString(body.description, 5, 500) ||
+      !validateInputString(body.description, 2, 500) ||
       creator === ""
     ) {
       return response
@@ -166,7 +166,7 @@ export const setGame = async (
         : ""
       : undefined;
     const description = body.description
-      ? validateInputString(body.description, 300, 500)
+      ? validateInputString(body.description, 2, 500)
         ? body.description.trim()
         : ""
       : undefined;

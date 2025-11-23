@@ -61,6 +61,9 @@ const GameDetails = () => {
     }
   }
 
+  const myReviewFromUser = user?.reviews.find((r) => r.game === game.id);
+  const myRating = myReviewFromUser ? Number(myReviewFromUser.rating) : null;
+
   return (
     <div className="game-details">
         <div className="game-details-container">
@@ -139,13 +142,13 @@ const GameDetails = () => {
                             sx={{fontSize: "2vw"}}
                             name="half-rating-read"
                             value={
-                            user.reviews.find((r) => r.game === game.id)?.rating
+                            myRating
                             }
                             precision={0.5}
                             readOnly
                         />
-                        {user.reviews.find((r) => r.game === game.id)?.rating && 
-                        <p className="game-details-rating-text">{user.reviews.find((r) => r.game === game.id)?.rating.toFixed(1)}</p>}
+                        {myRating !== null && 
+                        <p className="game-details-rating-text">{myRating.toFixed(1)}</p>}
                         </div>
                     </div>
                     </Button>
