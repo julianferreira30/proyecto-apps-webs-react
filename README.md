@@ -5,10 +5,10 @@
 GameBoxd es una aplicación web full-stack que permite a los usuarios explorar, agregar y reseñar videojuegos. La plataforma ofrece funcionalidades similares a Letterboxd pero enfocada en el mundo de los videojuegos, donde los usuarios pueden:
 
 - Explorar un catálogo de videojuegos
-- Agregar nuevos juegos a la base de datos
+- Agregar nuevos juegos a la base de datos y editar sus atributos
 - Escribir y leer reseñas de juegos
-- Gestionar listas personales (favoritos, wishlist)
-- Filtrar juegos por año, género, plataforma y rating
+- Gestionar listas personales (jugados, favoritos, wishlist)
+- Filtrar juegos por año, género, plataforma, rating y tipo de ordenación
 - Autenticarse y mantener perfiles de usuario
 
 ## Estructura del Estado Global
@@ -22,25 +22,25 @@ El proyecto utiliza **Redux Toolkit** como solución de manejo de estado global,
 #### 1. **gameReducer.ts**
 
 - Gestiona el estado de los videojuegos
-- Acciones para cargar, agregar, actualizar y filtrar juegos
+- Acciones para cargar, agregar, actualizar y guardar los juegos filtrados y el seleccionado
 - Maneja el estado de carga y errores relacionados con los juegos
 
 #### 2. **userReducer.ts**
 
 - Controla la informacion del usuario autenticado
-- Gestiona favoritos, wishlist y juegos agregados por el usuario
+- Gestiona juegos jugados, favoritos y en wishlist del usuario
 - Maneja el estado de autenticación (login/logout)
 
 #### 3. **reviewReducer.ts**
 
 - Administra las reseñas de los videojuegos
-- Acciones para crear, leer, actualizar y eliminar reviews
+- Acciones para crear reviews
 - Vincula reviews con usuarios y juegos específicos
 
 #### 4. **filterReducer.ts**
 
-- Controla los filtros aplicados a la lista de juegso
-- Maneja filtros por año, género, plataforma y rating
+- Controla los filtros aplicados a la lista de juegos
+- Maneja filtros por año, género, plataforma, rating y tipo de ordenación
 - Permite combinación múltiple de filtros
 
 ## Mapa de Rutas y Flujo de Autenticación
@@ -53,7 +53,7 @@ El proyecto utiliza **Redux Toolkit** como solución de manejo de estado global,
 ├── /game/:id - Detalles específicos de un juego
 ├── /add-game - Formulario para agregar nuevos juegos (requiere auth)
 ├── /set-game/:id - Edición de juegos existentes (requiere auth + ownership)
-└── /profile - Perfil del usuario con favoritos y wishlist (requiere auth)
+└── /profile/:field - Perfil del usuario con la lista de elementos field. Pueden ser juegos jugados (played), en favoritos (favorites), en la wishlist (wishlist) o reviews del usuario (reviews). Requiere auth
 ```
 ## Flujo de Autenticación
 
@@ -102,6 +102,9 @@ El proyecto utiliza **Material-UI v5** como librería principal de componentes y
 - **Autocomplete**: Selección de géneros y años en filtros
 - **Box**: Layout y contenedores flexibles
 - **Icons** (Favorite, Create, Bookmark): Iconografía consistente
+- **Fade & Slide**: Animación para errores
+- **Rating**: Calificación en una review o de un juego
+- **Chip**: Contenedor para los géneros
 
 ### Decisiones de Diseño
 
