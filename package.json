@@ -1,0 +1,25 @@
+{
+  "name": "proyecto-apps-webs-react",
+  "version": "1.0.0",
+  "description": "GameBoxd es una aplicación web full-stack que permite a los usuarios explorar, agregar y reseñar videojuegos. La plataforma ofrece funcionalidades similares a Letterboxd pero enfocada en el mundo de los videojuegos, donde los usuarios pueden:",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:report":"playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julianferreira30/proyecto-apps-webs-react.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/julianferreira30/proyecto-apps-webs-react/issues"
+  },
+  "homepage": "https://github.com/julianferreira30/proyecto-apps-webs-react#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.1"
+  }
+}

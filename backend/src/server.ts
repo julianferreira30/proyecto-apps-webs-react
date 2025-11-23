@@ -10,11 +10,15 @@ import loginRouter from "./routes/login";
 import userRouter from "./routes/user";
 import gameRouter from "./routes/game";
 import reviewRouter from "./routes/review";
+import testingRouter from "./controllers/testing";
 import path from "path";
 
 // ---- DB ----
 dotenv.config();
 mongoose.set("strictQuery", false);
+
+
+
 
 if (config.MONGODB_URI) {
   mongoose.connect(config.MONGODB_URI).catch((error) => {
@@ -57,6 +61,10 @@ app.use("/api/register", registerRouter);
 app.use("/api/users", userRouter);
 app.use("/api/games", gameRouter);
 app.use("/api/reviews", reviewRouter);
+
+if (process.env.NODE_ENV === "test") {
+  app.use("/api/testing", testingRouter);
+}
 
 // ---- STATIC FILES ----
 app.use(express.static("public"));
