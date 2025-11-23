@@ -46,7 +46,7 @@ El proyecto utiliza **Redux Toolkit** como solución de manejo de estado global,
 ## Mapa de Rutas y Flujo de Autenticación
 
 ### Estructura de Rutas
-
+``` md
 / (Root.tsx)
 ├── / - Página principal con lista de juegos filtrable
 ├── /register - Registro de nuevos usuarios
@@ -54,7 +54,7 @@ El proyecto utiliza **Redux Toolkit** como solución de manejo de estado global,
 ├── /add-game - Formulario para agregar nuevos juegos (requiere auth)
 ├── /set-game/:id - Edición de juegos existentes (requiere auth + ownership)
 └── /profile - Perfil del usuario con favoritos y wishlist (requiere auth)
-
+```
 ## Flujo de Autenticación
 
 #### Estados de Autenticación:
