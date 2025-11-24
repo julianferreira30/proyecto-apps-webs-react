@@ -92,6 +92,15 @@ El proyecto utiliza **Redux Toolkit** como solución de manejo de estado global,
 Se crearon todos los test necesarios para confirmar el correcto comportamiento de la aplicación. 
 
 En particular se testea la correcta creación y login de usuario. Que solo un usuario loggeado pueda subir nuevos juegos, que pueda agregar juegos a su lista de juegos jugados, favoritos y wishlist. Además de quitarlos de estas.
+### PROBLEMA CONOCIDO
+#### Issue con Variable de entorno en Testing
+Problema identificado: Durante la ejecución de los tests unitarios, la variable process.env.NODE_ENV no se establece correctamente como "test", manteniéndose como "development" incluso cuando se ejecutan los tests.
+
+Impacto: 
+- Los tests no utilizan la base de datos de testing separada como estaba diseñado
+- La aplicación no puede distinguir automáticamente entre entornos de desarrollo y testing
+- Riesgo de conflicto entre datos de desarrollo y datos de prueba
+
 
 ## Librería de Estilos y Decisiones de Diseño
 
@@ -158,21 +167,52 @@ El proyecto utiliza **Material-UI v5** como librería principal de componentes y
 
 ## Despliegue en Producción
 
-### Comandos de Deploy:
+### Comandos de Deploy en server:
 
 ```bash
 # Compilar el frontend
 cd frontend && npm run build:ui
 # Compilar el backend
 cd ../backend && npm run build
-# Subir la carpeta build, public y los archivos package-lock.json, package.json
+# Subir la carpeta build, public y los archivos package-lock.json, package.json que se ubican en backend, a alguna carpeta del servidor
+# OJO, Hay que modificar el package.json en el server, con el script start, a este:
+"scripts": {
+  "start": "node build/index.js",
+...
+...
+}
 # .env
-# Hacer un .env en la raíz de la carpeta que elegimos con los siguientes valores:
-MONGODB_URI=mongodb://fulls:fulls@fullstack.dcc.uchile.cl:27019
+# Hacer un .env en la carpeta que elegimos con los siguientes valores:
+MONGODB_URI= // El nombre de la db y su contraseña
 MONGODB_DBNAME=fullstack
 PORT=7113
 HOST=0.0.0.0
 # Ejecutar en la raíz de la carpeta :
 npm install
 npm start
+# Luego acceder a la siguiente página (En modo incógnito para que no haya error)
+fullstack.dcc.uchile.cl:7113
+```
+
+### Comandos de Deploy en Local
+```bash
+# Backend: crear .env en backend/
+MONGODB_URI=mongodb://127.0.0.1:27017/proyecto
+TEST_MONGODB_URI=mongodb://127.0.0.1:27017/proyecto_test
+PORT=7113
+HOST=localhost
+NODE_ENV=development
+
+# Frontend
+cd frontend
+npm install
+npm run dev     # levanta en localhost:7158
+
+# Backend
+cd ../backend
+npm install
+npm start  
+
+
+
 ```
