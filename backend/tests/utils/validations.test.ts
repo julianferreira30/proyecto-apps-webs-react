@@ -125,7 +125,7 @@ describe("Validations Tests", () => {
     test("Input array genre repeats a genre", () => {
         assert(!validateInputGenre(["Acción", "Acción"]));
         assert(!validateInputGenre(["Acción","Aventura", "RPG", "Acción"]));
-        assert(!validateInputGenre(["Acción", "Aventura", "Battle Royale", "Carrrera", "Ciencia Ficción",
+        assert(!validateInputGenre(["Acción", "Aventura", "Battle Royale", "Carrera", "Ciencia Ficción",
                 "Deportes", "Estrategia", "Fantasia", "Indie", "Metroidvania", "MOBA", "Multiplayer",
                 "Mundo Abierto", "Party Game", "Peleas", "Plataforma", "Rogue Like", "RPG", "Sandbox",
                 "Shooter", "Sigilo", "Simulador", "Souls Like", "Superheroes", "Survival", "Tactical",
@@ -136,7 +136,7 @@ describe("Validations Tests", () => {
     test("Input array genre is valid", () => {
         assert(validateInputGenre(["Acción"]));
         assert(validateInputGenre(["Acción","Aventura", "RPG"]));
-        assert(validateInputGenre(["Acción", "Aventura", "Battle Royale", "Carrrera", "Ciencia Ficción",
+        assert(validateInputGenre(["Acción", "Aventura", "Battle Royale", "Carrera", "Ciencia Ficción",
                 "Deportes", "Estrategia", "Fantasia", "Indie", "Metroidvania", "MOBA", "Multiplayer",
                 "Mundo Abierto", "Party Game", "Peleas", "Plataforma", "Rogue Like", "RPG", "Sandbox",
                 "Shooter", "Sigilo", "Simulador", "Souls Like", "Superheroes", "Survival", "Tactical",

@@ -4,7 +4,7 @@ import axiosSecure from "../utils/axiosSecure";
 /**
  * Tipo que contiene los campos necesarios para iniciar sesión en la app por un usuario ya registrado
  */
-type Credentials = {
+export type Credentials = {
     username: string;
     password: string;
 };

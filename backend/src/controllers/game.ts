@@ -16,7 +16,7 @@ export const getAllGames = async (
 ) => {
   try {
     const games = await Game.find({});
-    return response.status(201).json(games);
+    return response.status(201).json(games.reverse());
   } catch (error) {
     next(error);
   }
@@ -68,7 +68,7 @@ export const addGame = async (
       !validateInputNumber(body.release_year, 1972, new Date().getFullYear()) ||
       !validateInputGenre(body.genre) ||
       !validateInputStringImage(body.image) ||
-      !validateInputString(body.description, 1, 500) ||
+      !validateInputString(body.description, 2, 500) ||
       creator === ""
     ) {
       return response
@@ -105,24 +105,20 @@ export const setGame = async (
   try {
     const user = await User.findById(request.userId);
     if (!user) {
-      return response
-        .status(401)
-        .json({
-          error:
-            "Solo un usuario autenticado puede cambiar atributos de un juego",
-        });
+      return response.status(401).json({
+        error:
+          "Solo un usuario autenticado puede cambiar atributos de un juego",
+      });
     }
 
     const id = request.params.id;
     const objectId = new mongoose.Types.ObjectId(id);
     const body = request.body;
     if (!user.added.includes(objectId)) {
-      return response
-        .status(401)
-        .json({
-          error:
-            "Solo un usuario que haya agregado ese juego puede cambiar sus atributos",
-        });
+      return response.status(401).json({
+        error:
+          "Solo un usuario que haya agregado ese juego puede cambiar sus atributos",
+      });
     }
 
     if (
@@ -170,7 +166,7 @@ export const setGame = async (
         : ""
       : undefined;
     const description = body.description
-      ? validateInputString(body.description, 150, 500)
+      ? validateInputString(body.description, 2, 500)
         ? body.description.trim()
         : ""
       : undefined;

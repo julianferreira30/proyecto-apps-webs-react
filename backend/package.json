@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "tsx src/index.ts",
-    "dev": "tsx watch src/index.ts",
+    "dev": "cross-env watch src/index.ts",
     "test": "cross-env NODE_ENV=test tsx --test --test-concurrency=1 tests/**/*.test.ts",
     "test:utils": "tsx --test --test-concurrency=1 tests/utils/*.test.ts",
     "test:controllers": "cross-env NODE_ENV=test tsx --test --test-concurrency=1 tests/controllers/*.test.ts",
     "test:watch": "cross-env NODE_ENV=test tsx --test --watch tests/*.test.ts",
-    "json-server": "json-server --watch db.json --port 3002"
+    "json-server": "json-server --watch db.json --port 3002",
+    "build": "tsc",
+    "start:test": "cross-env NODE_ENV=test ts-node-dev src/index.ts"
   },
   "keywords": [],
   "author": "",

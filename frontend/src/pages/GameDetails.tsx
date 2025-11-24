@@ -1,0 +1,234 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import type { RootState, AppDispatch } from "../store";
+import { Button, ButtonGroup, Rating, Chip, Slide, CircularProgress } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import CreateIcon from '@mui/icons-material/Create';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import { restoreSession, setError, setShowLoginForm, toggleFavourite, togglePlayed, toggleWishlist } from "../reducers/userReducer";
+import { getOneGame } from "../reducers/gameReducer";
+import { setShowReviewForm } from "../reducers/reviewReducer";
+import Review from "../components/AddReview";
+import GameReviews from "../components/GameReviews";
+import { useEffect } from "react";
+import { SearchOff } from "@mui/icons-material";
+
+
+
+const GameDetails = () => {
+  // Store
+  const { id } = useParams<{id: string}>();
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    if (id) {
+      dispatch(getOneGame(id));
+      dispatch(restoreSession())
+    }
+  }, [id, dispatch]);
+
+  const showReviewForm = useSelector((state: RootState) => state.reviews.showReviewForm);
+  const game = useSelector((state: RootState) => state.games.selectedGame);
+  const user = useSelector((state: RootState) => state.user.user);
+  const loadingUser = useSelector((state: RootState) => state.user.loading);
+  const loadingGame = useSelector((state: RootState) => state.games.loading);
+  const error = useSelector((state: RootState) => state.user.error);
+
+  // Carga y errores
+  if (loadingGame) {
+    return <CircularProgress color="success" />;
+  };
+
+  if (!game) {
+    return <div>
+        <p style={{marginTop:"10vw"}}>Juego no encontrado</p>
+        <SearchOff />
+        </div>
+  };
+
+  // Favoritos, jugados y wishlist
+  const isInPlayed = user?.played.some((g) => g.id === game.id);
+  const isInFavourite = user?.favorites.some((g) => g.id === game.id);
+  const isInWishlist = user?.wishlist.some((g) => g.id === game.id);
+
+  const played = (gameId: string) => {
+    dispatch(setError(null));
+    if (user) {
+      dispatch(togglePlayed(gameId, user))
+      setTimeout(() => {
+        dispatch(setError(null))
+      }, 5000)
+    }
+  }
+
+  const myReviewFromUser = user?.reviews.find((r) => r.game === game.id);
+  const myRating = myReviewFromUser ? Number(myReviewFromUser.rating) : null;
+
+  return (
+    <div className="game-details">
+        <div className="game-details-container">
+        <Slide in={!!(error === "No se puede quitar de jugados porque ya hiciste una review")} timeout={500}>
+            <span className="game-details-error">
+                {error}
+            </span>
+        </Slide>
+        <div className="game-details-card">
+            <div className="game-details-image-container">
+            <img
+                src={game.image}
+                alt="No es posible procesar la imágen"
+                className="game-details-image"
+            />
+            </div>
+
+            <div className="game-details-text-container">
+            <div className="game-details-header">
+                <h1 className="game-details-name">{game.name}</h1>
+                <p className="game-details-year">{game.release_year}</p>
+            </div>
+
+            <div className="game-details-description-container">
+                <div className="game-details-description-left">
+                <h3 className="game-details-creator">{"Creado por ".concat(game.creator)}</h3>
+                <p className="game-details-description">{game.description}</p>
+                <p className="game-details-genre-text">Géneros</p>
+                <hr className="game-details-separation-genre"></hr>
+                <div>
+                    {game.genre.map((g) => (
+                    <Chip
+                    key={g}
+                    label={g}
+                    className="game-details-genre"
+                    />
+                ))}
+                </div>
+                </div>
+
+                <div className="game-details-description-right">
+                <ButtonGroup
+                    orientation="vertical"
+                    variant="contained"
+                    aria-label="Vertical button group"
+                    className="game-details-vertical-buttongroup"
+                >
+                    <Button
+                    className="game-details-rating-button"
+                    disabled={true}
+                    >
+                    <div className="game-details-rating-container">
+                        <p className="game-details-rating-label">Calificación usuarios</p>
+                        <div className="game-details-rating-row">
+                        <Rating
+                            sx={{fontSize: "2vw"}}
+                            name="half-rating-read"
+                            value={game.rating}
+                            precision={0.5}
+                            readOnly
+                        />
+                        <p className="game-details-rating-text">{game.rating.toFixed(1)}</p>
+                        </div>
+                    </div>
+                    </Button>
+                    {user && (<>
+                    <Button
+                    className="game-details-my-rating-button"
+                    disabled={true}
+                    >
+                    <div className="game-details-my-rating">
+                        <p className="game-details-rating-small">Mi calificación</p>
+                        <div className="game-details-rating-row">
+                        <Rating
+                           className="game-details-rating-read"
+                            sx={{fontSize: "2vw"}}
+                            name="half-rating-read"
+                            value={
+                            myRating
+                            }
+                            precision={0.5}
+                            readOnly
+                        />
+                        {myRating !== null && 
+                        <p className="game-details-rating-text">{myRating.toFixed(1)}</p>}
+                        </div>
+                    </div>
+                    </Button>
+
+                    <ButtonGroup
+                    orientation="horizontal"
+                    variant="contained"
+                    aria-label="Horizontal button group"
+                    className="game-details-horizontal-buttongroup"
+                    >
+                    <Button
+                        className="game-details-played-button"
+                        onClick={() => played(game.id)}
+                        disabled={loadingUser}
+                    >
+                        <SportsEsportsIcon
+                        sx={{color: isInPlayed ? "#0020acff" : "white", fontSize: "2vw"}}
+                        />
+                        <p className={`game-details-icon ${isInPlayed ? "active" : ""}`}>Jugado</p>
+                    </Button>
+
+                    <Button
+                        className="game-details-favourite-button"
+                        onClick={() => dispatch(toggleFavourite(game.id, user))}
+                        disabled={loadingUser}
+                    >
+                        <FavoriteIcon
+                        sx={{color: isInFavourite ? "#DF0024" : "white", fontSize: "2vw"}}
+                        />
+                        <p className={`game-details-icon ${isInFavourite ? "active" : ""}`}>Favorito</p>
+                    </Button>
+
+                    <Button
+                        className="game-details-wishlist-button"
+                        onClick={() => dispatch(toggleWishlist(game.id, user))}
+                        disabled={loadingUser}
+                    >
+                        <BookmarkIcon
+                        sx={{color: isInWishlist ? "#F3C300" : "white", fontSize: "2vw"}}
+                        />
+                        <p className={`game-details-icon ${isInWishlist ? "active" : ""}`}>Wishlist</p>
+                    </Button>
+                    </ButtonGroup>
+
+                    <Button
+                    onClick={() => dispatch(setShowReviewForm(true))}
+                    disabled={loadingUser}
+                    className="game-details-review-button"
+                    >
+                    Review <CreateIcon sx={{fontSize: "2vw"}}/>
+                    </Button></>)}
+                    {!user && (
+                    <Button
+                        onClick={() => dispatch(setShowLoginForm(true))}
+                        disabled={loadingUser}
+                        className="game-details-login"
+                    >
+                        Iniciar sesión
+                    </Button>
+                    )}
+                </ButtonGroup>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <p className="game-details-reviews-text">Reviews</p>
+        <hr className="game-details-separation-reviews"></hr>
+
+        {showReviewForm && (
+            <div className="game-details-overlay">
+            <Review />
+            </div>
+        )}
+        </div>
+        <div style={{width:"100%"}}>
+            <GameReviews />
+        </div>
+    </div>
+  );
+};
+
+export default GameDetails;

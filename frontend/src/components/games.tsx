@@ -1,19 +1,34 @@
-import type { GameData } from "../types/games";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store"; 
+import { useNavigate } from "react-router-dom";
+import BlindIcon from '@mui/icons-material/Blind';
 
-interface GamesProps {
-  game?: GameData;
-  onClick?: () => void;
-}
 
-const Games = ({ game, onClick }: GamesProps) => {
-  if (!game) {
-    return;
-  }
+
+const Games = () => {
+  // Navegación
+  const navigate = useNavigate();
+
+
+  // Store
+  const filteredGames = useSelector((state: RootState) => state.games.filteredGames);
+  const loading = useSelector((state: RootState) => state.games.loading);
+  
   return (
-    <div className="card" onClick={onClick}>
-      <p style={{margin:"10px"}}><img src={game.image} style={{maxWidth: "264px", maxHeight: "352px"}}/></p>
-      <h2 style={{margin:"0px"}}>{game.name}</h2>
-      <p style={{margin:"10px"}}>{game.creator}</p>
+    <div className="games">
+      <div className={filteredGames.length === 0 ? "no-container" : "games-container"}>
+        {filteredGames.length === 0 && !loading ? 
+        <div>
+          <p className="games-no">No hay juegos para mostrar</p>
+          <BlindIcon className="games-no-sad"/>
+        </div> : 
+        (filteredGames.map((game, index) => (
+          <div className="games-card" key={index} onClick={() => navigate(`/game/${game.id}`)}>
+            <img src={game.image} alt="No se encontró la imágen" className="games-image"/>
+            <h2 className="games-name">{game.name.length > 35 ? game.name.slice(0,30).concat("...") : game.name}</h2>
+          </div>
+        )))}
+      </div>
     </div>
   );
 };
