@@ -11,7 +11,7 @@
     "test:controllers": "cross-env NODE_ENV=test tsx --test --test-concurrency=1 tests/controllers/*.test.ts",
     "test:watch": "cross-env NODE_ENV=test tsx --test --watch tests/*.test.ts",
     "json-server": "json-server --watch db.json --port 3002",
-    "build":"tsc",
+    "build": "tsc",
     "start:test": "cross-env NODE_ENV=test ts-node-dev src/index.ts"
   },
   "keywords": [],

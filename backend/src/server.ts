@@ -18,8 +18,6 @@ dotenv.config();
 mongoose.set("strictQuery", false);
 
 
-
-
 if (config.MONGODB_URI) {
   mongoose.connect(config.MONGODB_URI).catch((error) => {
     if (process.env.NODE_ENV !== "test") {
@@ -27,6 +25,7 @@ if (config.MONGODB_URI) {
     }
   });
 }
+
 
 const app = express();
 
@@ -62,9 +61,10 @@ app.use("/api/users", userRouter);
 app.use("/api/games", gameRouter);
 app.use("/api/reviews", reviewRouter);
 
-if (process.env.NODE_ENV === "test") {
-  app.use("/api/testing", testingRouter);
-}
+//if (process.env.NODE_ENV === "test") {
+  //console.log("Testing mode enabled: /api/testing route active");
+app.use("/api/testing", testingRouter);
+//}
 
 // ---- STATIC FILES ----
 app.use(express.static("public"));
