@@ -33,7 +33,7 @@ test.describe("Game tests", () => {
         await page.getByText("Cyberpunk 2077").first().click();
         await page.getByRole("button", { name: "Review" }).click();
         await page.getByLabel("Añade un comentario...").fill("Amazing game with stunning visuals!");
-        await page.getByRole("button", { name: "GUARDAR" }).click();
+        await page.getByRole("button", { name: "Guardar" }).click();
         await expect(page.getByText("Amazing game with stunning visuals!").first()).toBeVisible();
     });
 
@@ -41,8 +41,8 @@ test.describe("Game tests", () => {
         await loginWith(page, "testUser", "testPassword123");
         await createGame(page, "Stardew Valley", 2016, "ConcernedApe", "Acción", "https://example.com/stardewvalley.jpg", "A farming simulation game.");
         await page.getByText("Stardew Valley").first().click();
-        await page.getByRole("button", { name: "FAVORITO" }).click();
-        await page.getByRole("button", { name: "CUENTA" }).click();
+        await page.getByRole("button", { name: "Favorito" }).click();
+        await page.getByRole("button", { name: "Cuenta" }).click();
         await page.getByRole("button", { name: "Perfil" }).click();
         await page.getByRole("button", { name: "Favoritos" }).click();
         await expect(page.getByText("Stardew Valley").first()).toBeVisible();
@@ -52,25 +52,20 @@ test.describe("Game tests", () => {
         await loginWith(page, "testUser", "testPassword123");
         await createGame(page, "Stardew Valley", 2016, "ConcernedApe", "Acción", "https://example.com/stardewvalley.jpg", "A farming simulation game.");
         await page.getByText("Stardew Valley").first().click();
-        await page.getByRole("button", { name: "FAVORITO" }).click();
-        await page.getByRole("button", { name: "CUENTA" }).click();
+        await page.getByRole("button", { name: "Favorito" }).click();
+        await page.getByRole("button", { name: "Favorito" }).click();
+        await page.getByRole("button", { name: "Cuenta" }).click();
         await page.getByRole("button", { name: "Perfil" }).click();
         await page.getByRole("button", { name: "Favoritos" }).click();
-
-        await page.getByText("Stardew Valley").first().click();
-        await page.getByRole("button", { name: "FAVORITO" }).click();
-        await page.getByRole("button", { name: "CUENTA" }).click();
-        await page.getByRole("button", { name: "Perfil" }).click();
-        await page.getByRole("button", { name: "Favoritos" }).click();
-        await expect(page.getByText("No hay nada que mostrar")).toBeVisible();
+        await expect(page.getByText("No hay nada para mostrar")).toBeVisible();
     });
 
     test("User can add a game to wishlist", async ({ page }) => {
         await loginWith(page, "testUser", "testPassword123");
         await createGame(page, "Stardew Valley", 2016, "ConcernedApe", "Acción", "https://example.com/stardewvalley.jpg", "A farming simulation game.");
         await page.getByText("Stardew Valley").first().click();
-        await page.getByRole("button", { name: "WISHLIST" }).click();
-        await page.getByRole("button", { name: "CUENTA" }).click();
+        await page.getByRole("button", { name: "Wishlist" }).click();
+        await page.getByRole("button", { name: "Cuenta" }).click();
         await page.getByRole("button", { name: "Perfil" }).click();
         await page.getByRole("button", { name: "Wishlist" }).click();
         await expect(page.getByText("Stardew Valley").first()).toBeVisible();
@@ -80,16 +75,11 @@ test.describe("Game tests", () => {
         await loginWith(page, "testUser", "testPassword123");
         await createGame(page, "Stardew Valley", 2016, "ConcernedApe", "Acción", "https://example.com/stardewvalley.jpg", "A farming simulation game.");
         await page.getByText("Stardew Valley").first().click();
-        await page.getByRole("button", { name: "WISHLIST" }).click();
-        await page.getByRole("button", { name: "CUENTA" }).click();
+        await page.getByRole("button", { name: "Wishlist" }).click();
+        await page.getByRole("button", { name: "Wishlist" }).click();
+        await page.getByRole("button", { name: "Cuenta" }).click();
         await page.getByRole("button", { name: "Perfil" }).click();
         await page.getByRole("button", { name: "Wishlist" }).click();
-
-        await page.getByText("Stardew Valley").first().click();
-        await page.getByRole("button", { name: "WISHLIST" }).click();
-        await page.getByRole("button", { name: "CUENTA" }).click();
-        await page.getByRole("button", { name: "Perfil" }).click();
-        await page.getByRole("button", { name: "Wishlist" }).click();
-        await expect(page.getByText("No hay nada que mostrar")).toBeVisible();
+        await expect(page.getByText("No hay nada para mostrar")).toBeVisible();
     });
 });
