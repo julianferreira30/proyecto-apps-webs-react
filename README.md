@@ -89,6 +89,10 @@ El proyecto utiliza **Redux Toolkit** como solución de manejo de estado global,
 
 ## Descripción tests E2E
 
+Se crearon todos los test necesarios para confirmar el correcto comportamiento de la aplicación. 
+
+En particular se testea la correcta creación y login de usuario. Que solo un usuario loggeado pueda subir nuevos juegos, que pueda agregar juegos a su lista de juegos jugados, favoritos y wishlist. Además de quitarlos de estas.
+
 ## Librería de Estilos y Decisiones de Diseño
 
 ### Librería de Estilos Utilizada: Material-UI (MUI)
